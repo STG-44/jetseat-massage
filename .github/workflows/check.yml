@@ -1,0 +1,26 @@
+name: Rust desktop checks
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  check:
+    strategy:
+      matrix:
+        os: [macos-15-intel, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libasound2-dev libudev-dev libxkbcommon-dev libwayland-dev libx11-dev libxcursor-dev libxi-dev libxrandr-dev libgl1-mesa-dev
+      - run: cargo fmt --check
+      - run: cargo clippy --all-targets --locked -- -D warnings
+      - run: cargo test --locked
+      - if: runner.os == 'macOS'
+        run: bash scripts/package-macos.sh
+      - if: runner.os == 'Linux'
+        run: bash scripts/package-linux.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: jetseat-${{ matrix.os }}
+          path: dist/

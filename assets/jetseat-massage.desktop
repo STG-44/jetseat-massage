@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=JetSeat Massage
+Comment=USB and audio massage for Gametrix KW-901
+Comment[ru]=USB- и аудиомассаж для Gametrix KW-901
+Exec=jetseat-massage
+Icon=jetseat-massage
+Terminal=false
+Type=Application
+Categories=Utility;Audio;

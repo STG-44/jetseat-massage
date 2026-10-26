@@ -1,0 +1,31 @@
+# Local source package: run makepkg -si from packaging/arch in the project.
+pkgname=jetseat-massage
+pkgver=0.2.0
+pkgrel=1
+pkgdesc='USB and audio massage controller for Gametrix KW-901'
+arch=('x86_64')
+license=('MIT')
+install=jetseat-massage.install
+depends=('glibc>=2.30' 'gcc-libs' 'alsa-lib' 'libxkbcommon' 'libxkbcommon-x11' 'libx11' 'libxcursor' 'libxrandr' 'libxi' 'wayland' 'mesa')
+makedepends=('cargo' 'pkgconf')
+optdepends=('pipewire-alsa: ALSA output through PipeWire')
+options=('!debug' '!strip')
+source=()
+sha256sums=()
+_project_root="$(cd "$startdir/../.." && pwd)"
+
+build() {
+  cd "$_project_root"
+  CARGO_TARGET_DIR="$srcdir/target" cargo build --release --locked
+}
+
+package() {
+  cd "$_project_root"
+  install -Dm755 "$srcdir/target/release/jetseat-massage" "$pkgdir/usr/bin/jetseat-massage"
+  install -Dm644 assets/jetseat-massage.desktop "$pkgdir/usr/share/applications/jetseat-massage.desktop"
+  install -Dm644 assets/jetseat-massage.svg "$pkgdir/usr/share/icons/hicolor/scalable/apps/jetseat-massage.svg"
+  install -Dm644 assets/70-jetseat.rules "$pkgdir/usr/lib/udev/rules.d/70-jetseat.rules"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+  install -Dm644 PROTOCOL.md "$pkgdir/usr/share/doc/$pkgname/PROTOCOL.md"
+}

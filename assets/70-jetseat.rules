@@ -1,0 +1,5 @@
+# Access for the active local desktop session. Reconnect USB after installation.
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="0613", TAG+="uaccess"
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="0125", TAG+="uaccess"
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="231d", ATTRS{idProduct}=="2001", TAG+="uaccess"
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="231d", ATTRS{idProduct}=="2002", TAG+="uaccess"
