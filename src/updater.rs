@@ -161,6 +161,10 @@ fn asset_name(version: &Version, os: &str, arch: &str) -> Option<String> {
         ("macos", "x86_64") => Some(format!("JetSeat-Massage-{version}-macOS-Intel.pkg")),
         ("macos", "aarch64") => Some(format!("JetSeat-Massage-{version}-macOS-arm64.pkg")),
         ("linux", "x86_64") => Some(format!("jetseat-massage-{version}-1-x86_64.pkg.tar.zst")),
+        ("windows", "x86_64") => Some(format!("JetSeat-Massage-{version}-Windows-x64-Setup.exe")),
+        ("windows", "aarch64") => {
+            Some(format!("JetSeat-Massage-{version}-Windows-arm64-Setup.exe"))
+        }
         _ => None,
     }
 }
@@ -345,7 +349,15 @@ fn launch(path: &Path) -> Result<(), String> {
             ))
         }
     }
-    #[cfg(not(any(target_os = "macos", target_os = "linux")))]
+    #[cfg(target_os = "windows")]
+    {
+        Command::new(path)
+            .arg(format!("/UPDATEPID={}", std::process::id()))
+            .spawn()
+            .map(|_| ())
+            .map_err(|e| format!("Не удалось открыть установщик: {e}"))
+    }
+    #[cfg(not(any(target_os = "macos", target_os = "linux", target_os = "windows")))]
     {
         Err("Установка для этой системы не поддерживается".into())
     }
@@ -407,5 +419,41 @@ mod tests {
         for data in [&b"corrupt"[..], &b"pack"[..], &b"package extra"[..]] {
             assert!(verify(data, &r, std::io::sink()).is_err());
         }
+    }
+
+    #[test]
+    fn selects_only_the_matching_cpu_and_os_installer() {
+        let version = Version::parse("0.4.0").unwrap();
+        let targets = [
+            ("macos", "x86_64"),
+            ("macos", "aarch64"),
+            ("windows", "x86_64"),
+            ("windows", "aarch64"),
+            ("linux", "x86_64"),
+        ];
+        let assets = targets
+            .iter()
+            .map(|(os, arch)| {
+                let name = asset_name(&version, os, arch).unwrap();
+                ApiAsset {
+                    browser_download_url: format!("{RELEASES_URL}/download/v{version}/{name}"),
+                    name,
+                    size: 7,
+                    digest: Some(format!("sha256:{:x}", Sha256::digest(b"package"))),
+                }
+            })
+            .collect::<Vec<_>>();
+        let json = serde_json::json!([{"tag_name":"v0.4.0", "assets":assets.iter().map(|a|serde_json::json!({"name":a.name,"browser_download_url":a.browser_download_url,"size":a.size,"digest":a.digest})).collect::<Vec<_>>()}]);
+        for (os, arch) in targets {
+            let selected = select(
+                serde_json::from_value(json.clone()).unwrap(),
+                &Version::parse("0.3.0").unwrap(),
+                os,
+                arch,
+            )
+            .unwrap();
+            assert_eq!(selected.name, asset_name(&version, os, arch).unwrap());
+        }
+        assert!(asset_name(&version, "windows", "arm").is_none());
     }
 }

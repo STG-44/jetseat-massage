@@ -13,15 +13,18 @@ cargo build --release --locked
 package="$project_root/dist/jetseat-massage-linux-$(uname -m)"
 mkdir -p "$package/bin" "$package/share/applications" "$package/share/icons/hicolor/scalable/apps"
 cp "${CARGO_TARGET_DIR:-target}/release/jetseat-massage" "$package/bin/"
-cp assets/jetseat-massage.svg "$package/share/icons/hicolor/scalable/apps/"
+for size in 16 32 48 64 128 256 512; do
+    mkdir -p "$package/share/icons/hicolor/${size}x${size}/apps"
+    cp "assets/icons/app-$size.png" "$package/share/icons/hicolor/${size}x${size}/apps/jetseat-massage.png"
+done
 cp assets/jetseat-massage.desktop "$package/share/applications/"
 mkdir -p "$package/lib/udev/rules.d"
 cp assets/70-jetseat.rules "$package/lib/udev/rules.d/"
 cat > "$package/INSTALL.txt" <<'INSTALL'
 Из каталога распакованного пакета:
-mkdir -p "$HOME/.local/bin" "$HOME/.local/share/applications" "$HOME/.local/share/icons/hicolor/scalable/apps"
+mkdir -p "$HOME/.local/bin" "$HOME/.local/share/applications" "$HOME/.local/share/icons"
 cp bin/jetseat-massage "$HOME/.local/bin/"
-cp share/icons/hicolor/scalable/apps/jetseat-massage.svg "$HOME/.local/share/icons/hicolor/scalable/apps/"
+cp -R share/icons/hicolor "$HOME/.local/share/icons/"
 sed "s|Exec=jetseat-massage|Exec=\"$HOME/.local/bin/jetseat-massage\"|" share/applications/jetseat-massage.desktop > "$HOME/.local/share/applications/jetseat-massage.desktop"
 
 Для доступа к KW-901 по USB:

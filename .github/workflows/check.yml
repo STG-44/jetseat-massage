@@ -1,26 +1,67 @@
 name: Rust desktop checks
 on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
 jobs:
   check:
+    timeout-minutes: 35
     strategy:
+      fail-fast: false
       matrix:
-        os: [macos-15-intel, ubuntu-24.04]
-    runs-on: ${{ matrix.os }}
+        include:
+          - name: macOS-Intel
+            runner: macos-15-intel
+            target: x86_64-apple-darwin
+          - name: macOS-arm64
+            runner: macos-15
+            target: aarch64-apple-darwin
+          - name: Linux-x86_64
+            runner: ubuntu-24.04
+            target: x86_64-unknown-linux-gnu
+          - name: Windows-x64
+            runner: windows-2025
+            target: x86_64-pc-windows-msvc
+            arch: x64
+          - name: Windows-arm64
+            runner: windows-11-arm
+            target: aarch64-pc-windows-msvc
+            arch: arm64
+    runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
         with:
+          targets: ${{ matrix.target }}
           components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: ${{ matrix.name }}
       - if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y libasound2-dev libudev-dev libxkbcommon-dev libwayland-dev libx11-dev libxcursor-dev libxi-dev libxrandr-dev libgl1-mesa-dev
+      - if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          choco install nsis --yes --no-progress --limit-output
+          if ($LASTEXITCODE -notin @(0, 3010)) { throw 'NSIS installation failed' }
       - run: cargo fmt --check
-      - run: cargo clippy --all-targets --locked -- -D warnings
-      - run: cargo test --locked
+      - run: cargo clippy --all-targets --all-features --locked --target ${{ matrix.target }} -- -D warnings
+      - run: cargo test --locked --target ${{ matrix.target }}
       - if: runner.os == 'macOS'
         run: bash scripts/package-macos.sh
       - if: runner.os == 'Linux'
         run: bash scripts/package-linux.sh
+      - if: runner.os == 'Windows'
+        shell: pwsh
+        run: ./scripts/package-windows.ps1 -Architecture ${{ matrix.arch }}
+      - if: runner.os == 'Windows'
+        shell: pwsh
+        run: ./scripts/smoke-windows.ps1 -Architecture ${{ matrix.arch }}
       - uses: actions/upload-artifact@v4
         with:
-          name: jetseat-${{ matrix.os }}
-          path: dist/
+          name: jetseat-${{ matrix.name }}
+          path: |
+            dist/*.pkg
+            dist/*.exe
+            dist/*.zip
+            dist/*.tar.gz
+          if-no-files-found: error

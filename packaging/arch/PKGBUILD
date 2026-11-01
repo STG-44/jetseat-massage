@@ -1,6 +1,6 @@
 # Local source package: run makepkg -si from packaging/arch in the project.
 pkgname=jetseat-massage
-pkgver=0.3.0
+pkgver=0.4.0
 pkgrel=1
 pkgdesc='USB and audio massage controller for Gametrix KW-901'
 arch=('x86_64')
@@ -23,7 +23,9 @@ package() {
   cd "$_project_root"
   install -Dm755 "$srcdir/target/release/jetseat-massage" "$pkgdir/usr/bin/jetseat-massage"
   install -Dm644 assets/jetseat-massage.desktop "$pkgdir/usr/share/applications/jetseat-massage.desktop"
-  install -Dm644 assets/jetseat-massage.svg "$pkgdir/usr/share/icons/hicolor/scalable/apps/jetseat-massage.svg"
+  for _size in 16 32 48 64 128 256 512; do
+    install -Dm644 "assets/icons/app-$_size.png" "$pkgdir/usr/share/icons/hicolor/${_size}x${_size}/apps/jetseat-massage.png"
+  done
   install -Dm644 assets/70-jetseat.rules "$pkgdir/usr/lib/udev/rules.d/70-jetseat.rules"
   install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
   install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"

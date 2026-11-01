@@ -1,3 +1,8 @@
+#![cfg_attr(
+    all(target_os = "windows", not(debug_assertions)),
+    windows_subsystem = "windows"
+)]
+
 use cpal::traits::DeviceTrait;
 use eframe::egui::{self, Color32, FontId, RichText, Stroke, Vec2};
 use jetseat_massage::{
@@ -1121,6 +1126,12 @@ fn main() -> eframe::Result {
             viewport: egui::ViewportBuilder::default()
                 .with_inner_size([1050.0, 860.0])
                 .with_min_inner_size([820.0, 620.0])
+                .with_icon(
+                    eframe::icon_data::from_png_bytes(include_bytes!(
+                        "../assets/icons/app-256.png"
+                    ))
+                    .expect("embedded app icon"),
+                )
                 .with_app_id("jetseat-massage"),
             ..Default::default()
         },
