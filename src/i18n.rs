@@ -219,6 +219,7 @@ mod tests {
         for (tag, expected) in [
             ("ru_RU.UTF-8", Language::Russian),
             ("pt-BR", Language::Portuguese),
+            ("uk-UA", Language::Ukrainian),
             ("zh-Hans-CN", Language::Chinese),
             ("ja_JP", Language::Japanese),
             ("ko-KR", Language::Korean),

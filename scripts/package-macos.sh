@@ -17,7 +17,11 @@ if [ -n "$target" ]; then
     binary="${CARGO_TARGET_DIR:-target}/$target/release/jetseat-massage"
 fi
 MACOSX_DEPLOYMENT_TARGET="${MACOSX_DEPLOYMENT_TARGET:-12.0}" cargo build "${args[@]}"
-app="$project_root/dist/macos-$arch/JetSeat Massage.app"
+# Sign outside cloud-synced folders: FileProvider may reattach Finder metadata.
+stage="$(mktemp -d "${TMPDIR:-/tmp}/jetseat-installer.XXXXXX")"
+trap 'rm -rf "$stage"' EXIT
+app="$stage/JetSeat Massage.app"
+mkdir -p "$project_root/dist/macos-$arch"
 mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources"
 cp "$binary" "$app/Contents/MacOS/jetseat-massage"
 cp assets/fonts/OFL.txt "$app/Contents/Resources/OFL-NotoSansCJK.txt"
@@ -44,8 +48,6 @@ xattr -cr "$app"
 codesign --force --sign - "$app"
 codesign --verify --deep --strict "$app"
 ditto --norsrc --noextattr --noqtn -c -k --keepParent "$app" "$project_root/dist/JetSeat-Massage-macOS-$arch.zip"
-stage="$(mktemp -d "${TMPDIR:-/tmp}/jetseat-installer.XXXXXX")"
-trap 'rm -rf "$stage"' EXIT
 mkdir -p "$stage/root/Applications"
 ditto --norsrc --noextattr --noqtn "$app" "$stage/root/Applications/JetSeat Massage.app"
 pkgbuild --analyze --root "$stage/root" "$stage/components.plist"
@@ -53,5 +55,6 @@ pkgbuild --analyze --root "$stage/root" "$stage/components.plist"
 pkgbuild --root "$stage/root" --component-plist "$stage/components.plist" \
     --identifier dev.jetseat.massage --version "$version" --install-location / \
     "$project_root/dist/JetSeat-Massage-$version-macOS-$arch.pkg"
+ditto --norsrc --noextattr --noqtn "$app" "$project_root/dist/macos-$arch/JetSeat Massage.app"
 printf 'Ready: app, ZIP and .pkg installer in %s/dist\n' "$project_root"
 
