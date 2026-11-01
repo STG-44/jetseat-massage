@@ -1,88 +1,80 @@
-# JetSeat Massage 0.3
+# JetSeat Massage
 
-Приложение на **Rust с нативным GUI (egui)** для Gametrix KW-901, macOS Intel и CachyOS/Linux. Есть прямое управление шестью моторами через USB, аудиовыход 3,5 мм и деморежим.
+A Rust desktop application with a native egui interface for the **Gametrix KW-901**. It controls six motors directly over USB, supports 3.5 mm audio output, and includes a device-free demo.
 
-Готовые установщики для Mac Intel и CachyOS, исходный архив и контрольные суммы доступны в [GitHub Releases](https://github.com/STG-44/jetseat-massage/releases/tag/v0.3.0). Rust для установки готовых пакетов не нужен. Выпуск помечен предварительным: физическая реакция накидки ещё не испытана.
+[Download installers](https://github.com/STG-44/jetseat-massage/releases) · [USB protocol](PROTOCOL.md) · [Validation](VALIDATION.md)
 
-## Что изменилось в 0.3
+## Installation
 
-- Исправлен вылет после «Начать массаж»: все обращения к HIDAPI выполняются одним постоянным потоком, который сохраняет жизненный цикл macOS CFRunLoop. Кратковременные потоки больше не инициализируют HID-менеджер.
-- Добавлена вкладка «Обновления»: автоматическая проверка и скачивание при запуске и каждые 6 часов, пока массаж остановлен. Настройку можно отключить.
-- Новая версия выбирается по semver и платформе; размер и SHA-256 установщика сверяются с GitHub Releases при скачивании и повторно перед установкой. Файл без корректной контрольной суммы не предлагается.
-- Установка запускается кнопкой после остановки сеанса. На Mac открывается штатный Installer; на CachyOS используется pacman через pkexec с системной авторизацией. После установки приложение нужно запустить снова. При отмене Linux-установки окно остаётся открытым и показывает ошибку.
-- Из интерфейса убрана подпись «/ macOS + Linux».
-
-Версию 0.3 необходимо установить один раз вручную: в 0.2 автообновления ещё не было. Для проверки и скачивания используется публичный репозиторий, вход в GitHub не нужен. Программа не меняет систему и не запускает установку молча во время массажа.
-
-## Программы
-
-| Программа | Что делает |
+| System | Installer |
 | --- | --- |
-| Релакс | Медленно увеличивает и уменьшает общую силу |
-| Волна | По USB перемещает волну от сиденья к спине; по аудио меняет общую силу |
-| Пульс | Импульсы с паузами для отдыха |
-| Ровный | Постоянная заданная сила |
-| Змейка | Проходит шесть зон: вверх слева, вниз справа |
-| Лево / право | Плавно чередует стороны |
+| Windows 10/11, Intel or AMD x64 | `JetSeat-Massage-0.4.0-Windows-x64-Setup.exe` |
+| Windows 11, ARM64 | `JetSeat-Massage-0.4.0-Windows-arm64-Setup.exe` |
+| macOS 12+, Intel | `JetSeat-Massage-0.4.0-macOS-Intel.pkg` |
+| macOS 12+, Apple Silicon (M series) | `JetSeat-Massage-0.4.0-macOS-arm64.pkg` |
+| CachyOS / Arch Linux, x86_64 | `jetseat-massage-0.4.0-1-x86_64.pkg.tar.zst` |
 
-Все шесть программ доступны по USB и в деморежиме. В аудиорежиме доступны первые четыре. Через USB можно включать и выключать каждую зону: сиденье слева/справа, низ спины слева/справа, середина спины слева/справа. Общая сила, темп и таймер от 1 до 30 минут регулируются в интерфейсе. Индикаторы показывают уровни команд, а не измеренную вибрацию.
+Rust is not needed to install a ready-made package. Portable ZIP archives are also provided for Windows and macOS. This is a prerelease: physical vibration and zone placement still need user confirmation.
 
-**Исправлен вылет при старте USB-массажа на macOS.** Подключённая GTX JetSeat (231D:2002) прошла восемь реальных циклов открытия, записи нулевой силы и закрытия. Это проверка USB-связи и устойчивости, не ощущений от массажа. USB-кодирование сверено с оригинальной библиотекой Gametrix. Шесть контрольных пакетов совпадают с результатом кодировщика `uwApi.dll`. Совместимость конкретной прошивки нужно испытать на накидке. Подробности — в [PROTOCOL.md](PROTOCOL.md) и [VALIDATION.md](VALIDATION.md).
+**Windows:** run Setup. It installs for the current user, adds a Start menu shortcut, and appears in Installed apps. USB uses the **Microsoft HID driver already included with Windows**; no vendor driver, external DLL download, or separate Gametrix software is required. HIDAPI and the application runtime are compiled into the executable. This follows the [Windows HID over USB driver model](https://learn.microsoft.com/en-us/windows-hardware/drivers/hid/hid-over-usb). Actual seat operation on Windows has not yet been tested.
 
-## MacBook Pro 15″ 2018, Intel
+**macOS:** open the `.pkg`; the application is installed in `/Applications`. Intel and Apple Silicon packages contain native binaries for their respective CPUs. The app is ad-hoc signed; the installer has no Developer ID signature or Apple notarization. macOS may require approval in Privacy & Security. To remove it, move the app to Trash.
 
-Откройте `JetSeat-Massage-0.3.0-macOS-Intel.pkg` и пройдите обычный установщик. Приложение появится в `/Applications/JetSeat Massage.app`. Rust для готовой сборки не нужен. Минимальная версия macOS — 12.
-
-Также предоставлен ZIP с `.app`: распакуйте и перенесите приложение в «Программы». Приложение имеет локальную ad-hoc подпись; установщик не подписан Developer ID и не нотарифицирован. macOS может потребовать разрешить его открытие в настройках конфиденциальности и безопасности.
-
-Удаление: переместите приложение из «Программ» в корзину. USB-драйверы и системные службы на Mac не устанавливаются.
-
-## CachyOS / Arch, x86_64
-
-В каталоге с готовым пакетом выполните:
+**CachyOS / Arch:** install the downloaded package:
 
 ```sh
-sudo pacman -U ./jetseat-massage-0.3.0-1-x86_64.pkg.tar.zst
+sudo pacman -U ./jetseat-massage-0.4.0-1-x86_64.pkg.tar.zst
 ```
 
-Pacman установит бинарник, ярлык приложения, иконку и правила доступа к USB. После установки переподключите USB накидки. Запускайте приложение обычным пользователем из меню или командой `jetseat-massage`.
+The package includes a udev rule. Reconnect the seat USB after installation and run the GUI as a regular user. For other distributions, the portable archive includes installation instructions; dependencies are listed in `packaging/arch/PKGBUILD`.
 
-Правила `70-jetseat.rules` дают доступ к четырём известным VID/PID активному локальному пользователю через `uaccess`. GUI не требует запуска от root. Удаление: `sudo pacman -R jetseat-massage`.
+## Languages
 
-GUI поддерживает Wayland и X11. Звук работает через [ALSA](https://archlinux.org/packages/extra/x86_64/alsa-lib/); для вывода через PipeWire может понадобиться [pipewire-alsa](https://archlinux.org/packages/extra/x86_64/pipewire-alsa/).
+Choose the language at the top of the window. Changes take effect immediately and are saved. The first launch follows the system language; unsupported languages fall back to English.
 
-## Подключение по USB
+Russian, Ukrainian, English, German, French, Spanish, Brazilian Portuguese, Italian, Simplified Chinese, Japanese, and Korean are included. Help, diagnostics, update screens, and application error messages are translated. Device names and native operating system errors retain their original text. Noto Sans CJK is embedded, so Asian text does not depend on installed fonts.
 
-1. Подключите штатное питание KW-901 и включите накидку.
-2. Подключите USB к компьютеру. Аудиокабель для USB-массажа не требуется.
-3. На вкладке «Массаж» выберите **«USB · 6 зон»**, нажмите **«Найти накидку»**, выберите устройство.
-4. Выберите программу, зоны и длительность. Начните с силы 25%, нажмите **«Начать массаж»**.
-5. **«Стоп»**, **Esc**, конец таймера и закрытие приложения отправляют команду нулевой силы.
+## Programs
 
-Перед отправкой команд проверяются VID/PID и HID-дескриптор: нужен ненумерованный выходной отчёт 64 бита. Неизвестный формат блокируется. Поиск USB выполняется в фоне, чтобы не прерывать оконный цикл macOS.
+| Program | Behavior |
+| --- | --- |
+| Relax | Smooth overall rise and fall |
+| Wave | Moves from seat to back over USB; varies overall strength over audio |
+| Pulse | Pulses separated by rest |
+| Steady | Constant selected strength |
+| Snake | Visits all six zones: up the left side, down the right |
+| Left / right | Smoothly alternates sides |
 
-Если устройство найдено, но вибрации нет, проверьте питание и режим USB контроллера. Приложение не переключает сохранённые режимы, не меняет прошивку и не отправляет feature reports. При отключённом USB или зависшем системном вызове передать «Стоп» невозможно; при продолжающейся вибрации выключите питание на пульте.
+USB and Demo support all six programs and individual zone switches: left/right seat, lower back, and mid-back. Audio supports the first four programs. Strength, pace, and a 1–30 minute timer are adjustable. Indicators display commanded levels, not measured vibration.
 
-USB-поток независимо пытается выключить моторы, если GUI не отвечает более 1,5 секунды. После сна автоматического продолжения нет. Это контроль приложения, не аппаратный watchdog; остановка при аварийном завершении процесса или отключении компьютера не гарантируется.
+## Connect by USB
 
-## Подключение по аудиокабелю
+1. Connect the original KW-901 power supply and switch on its controller.
+2. Connect USB to the computer. No audio cable is needed.
+3. Choose **USB · 6 zones**, click **Find seat**, and select the device.
+4. Choose a program, zones, and strength, then click **Start massage**. Start at 25%.
 
-1. Подключите питание и аудиоштекер 3,5 мм накидки к выходу для наушников либо отдельной звуковой карте.
-2. Включите на пульте режим перехвата звука, настройте чувствительность.
-3. В приложении выберите **«Аудио · 3,5 мм»**, обновите список и выберите аудиовыход.
-4. Начните с небольшой системной громкости и силы 25%, запустите программу и подберите уровень.
+The app validates both the device ID and a compatible HID descriptor before writing. If the device is detected but does not vibrate, check power and the controller’s USB mode. The app does not change firmware or saved controller settings.
 
-Аудиорежим задаёт общую реакцию на низкочастотный звук. Раздельное управление зонами доступно через USB. Процент силы в аудиорежиме — уровень сигнала приложения; результат зависит также от громкости и пульта. Частота 40–120 Гц относится к звуку.
+Stop, Escape, session expiry, and normal exit attempt to send zero strength. A 1.5-second GUI heartbeat watchdog also stops output. This is a software watchdog: stopping after a process crash, USB failure, or computer shutdown cannot be guaranteed. Use the controller’s power button if vibration continues.
 
-Если выбрать динамики, сигнал будет слышен. Музыка и другие приложения на том же выходе тоже могут вызывать вибрацию. «Стоп» выключает сигнал JetSeat Massage; кнопка пульта выключает накидку. Аудиопоток имеет независимый таймер и контроль отклика GUI.
+## Connect by audio
 
-Каждый запуск открывает деморежим без активного сеанса. Демо не выводит звук и не отправляет USB-команды. Настройки силы, программы, темпа, длительности и зон сохраняются.
+Connect the 3.5 mm cable to the computer or a sound card and enable audio capture on the seat controller. Choose **Audio · 3.5 mm** and the matching output. Begin with low system volume and 25% strength. Audio controls the overall response, while USB controls individual zones. The 40–120 Hz setting is an audio frequency, not motor speed.
 
-Сведения о шести моторах и подключении: [страница KW-901 у производителя](https://gametrix.ru/catalog/gaming/vibration-pads/kw901-jetseat-live-sense).
+Selecting speakers makes the signal audible. Other applications on the same output may also cause vibration. Stop disables this application’s signal only.
 
-## Диагностика
+Every launch starts in Demo with no active session. Strength, program, pace, duration, zones, language, and update preferences are saved.
 
-На вкладке «USB-диагностика» нажмите «Обновить устройства» и «Копировать JSON-отчёт». Диагностика только перечисляет HID-интерфейсы, без отправки команд. Совпадение имени — подсказка; известный VID/PID отмечается отдельно.
+## Updates
+
+Version 0.3 and later can check and download updates at startup and every six hours while massage is stopped. This can be disabled. A public GitHub release is selected by version, operating system, and CPU. File size and SHA-256 are checked after download and again before installation. No GitHub login is required.
+
+Installation begins with **Install update**, after the session is stopped. macOS opens Installer; Windows launches the bundled Setup and waits for the old process to exit; CachyOS uses pacman through system authorization with pkexec. Relaunch the application after installation. New sessions are blocked while installing. Version 0.2 users must install once manually.
+
+## Diagnostics and development
+
+The USB diagnostics page can enumerate devices and copy a JSON report without sending commands. Name matches are hints; known VID/PID matches are marked separately.
 
 ```sh
 jetseat-massage --diagnose kw901-usb.json
@@ -91,18 +83,21 @@ jetseat-massage --usb-self-test
 jetseat-massage --check-updates
 ```
 
-## Сборка из исходников
+`--usb-self-test` requires exactly one compatible connected seat and performs eight zero-force open/write/close cycles. It does not test massage strength.
 
-Нужен Rust 1.88 или новее. На Mac — Command Line Tools for Xcode:
+Rust 1.88 or later is required to build. macOS requires Xcode Command Line Tools. Windows requires the Visual Studio C++ build tools and NSIS. Choose the matching native Rust target.
 
 ```sh
-xcode-select --install
 bash scripts/package-macos.sh
+bash scripts/package-macos.sh aarch64-apple-darwin
 ```
 
-Скрипт создаёт `.app`, ZIP и `.pkg` в `dist/` для архитектуры текущего Mac.
+```powershell
+./scripts/package-windows.ps1 -Architecture x64
+./scripts/package-windows.ps1 -Architecture arm64
+```
 
-На CachyOS/Arch:
+On CachyOS / Arch:
 
 ```sh
 sudo pacman -S --needed base-devel rust pkgconf
@@ -110,21 +105,16 @@ cd packaging/arch
 makepkg -si
 ```
 
-`packaging/arch/PKGBUILD` собирает пакет из проекта двумя каталогами выше. Рабочие каталоги makepkg находятся внутри `packaging/arch`, отдельно от Rust-исходников. На других Linux можно собрать переносимый архив: `bash scripts/package-linux.sh`; необходимые библиотеки перечислены в `PKGBUILD`.
+On other Linux systems, `bash scripts/package-linux.sh` creates a portable archive. All packaging scripts place results in `dist/`.
 
 ```sh
 cargo fmt --check
-cargo clippy --all-targets --locked -- -D warnings
+cargo clippy --all-targets --all-features --locked -- -D warnings
 cargo test --locked
-cargo build --release --locked
 ```
 
-Отдельный тест реального аудиопотока выводит только тишину:
+CI checks and packages native Windows x64/ARM64, macOS Intel/ARM64, and Linux x86_64 builds. Windows CI also installs the package, runs the installed diagnostics executable, and uninstalls it.
 
-```sh
-cargo test --locked real_audio_stream_silence_stop_and_watchdog -- --ignored
-```
+Translations are embedded in `locales/messages.json`; translation columns follow `Language::ALL` after Russian (the source column). Keep numeric placeholders intact. `cargo test` validates all translated placeholders. The generated icon source and prompt are under `assets/icons/`.
 
-Модули: `updater.rs` — обновления; `hid_service.rs` — постоянный владелец HIDAPI; `signal.rs` — программы; `audio.rs` — CPAL; `protocol.rs` — HID-кодирование и дескриптор; `usb.rs` — USB-поток и остановка; `diagnostic.rs` — перечисление; `main.rs` — русский GUI. CI при запуске проверяет macOS Intel и Ubuntu.
-
-Лицензия MIT. Это независимое приложение, не официальный продукт Gametrix. Оригинальные Windows-программы, DLL и аудиофайлы в поставку не включены.
+MIT license. Noto Sans CJK is distributed under the SIL Open Font License in `assets/fonts/OFL.txt`; packages include this notice. This is an independent project, not an official Gametrix product. Original Windows programs, proprietary DLLs, and audio files are not redistributed.

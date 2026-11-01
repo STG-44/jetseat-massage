@@ -33,12 +33,17 @@ try {
         if ($command) { $makensis = $command.Source }
     }
     if (-not $makensis) { throw 'Install NSIS first: choco install nsis -y' }
-    & $makensis '/V3' "/DARCH=$Architecture" "/DAPP_VERSION=$version" "/DBINARY=$binary" "/DOUTPUT=$output" "/DICON=$projectRoot/assets/icons/app.ico" "/DLICENSE_FILE=$projectRoot/LICENSE" "/DREADME_FILE=$projectRoot/README.md" "$projectRoot/packaging/windows/installer.nsi"
+    $icon = (Resolve-Path 'assets/icons/app.ico').Path
+    $license = (Resolve-Path 'LICENSE').Path
+    $readme = (Resolve-Path 'README.md').Path
+    $fontLicense = (Resolve-Path 'assets/fonts/OFL.txt').Path
+    & $makensis '/V3'  "/DARCH=$Architecture" "/DAPP_VERSION=$version" "/DBINARY=$binary" "/DOUTPUT=$output" "/DICON=$icon" "/DLICENSE_FILE=$license" "/DREADME_FILE=$readme" "/DFONT_LICENSE=$fontLicense" "$projectRoot/packaging/windows/installer.nsi"
     if ($LASTEXITCODE -ne 0) { throw 'Windows installer packaging failed' }
     $portable = Join-Path $dist "portable-Windows-$Architecture"
     New-Item -ItemType Directory -Force -Path $portable | Out-Null
     Copy-Item $binary (Join-Path $portable 'jetseat-massage.exe') -Force
     Copy-Item LICENSE,README.md $portable -Force
+    Copy-Item assets/fonts/OFL.txt (Join-Path $portable 'OFL-NotoSansCJK.txt') -Force
     Compress-Archive -Path "$portable/*" -DestinationPath (Join-Path $dist "JetSeat-Massage-$version-Windows-$Architecture.zip") -Force
     Write-Output "Ready: $output"
 } finally {

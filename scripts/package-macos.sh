@@ -20,6 +20,8 @@ MACOSX_DEPLOYMENT_TARGET="${MACOSX_DEPLOYMENT_TARGET:-12.0}" cargo build "${args
 app="$project_root/dist/macos-$arch/JetSeat Massage.app"
 mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources"
 cp "$binary" "$app/Contents/MacOS/jetseat-massage"
+cp assets/fonts/OFL.txt "$app/Contents/Resources/OFL-NotoSansCJK.txt"
+cp LICENSE "$app/Contents/Resources/LICENSE.txt"
 cp assets/icons/app.icns "$app/Contents/Resources/AppIcon.icns"
 cat > "$app/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
@@ -51,5 +53,5 @@ pkgbuild --analyze --root "$stage/root" "$stage/components.plist"
 pkgbuild --root "$stage/root" --component-plist "$stage/components.plist" \
     --identifier dev.jetseat.massage --version "$version" --install-location / \
     "$project_root/dist/JetSeat-Massage-$version-macOS-$arch.pkg"
-printf 'Готово: приложение, ZIP и установщик .pkg в %s/dist\n' "$project_root"
+printf 'Ready: app, ZIP and .pkg installer in %s/dist\n' "$project_root"
 

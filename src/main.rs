@@ -8,6 +8,7 @@ use eframe::egui::{self, Color32, FontId, RichText, Stroke, Vec2};
 use jetseat_massage::{
     audio::{self, Audio, Endpoint},
     diagnostic::{self, HidInfo},
+    i18n::{self, Language, tr},
     signal::{self, Pattern},
     updater::{self, Status as UpdateStatus, Updater},
     usb::{self, Usb},
@@ -35,6 +36,7 @@ struct Settings {
     frequency: u32,
     zones: [bool; 6],
     auto_updates: bool,
+    language: Language,
 }
 
 impl Default for Settings {
@@ -47,6 +49,7 @@ impl Default for Settings {
             frequency: 70,
             zones: [true; 6],
             auto_updates: true,
+            language: Language::default(),
         }
     }
 }
@@ -143,6 +146,12 @@ impl App {
             .and_then(|s| eframe::get_value(s, "settings"))
             .unwrap_or_default();
         settings.sanitize();
+        #[cfg(feature = "screenshot")]
+        if let Ok(tag) = std::env::var("JETSEAT_LANGUAGE") {
+            settings.language = Language::from_tag(&tag);
+        }
+        i18n::set_language(settings.language);
+        i18n::configure_fonts(&cc.egui_ctx, settings.language);
         let (endpoints, message, error) = match audio::endpoints() {
             Ok(devices) => (
                 devices,
@@ -388,9 +397,14 @@ impl App {
     fn header(&mut self, ui: &mut egui::Ui) {
         ui.horizontal(|ui| {
             ui.vertical(|ui| {
-                ui.label(RichText::new("JETSEAT").size(12.0).color(ACCENT).strong());
-                ui.heading("Массаж в вашем ритме");
-                ui.label(RichText::new("Gametrix KW-901").color(MUTED));
+                ui.label(
+                    RichText::new(tr("JETSEAT"))
+                        .size(12.0)
+                        .color(ACCENT)
+                        .strong(),
+                );
+                ui.heading(tr("Массаж в вашем ритме"));
+                ui.label(RichText::new(tr("Gametrix KW-901")).color(MUTED));
             });
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                 let (label, color) = if self.run.is_some() {
@@ -409,22 +423,40 @@ impl App {
                 } else {
                     ("ГОТОВ К ЗАПУСКУ", MUTED)
                 };
-                ui.label(RichText::new(label).color(color).size(12.0).strong());
+                ui.label(RichText::new(tr(label)).color(color).size(12.0).strong());
             });
         });
         ui.add_space(10.0);
-        ui.horizontal(|ui| {
-            ui.selectable_value(&mut self.page, Page::Massage, "Массаж");
-            ui.selectable_value(&mut self.page, Page::Usb, "USB-диагностика");
-            ui.selectable_value(&mut self.page, Page::Help, "Подключение");
+        ui.horizontal_wrapped(|ui| {
+            ui.label(tr("Язык"));
+            let previous = self.settings.language;
+            egui::ComboBox::from_id_salt("language")
+                .selected_text(self.settings.language.name())
+                .width(170.0)
+                .show_ui(ui, |ui| {
+                    for language in Language::ALL {
+                        ui.selectable_value(&mut self.settings.language, language, language.name());
+                    }
+                });
+            if previous != self.settings.language {
+                i18n::set_language(self.settings.language);
+                i18n::configure_fonts(ui.ctx(), self.settings.language);
+                ui.ctx().request_repaint();
+            }
+        });
+        ui.add_space(8.0);
+        ui.horizontal_wrapped(|ui| {
+            ui.selectable_value(&mut self.page, Page::Massage, tr("Массаж"));
+            ui.selectable_value(&mut self.page, Page::Usb, tr("USB-диагностика"));
+            ui.selectable_value(&mut self.page, Page::Help, tr("Подключение"));
             ui.selectable_value(
                 &mut self.page,
                 Page::Updates,
-                if matches!(self.updater.status, UpdateStatus::Ready(_)) {
+                tr(if matches!(self.updater.status, UpdateStatus::Ready(_)) {
                     "Обновление готово"
                 } else {
                     "Обновления"
-                },
+                }),
             );
         });
         ui.add_space(4.0);
@@ -435,16 +467,16 @@ impl App {
     fn massage(&mut self, ui: &mut egui::Ui) {
         ui.horizontal_wrapped(|ui| {
             ui.add_enabled_ui(self.run.is_none(), |ui| {
-                ui.selectable_value(&mut self.output, Output::Demo, "Демо");
-                ui.selectable_value(&mut self.output, Output::Usb, "USB · 6 зон");
-                ui.selectable_value(&mut self.output, Output::Audio, "Аудио · 3,5 мм");
+                ui.selectable_value(&mut self.output, Output::Demo, tr("Демо"));
+                ui.selectable_value(&mut self.output, Output::Usb, tr("USB · 6 зон"));
+                ui.selectable_value(&mut self.output, Output::Audio, tr("Аудио · 3,5 мм"));
             });
             ui.label(
-                RichText::new(match self.output {
+                RichText::new(tr(match self.output {
                     Output::Demo => "Посмотрите программы без подключения",
                     Output::Usb => "Отдельное управление моторами",
                     Output::Audio => "Общая реакция на звук",
-                })
+                }))
                 .color(MUTED)
                 .size(14.0),
             );
@@ -455,27 +487,26 @@ impl App {
                 self.settings.pattern = Pattern::Relax;
             }
             card(ui, |ui| {
-                ui.label(RichText::new("Аудиовыход").strong());
+                ui.label(RichText::new(tr("Аудиовыход")).strong());
                 ui.horizontal_wrapped(|ui| {
                     ui.add_enabled_ui(self.run.is_none(), |ui| {
                         egui::ComboBox::from_id_salt("output")
-                            .selected_text(
-                                self.selected
-                                    .and_then(|i| self.endpoints.get(i))
-                                    .map(|e| e.name.as_str())
-                                    .unwrap_or("Выберите выход…"),
-                            )
+                            .selected_text(tr(self
+                                .selected
+                                .and_then(|i| self.endpoints.get(i))
+                                .map(|e| e.name.as_str())
+                                .unwrap_or("Выберите выход…")))
                             .width(290.0)
                             .show_ui(ui, |ui| {
                                 for (i, endpoint) in self.endpoints.iter().enumerate() {
                                     ui.selectable_value(
                                         &mut self.selected,
                                         Some(i),
-                                        &endpoint.name,
+                                        tr(&endpoint.name),
                                     );
                                 }
                             });
-                        if ui.button("Обновить").clicked() {
+                        if ui.button(tr("Обновить")).clicked() {
                             match audio::endpoints() {
                                 Ok(endpoints) => {
                                     self.endpoints = endpoints;
@@ -489,7 +520,7 @@ impl App {
                         }
                     });
                 });
-                ui.label(RichText::new("Подключите аудиокабель накидки к выбранному выходу и включите перехват звука. Если выбрать динамики, сигнал будет слышен.").size(13.0).color(MUTED));
+                ui.label(RichText::new(tr("Подключите аудиокабель накидки к выбранному выходу и включите перехват звука. Если выбрать динамики, сигнал будет слышен.")).size(13.0).color(MUTED));
             });
             ui.add_space(12.0);
         } else if self.output == Output::Usb {
@@ -497,26 +528,25 @@ impl App {
                 ui.horizontal_wrapped(|ui| {
                     ui.add_enabled_ui(self.run.is_none(), |ui| {
                         egui::ComboBox::from_id_salt("usb_output")
-                            .selected_text(
-                                self.usb_selected
-                                    .and_then(|i| self.usb_devices.get(i))
-                                    .map(|e| e.name.as_str())
-                                    .unwrap_or("Выберите KW-901…"),
-                            )
+                            .selected_text(tr(self
+                                .usb_selected
+                                .and_then(|i| self.usb_devices.get(i))
+                                .map(|e| e.name.as_str())
+                                .unwrap_or("Выберите KW-901…")))
                             .width(420.0)
                             .show_ui(ui, |ui| {
                                 for (i, device) in self.usb_devices.iter().enumerate() {
                                     ui.selectable_value(
                                         &mut self.usb_selected,
                                         Some(i),
-                                        &device.name,
+                                        tr(&device.name),
                                     );
                                 }
                             });
                         if ui
                             .add_enabled(
                                 self.usb_scan_rx.is_none(),
-                                egui::Button::new("Найти накидку"),
+                                egui::Button::new(tr("Найти накидку")),
                             )
                             .clicked()
                         {
@@ -525,7 +555,7 @@ impl App {
                     });
                 });
                 ui.label(
-                    RichText::new(&self.usb_scan_message)
+                    RichText::new(tr(&self.usb_scan_message))
                         .size(13.0)
                         .color(MUTED),
                 );
@@ -535,7 +565,7 @@ impl App {
         ui.columns(2, |columns| {
             card(&mut columns[0], |ui| {
                 ui.label(
-                    RichText::new("01  ПРОГРАММА")
+                    RichText::new(tr("01  ПРОГРАММА"))
                         .size(12.0)
                         .color(MUTED)
                         .strong(),
@@ -569,14 +599,14 @@ impl App {
                                         ui.set_width(cell_width);
                                         ui.set_min_height(68.0);
                                         ui.label(
-                                            RichText::new(pattern.title())
+                                            RichText::new(tr(pattern.title()))
                                                 .size(18.0)
                                                 .color(if chosen { ACCENT } else { Color32::WHITE })
                                                 .strong(),
                                         );
                                         ui.add(
                                             egui::Label::new(
-                                                RichText::new(pattern.description())
+                                                RichText::new(tr(pattern.description()))
                                                     .size(12.0)
                                                     .color(MUTED),
                                             )
@@ -598,21 +628,21 @@ impl App {
             });
             card(&mut columns[1], |ui| {
                 ui.label(
-                    RichText::new("02  НАСТРОЙКИ СЕАНСА")
+                    RichText::new(tr("02  НАСТРОЙКИ СЕАНСА"))
                         .size(12.0)
                         .color(MUTED)
                         .strong(),
                 );
                 ui.add_space(12.0);
                 ui.horizontal(|ui| {
-                    ui.label(if self.output == Output::Audio {
+                    ui.label(tr(if self.output == Output::Audio {
                         "Сила сигнала"
                     } else {
                         "Сила вибрации"
-                    });
+                    }));
                     ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                         ui.label(
-                            RichText::new(format!("{}%", self.settings.strength))
+                            RichText::new(tr(format!("{}%", self.settings.strength)))
                                 .size(25.0)
                                 .color(ACCENT)
                                 .strong(),
@@ -621,44 +651,47 @@ impl App {
                 });
                 ui.add(egui::Slider::new(&mut self.settings.strength, 0..=100).show_value(false));
                 ui.label(
-                    RichText::new(if self.output == Output::Audio {
+                    RichText::new(tr(if self.output == Output::Audio {
                         "Зависит также от громкости выхода и пульта."
                     } else {
                         "Уровень команды моторам. Начальная сила — 25%."
-                    })
+                    }))
                     .size(12.0)
                     .color(MUTED),
                 );
                 ui.add_space(7.0);
-                ui.label("Темп программы");
+                ui.label(tr("Темп программы"));
                 ui.add(
                     egui::Slider::new(&mut self.settings.speed, 0.5..=2.0)
                         .step_by(0.1)
-                        .suffix("×"),
+                        .suffix(tr("×")),
                 );
                 ui.add_space(7.0);
-                ui.label("Длительность");
+                ui.label(tr("Длительность"));
                 ui.add_enabled_ui(self.run.is_none(), |ui| {
                     ui.horizontal(|ui| {
                         for minutes in [5, 10, 15, 20] {
                             ui.selectable_value(
                                 &mut self.settings.minutes,
                                 minutes,
-                                format!("{minutes} мин"),
+                                tr(format!("{minutes} мин")),
                             );
                         }
                     });
-                    ui.add(egui::Slider::new(&mut self.settings.minutes, 1..=30).suffix(" мин"));
+                    ui.add(
+                        egui::Slider::new(&mut self.settings.minutes, 1..=30).suffix(tr(" мин")),
+                    );
                 });
                 if self.output == Output::Audio {
-                    egui::CollapsingHeader::new("Настройка аудиосигнала").show(ui, |ui| {
+                    egui::CollapsingHeader::new(tr("Настройка аудиосигнала")).show(ui, |ui| {
                         ui.label(
-                            RichText::new("Частота звука, а не обороты моторов.")
+                            RichText::new(tr("Частота звука, а не обороты моторов."))
                                 .size(12.0)
                                 .color(MUTED),
                         );
                         ui.add(
-                            egui::Slider::new(&mut self.settings.frequency, 40..=120).suffix(" Гц"),
+                            egui::Slider::new(&mut self.settings.frequency, 40..=120)
+                                .suffix(tr(" Гц")),
                         );
                     });
                 }
@@ -687,7 +720,7 @@ impl App {
             };
             card(ui, |ui| {
                 ui.label(
-                    RichText::new("03  ЗОНЫ НАКИДКИ")
+                    RichText::new(tr("03  ЗОНЫ НАКИДКИ"))
                         .size(12.0)
                         .color(MUTED)
                         .strong(),
@@ -695,7 +728,7 @@ impl App {
                 ui.horizontal_wrapped(|ui| {
                     for (i, name) in signal::ZONES.iter().enumerate() {
                         ui.vertical(|ui| {
-                            ui.checkbox(&mut self.settings.zones[i], *name);
+                            ui.checkbox(&mut self.settings.zones[i], tr(*name));
                             ui.add(
                                 egui::ProgressBar::new(levels[i])
                                     .fill(ACCENT)
@@ -742,7 +775,7 @@ impl App {
         ui.horizontal(|ui| {
             let secs = remaining.ceil() as u64;
             ui.label(
-                RichText::new(format!("{:02}:{:02}", secs / 60, secs % 60))
+                RichText::new(tr(format!("{:02}:{:02}", secs / 60, secs % 60)))
                     .size(32.0)
                     .strong(),
             );
@@ -758,11 +791,11 @@ impl App {
                 .add_enabled(
                     ready,
                     egui::Button::new(
-                        RichText::new(if self.output == Output::Demo {
+                        RichText::new(tr(if self.output == Output::Demo {
                             "Начать демосеанс"
                         } else {
                             "Начать массаж"
-                        })
+                        }))
                         .color(BG)
                         .strong(),
                     )
@@ -776,14 +809,14 @@ impl App {
             if ui
                 .add_enabled(
                     self.run.is_some(),
-                    egui::Button::new("Стоп · Esc").min_size(Vec2::new(125.0, 42.0)),
+                    egui::Button::new(tr("Стоп · Esc")).min_size(Vec2::new(125.0, 42.0)),
                 )
                 .clicked()
             {
                 self.stop("Сеанс остановлен. Сигнал выключен.");
             }
             ui.label(
-                RichText::new(format!("Уровень: {:.0}%", level * 100.0))
+                RichText::new(tr(format!("Уровень: {:.0}%", level * 100.0)))
                     .color(MUTED)
                     .size(13.0),
             );
@@ -794,7 +827,7 @@ impl App {
                 .desired_height(4.0),
         );
         ui.label(
-            RichText::new(&self.message)
+            RichText::new(tr(&self.message))
                 .size(13.0)
                 .color(if self.error { WARNING } else { MUTED }),
         );
@@ -802,15 +835,15 @@ impl App {
 
     fn usb(&mut self, ui: &mut egui::Ui) {
         card(ui, |ui| {
-            ui.heading("Подключение по USB");
-            ui.label("Прямое USB-управление добавлено: на вкладке «Массаж» выберите «USB · 6 зон». Здесь можно проверить идентификаторы устройства.");
-            ui.label(RichText::new("Перед отправкой команд проверяются VID/PID и формат HID-отчёта. Для USB-массажа аудиокабель не нужен.").color(MUTED));
+            ui.heading(tr("Подключение по USB"));
+            ui.label(tr("Прямое USB-управление добавлено: на вкладке «Массаж» выберите «USB · 6 зон». Здесь можно проверить идентификаторы устройства."));
+            ui.label(RichText::new(tr("Перед отправкой команд проверяются VID/PID и формат HID-отчёта. Для USB-массажа аудиокабель не нужен.")).color(MUTED));
             ui.add_space(10.0);
             ui.horizontal(|ui| {
                 if ui
                     .add_enabled(
                         self.scan_rx.is_none(),
-                        egui::Button::new("Обновить устройства"),
+                        egui::Button::new(tr("Обновить устройства")),
                     )
                     .clicked()
                 {
@@ -819,7 +852,7 @@ impl App {
                 if ui
                     .add_enabled(
                         !self.hid.is_empty(),
-                        egui::Button::new("Копировать JSON-отчёт"),
+                        egui::Button::new(tr("Копировать JSON-отчёт")),
                     )
                     .clicked()
                 {
@@ -834,40 +867,52 @@ impl App {
                     }
                 }
             });
-            ui.label(RichText::new(&self.scan_message).size(13.0).color(MUTED));
+            ui.label(
+                RichText::new(tr(&self.scan_message))
+                    .size(13.0)
+                    .color(MUTED),
+            );
         });
         ui.add_space(12.0);
         for device in &self.hid {
             card(ui, |ui| {
                 ui.horizontal_wrapped(|ui| {
                     ui.label(
-                        RichText::new(if device.product.is_empty() {
+                        RichText::new(tr(if device.product.is_empty() {
                             "Без названия"
                         } else {
                             &device.product
-                        })
+                        }))
                         .strong(),
                     );
                     if device.known_protocol {
-                        ui.label(RichText::new("ПРОТОКОЛ GAMETRIX").color(ACCENT).size(11.0));
+                        ui.label(
+                            RichText::new(tr("ПРОТОКОЛ GAMETRIX"))
+                                .color(ACCENT)
+                                .size(11.0),
+                        );
                     } else if device.candidate {
-                        ui.label(RichText::new("ВОЗМОЖНО, JETSEAT").color(ACCENT).size(11.0));
+                        ui.label(
+                            RichText::new(tr("ВОЗМОЖНО, JETSEAT"))
+                                .color(ACCENT)
+                                .size(11.0),
+                        );
                     }
                 });
                 ui.label(
-                    RichText::new(format!(
+                    RichText::new(tr(format!(
                         "VID {:04X} · PID {:04X} · Usage {:04X}:{:04X} · интерфейс {}",
                         device.vendor_id,
                         device.product_id,
                         device.usage_page,
                         device.usage,
                         device.interface
-                    ))
+                    )))
                     .size(13.0)
                     .color(MUTED),
                 );
                 if !device.manufacturer.is_empty() {
-                    ui.small(&device.manufacturer);
+                    ui.small(tr(&device.manufacturer));
                 }
             });
             ui.add_space(6.0);
@@ -876,29 +921,32 @@ impl App {
 
     fn help(&mut self, ui: &mut egui::Ui) {
         card(ui, |ui| {
-            ui.heading("USB: шесть отдельных зон");
-            ui.label("1. Подключите штатное питание KW-901 и включите пульт.");
-            ui.label("2. Подключите USB к MacBook или компьютеру с CachyOS.");
-            ui.label("3. На вкладке «Массаж» выберите «USB · 6 зон», нажмите «Найти накидку» и выберите устройство.");
-            ui.label("4. Выберите программу, зоны и силу. Нажмите «Начать массаж».");
-            ui.label(RichText::new("Аудиокабель не требуется. Если устройство найдено, но не вибрирует, проверьте питание и USB-режим контроллера. Эта версия не меняет прошивку или сохранённые настройки контроллера.").color(MUTED));
+            ui.heading(tr("USB: шесть отдельных зон"));
+            ui.label(RichText::new(tr("Windows использует встроенный драйвер Microsoft HID. Дополнительные драйверы и DLL скачивать не нужно.")).color(MUTED));
+            ui.label(tr("1. Подключите штатное питание KW-901 и включите пульт."));
+            ui.label(tr("2. Подключите USB к компьютеру."));
+            ui.label(tr("3. На вкладке «Массаж» выберите «USB · 6 зон», нажмите «Найти накидку» и выберите устройство."));
+            ui.label(tr(
+                "4. Выберите программу, зоны и силу. Нажмите «Начать массаж».",
+            ));
+            ui.label(RichText::new(tr("Аудиокабель не требуется. Если устройство найдено, но не вибрирует, проверьте питание и USB-режим контроллера. Эта версия не меняет прошивку или сохранённые настройки контроллера.")).color(MUTED));
         });
         ui.add_space(12.0);
         card(ui, |ui| {
-            ui.heading("Аудио: общая реакция на звук");
-            ui.label("Подключите аудиокабель 3,5 мм к выходу MacBook или звуковой карты, включите перехват звука на пульте, выберите «Аудио · 3,5 мм» и соответствующий аудиовыход.");
-            ui.label(RichText::new("Начните с небольшой системной громкости и силы 25%. Другие звуки на этом выходе тоже могут вызывать вибрацию. Стоп выключает только сигнал этого приложения.").color(MUTED));
+            ui.heading(tr("Аудио: общая реакция на звук"));
+            ui.label(tr("Подключите аудиокабель 3,5 мм к выходу компьютера или звуковой карты, включите перехват звука на пульте, выберите «Аудио · 3,5 мм» и соответствующий аудиовыход."));
+            ui.label(RichText::new(tr("Начните с небольшой системной громкости и силы 25%. Другие звуки на этом выходе тоже могут вызывать вибрацию. Стоп выключает только сигнал этого приложения.")).color(MUTED));
         });
         ui.add_space(12.0);
         card(ui, |ui| {
-            ui.label(RichText::new("Программы").strong());
-            ui.label("Релакс — общее плавное нарастание. Волна по USB — движение от сиденья к спине. Пульс — импульсы с отдыхом. Ровный — постоянная сила. Змейка — обход всех зон. Лево / право — чередование сторон.");
-            ui.label(RichText::new("Змейка, чередование сторон и выбор отдельных зон доступны через USB и в деморежиме. По аудиокабелю доступны четыре общих программы.").color(MUTED));
+            ui.label(RichText::new(tr("Программы")).strong());
+            ui.label(tr("Релакс — общее плавное нарастание. Волна по USB — движение от сиденья к спине. Пульс — импульсы с отдыхом. Ровный — постоянная сила. Змейка — обход всех зон. Лево / право — чередование сторон."));
+            ui.label(RichText::new(tr("Змейка, чередование сторон и выбор отдельных зон доступны через USB и в деморежиме. По аудиокабелю доступны четыре общих программы.")).color(MUTED));
             ui.hyperlink_to(
-                "KW-901: инструкция производителя",
+                tr("KW-901: инструкция производителя"),
                 "https://gametrix.ru/catalog/gaming/vibration-pads/kw901-jetseat-live-sense",
             );
-            ui.small(format!("JetSeat Massage {}", env!("CARGO_PKG_VERSION")));
+            ui.small(tr(format!("JetSeat Massage {}", env!("CARGO_PKG_VERSION"))));
         });
     }
 
@@ -907,66 +955,72 @@ impl App {
         let mut download = false;
         let mut install = false;
         card(ui, |ui| {
-            ui.heading("Обновления");
-            ui.label(format!("Установлена версия {}", env!("CARGO_PKG_VERSION")));
+            ui.heading(tr("Обновления"));
+            ui.label(tr(format!(
+                "Установлена версия {}",
+                env!("CARGO_PKG_VERSION")
+            )));
             ui.add_space(10.0);
             ui.checkbox(
                 &mut self.settings.auto_updates,
-                "Автоматически проверять и скачивать обновления",
+                tr("Автоматически проверять и скачивать обновления"),
             );
-            ui.label(RichText::new("Проверка при запуске и каждые 6 часов, когда массаж остановлен. Перед установкой сверяется SHA-256.").color(MUTED));
+            ui.label(RichText::new(tr("Проверка при запуске и каждые 6 часов, когда массаж остановлен. Перед установкой сверяется SHA-256.")).color(MUTED));
             ui.add_space(14.0);
             match &self.updater.status {
                 UpdateStatus::Idle => {
-                    ui.label("Обновления ещё не проверялись.");
+                    ui.label(tr("Обновления ещё не проверялись."));
                 }
                 UpdateStatus::Checking => {
                     ui.spinner();
-                    ui.label("Проверяем новые версии…");
+                    ui.label(tr("Проверяем новые версии…"));
                 }
                 UpdateStatus::Current => {
-                    ui.label("Установлена актуальная версия.");
+                    ui.label(tr("Установлена актуальная версия."));
                 }
                 UpdateStatus::Available(release) => {
-                    ui.label(format!("Доступна версия {}", release.version));
-                    download = ui.button("Скачать обновление").clicked();
+                    ui.label(tr(format!("Доступна версия {}", release.version)));
+                    download = ui.button(tr("Скачать обновление")).clicked();
                 }
                 UpdateStatus::Downloading => {
                     ui.spinner();
-                    ui.label("Скачиваем и проверяем обновление…");
+                    ui.label(tr("Скачиваем и проверяем обновление…"));
                 }
                 UpdateStatus::Ready(prepared) => {
                     ui.label(
-                        RichText::new(format!(
+                        RichText::new(tr(format!(
                             "Версия {} готова к установке",
                             prepared.release.version
-                        ))
+                        )))
                         .color(ACCENT),
                     );
-                    ui.label("Обновление устанавливается системным установщиком; может понадобиться пароль администратора. После установки запустите JetSeat Massage снова.");
+                    ui.label(tr("Обновление устанавливается системным установщиком; может понадобиться пароль администратора. После установки запустите JetSeat Massage снова."));
                     if self.run.is_some() {
-                        ui.label("Остановите массаж перед установкой.");
+                        ui.label(tr("Остановите массаж перед установкой."));
                     }
                     install = ui
                         .add_enabled(
                             self.run.is_none(),
-                            egui::Button::new("Установить обновление"),
+                            egui::Button::new(tr("Установить обновление")),
                         )
                         .clicked();
                 }
                 UpdateStatus::Installing => {
                     ui.spinner();
-                    ui.label("Открываем установщик…");
+                    ui.label(tr("Открываем установщик…"));
                 }
                 UpdateStatus::Error(error) => {
-                    ui.label(RichText::new(error).color(WARNING));
+                    ui.label(RichText::new(tr(error)).color(WARNING));
                 }
             }
             ui.add_space(12.0);
             check = ui
-                .add_enabled(!self.updater.busy(), egui::Button::new("Проверить сейчас"))
+                .add_enabled(
+                    !self.updater.busy(),
+                    egui::Button::new(tr("Проверить сейчас")),
+                )
                 .clicked();
-            ui.hyperlink_to("Все версии на GitHub", updater::RELEASES_URL);
+            ui.hyperlink_to(tr("Все версии на GitHub"), updater::RELEASES_URL);
         });
         if check {
             self.updater.check();
@@ -1076,7 +1130,7 @@ fn cli(args: &[String]) -> Result<bool, String> {
                     .default_output_config()
                     .map(|c| {
                         format!(
-                            "{} Гц / {} каналов / {:?}",
+                            "{} Hz / {} channels / {:?}",
                             c.sample_rate().0,
                             c.channels(),
                             c.sample_format()
@@ -1093,20 +1147,20 @@ fn cli(args: &[String]) -> Result<bool, String> {
         }
         Some("--check-updates") => {
             match updater::check()? {
-                Some(release) => println!("Доступна версия {}: {}", release.version, release.url),
-                None => println!("Версия {} актуальна", env!("CARGO_PKG_VERSION")),
+                Some(release) => {
+                    println!("Version {} is available: {}", release.version, release.url)
+                }
+                None => println!("Version {} is up to date", env!("CARGO_PKG_VERSION")),
             }
             Ok(true)
         }
         Some("--help" | "-h") => {
             println!(
-                "JetSeat Massage\nБез аргументов: GUI\n--diagnose [file.json]: USB/HID-отчёт без отправки команд\n--list-audio: доступные аудиовыходы\n--usb-self-test: 8 циклов USB с нулевой силой\n--check-updates: проверить доступную версию на GitHub"
+                "JetSeat Massage\nNo arguments: GUI\n--diagnose [file.json]: USB/HID report without sending commands\n--list-audio: list audio outputs\n--usb-self-test: 8 zero-force USB cycles\n--check-updates: check GitHub for updates"
             );
             Ok(true)
         }
-        Some(argument) => Err(format!(
-            "Неизвестный аргумент {argument}. Используйте --help."
-        )),
+        Some(argument) => Err(format!("Unknown argument {argument}. Use --help.")),
     }
 }
 
@@ -1116,7 +1170,7 @@ fn main() -> eframe::Result {
         Ok(true) => return Ok(()),
         Ok(false) => {}
         Err(e) => {
-            eprintln!("{e}");
+            eprintln!("{}", tr(e));
             std::process::exit(1);
         }
     }

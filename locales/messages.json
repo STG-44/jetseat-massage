@@ -1,0 +1,2417 @@
+[
+  {
+    "source": "Готово. Выберите программу и начните сеанс.",
+    "text": [
+      "Ready. Choose a program and start a session.",
+      "Bereit. Programm wählen und Sitzung starten.",
+      "Prêt. Choisissez un programme et démarrez une séance.",
+      "Listo. Elige un programa e inicia una sesión.",
+      "Pronto. Escolha um programa e inicie uma sessão.",
+      "Pronto. Scegli un programma e avvia una sessione.",
+      "就绪。请选择程序并开始按摩。",
+      "準備完了。プログラムを選んで開始してください。",
+      "준비 완료. 프로그램을 선택하고 세션을 시작하세요.",
+      "Готово. Виберіть програму та почніть сеанс."
+    ]
+  },
+  {
+    "source": "Не удалось получить аудиовыходы: {e}",
+    "text": [
+      "Could not list audio outputs: {0}",
+      "Audioausgänge nicht abrufbar: {0}",
+      "Impossible de lister les sorties audio : {0}",
+      "No se pudieron listar las salidas de audio: {0}",
+      "Não foi possível listar as saídas de áudio: {0}",
+      "Impossibile elencare le uscite audio: {0}",
+      "无法列出音频输出：{0}",
+      "音声出力を取得できません：{0}",
+      "오디오 출력을 가져올 수 없습니다: {0}",
+      "Не вдалося отримати аудіовиходи: {0}"
+    ]
+  },
+  {
+    "source": "Подключите накидку по USB и нажмите «Обновить».",
+    "text": [
+      "Connect the seat via USB and click Refresh.",
+      "Sitz per USB verbinden und „Aktualisieren“ wählen.",
+      "Branchez le siège en USB et cliquez sur Actualiser.",
+      "Conecta el asiento por USB y pulsa Actualizar.",
+      "Conecte o assento via USB e clique em Atualizar.",
+      "Collega il sedile via USB e premi Aggiorna.",
+      "通过 USB 连接坐垫，然后点击“刷新”。",
+      "シートをUSBで接続し「更新」を押してください。",
+      "시트를 USB로 연결하고 새로 고침을 누르세요.",
+      "Під’єднайте накидку через USB і натисніть «Оновити»."
+    ]
+  },
+  {
+    "source": "Дождитесь завершения установки обновления.",
+    "text": [
+      "Wait for the update installation to finish.",
+      "Bitte die Installation des Updates abwarten.",
+      "Attendez la fin de l’installation de la mise à jour.",
+      "Espera a que termine la instalación de la actualización.",
+      "Aguarde o fim da instalação da atualização.",
+      "Attendi il completamento dell’aggiornamento.",
+      "请等待更新安装完成。",
+      "更新のインストールが完了するまでお待ちください。",
+      "업데이트 설치가 끝날 때까지 기다리세요.",
+      "Дочекайтеся завершення встановлення оновлення."
+    ]
+  },
+  {
+    "source": "Выберите аудиовыход, к которому подключён кабель накидки.",
+    "text": [
+      "Select the audio output connected to the seat cable.",
+      "Den Audioausgang für das Sitzkabel wählen.",
+      "Sélectionnez la sortie audio reliée au siège.",
+      "Selecciona la salida de audio conectada al asiento.",
+      "Selecione a saída de áudio conectada ao assento.",
+      "Seleziona l’uscita audio collegata al sedile.",
+      "请选择连接坐垫音频线的输出。",
+      "シートのケーブルを接続した音声出力を選択してください。",
+      "시트 케이블이 연결된 오디오 출력을 선택하세요.",
+      "Виберіть аудіовихід, до якого під’єднано кабель накидки."
+    ]
+  },
+  {
+    "source": "Подключите KW-901 по USB и выберите устройство.",
+    "text": [
+      "Connect the KW-901 via USB and select the device.",
+      "KW-901 per USB verbinden und Gerät wählen.",
+      "Branchez le KW-901 en USB et sélectionnez l’appareil.",
+      "Conecta el KW-901 por USB y selecciona el dispositivo.",
+      "Conecte o KW-901 via USB e selecione o dispositivo.",
+      "Collega il KW-901 via USB e seleziona il dispositivo.",
+      "通过 USB 连接 KW-901 并选择设备。",
+      "KW-901をUSBで接続し、デバイスを選択してください。",
+      "KW-901을 USB로 연결하고 장치를 선택하세요.",
+      "Під’єднайте KW-901 через USB і виберіть пристрій."
+    ]
+  },
+  {
+    "source": "Демосеанс: звук и команды на устройство не отправляются.",
+    "text": [
+      "Demo session: no audio or device commands are sent.",
+      "Demositzung: kein Ton und keine Gerätebefehle.",
+      "Démonstration : aucun son ni commande envoyé.",
+      "Demostración: no se envían audio ni comandos al dispositivo.",
+      "Demonstração: nenhum áudio ou comando é enviado.",
+      "Demo: nessun audio o comando inviato al dispositivo.",
+      "演示模式：不会发送音频或设备指令。",
+      "デモ中：音声やデバイスへの指令は送信されません。",
+      "데모 세션: 오디오나 장치 명령을 보내지 않습니다.",
+      "Демонстрація: звук і команди на пристрій не надсилаються."
+    ]
+  },
+  {
+    "source": "Сигнал подаётся на выбранный аудиовыход.",
+    "text": [
+      "Signal is playing through the selected audio output.",
+      "Signal am gewählten Audioausgang aktiv.",
+      "Signal envoyé à la sortie audio sélectionnée.",
+      "La señal se reproduce por la salida seleccionada.",
+      "Sinal ativo na saída de áudio selecionada.",
+      "Segnale attivo sull’uscita audio selezionata.",
+      "正在向所选音频输出发送信号。",
+      "選択した音声出力に信号を送っています。",
+      "선택한 오디오 출력으로 신호를 보내는 중입니다.",
+      "Сигнал подається на вибраний аудіовихід."
+    ]
+  },
+  {
+    "source": "USB-сеанс: отдельное управление шестью зонами.",
+    "text": [
+      "USB session: independent control of six zones.",
+      "USB-Sitzung: sechs Zonen einzeln gesteuert.",
+      "Séance USB : commande indépendante des six zones.",
+      "Sesión USB: control independiente de seis zonas.",
+      "Sessão USB: controle independente de seis zonas.",
+      "Sessione USB: controllo indipendente di sei zone.",
+      "USB 按摩：独立控制六个区域。",
+      "USBセッション：6ゾーンを個別に制御します。",
+      "USB 세션: 6개 구역을 개별 제어합니다.",
+      "USB-сеанс: окреме керування шістьма зонами."
+    ]
+  },
+  {
+    "source": "Остановите USB-массаж перед диагностикой устройств.",
+    "text": [
+      "Stop USB massage before scanning devices.",
+      "USB-Massage vor der Gerätesuche stoppen.",
+      "Arrêtez le massage USB avant de rechercher les appareils.",
+      "Detén el masaje USB antes de buscar dispositivos.",
+      "Pare a massagem USB antes de buscar dispositivos.",
+      "Ferma il massaggio USB prima di cercare i dispositivi.",
+      "请先停止 USB 按摩，再扫描设备。",
+      "デバイス検索前にUSBマッサージを停止してください。",
+      "장치를 검색하기 전에 USB 마사지를 중지하세요.",
+      "Зупиніть USB-масаж перед діагностикою пристроїв."
+    ]
+  },
+  {
+    "source": "Поиск HID-устройств…",
+    "text": [
+      "Scanning HID devices…",
+      "HID-Geräte werden gesucht…",
+      "Recherche d’appareils HID…",
+      "Buscando dispositivos HID…",
+      "Buscando dispositivos HID…",
+      "Ricerca dispositivi HID…",
+      "正在扫描 HID 设备…",
+      "HIDデバイスを検索中…",
+      "HID 장치 검색 중…",
+      "Пошук HID-пристроїв…"
+    ]
+  },
+  {
+    "source": "Поиск KW-901…",
+    "text": [
+      "Searching for KW-901…",
+      "KW-901 wird gesucht…",
+      "Recherche du KW-901…",
+      "Buscando KW-901…",
+      "Buscando KW-901…",
+      "Ricerca KW-901…",
+      "正在查找 KW-901…",
+      "KW-901を検索中…",
+      "KW-901 검색 중…",
+      "Пошук KW-901…"
+    ]
+  },
+  {
+    "source": "Накидка не найдена. Подключите USB и штатное питание, включите пульт и повторите поиск.",
+    "text": [
+      "Seat not found. Connect USB and the original power supply, turn on the controller and search again.",
+      "Sitz nicht gefunden. USB und Originalnetzteil anschließen, Steuergerät einschalten und erneut suchen.",
+      "Siège introuvable. Branchez l’USB et l’alimentation d’origine, allumez la télécommande et relancez la recherche.",
+      "Asiento no encontrado. Conecta el USB y la fuente original, enciende el mando y vuelve a buscar.",
+      "Assento não encontrado. Conecte o USB e a fonte original, ligue o controle e busque novamente.",
+      "Sedile non trovato. Collega USB e alimentatore originale, accendi il telecomando e riprova.",
+      "未找到坐垫。请连接 USB 和原装电源，打开控制器后重新搜索。",
+      "シートが見つかりません。USBと純正電源を接続し、コントローラーをオンにして再検索してください。",
+      "시트를 찾을 수 없습니다. USB와 정품 전원을 연결하고 컨트롤러를 켠 후 다시 검색하세요.",
+      "Накидку не знайдено. Під’єднайте USB та штатне живлення, увімкніть пульт і повторіть пошук."
+    ]
+  },
+  {
+    "source": "Аудиокабель не нужен. При запуске проверяется HID-дескриптор и отправляется команда нулевой силы.",
+    "text": [
+      "No audio cable needed. At startup, the HID descriptor is checked and a zero-force command is sent.",
+      "Kein Audiokabel nötig. Beim Start werden HID-Deskriptor und ein Befehl mit Stärke null geprüft.",
+      "Aucun câble audio requis. Au démarrage, le descripteur HID est vérifié et une commande d’intensité nulle est envoyée.",
+      "No hace falta cable de audio. Al iniciar se comprueba el descriptor HID y se envía un comando de fuerza cero.",
+      "Não precisa de cabo de áudio. Ao iniciar, o descritor HID é verificado e um comando de força zero é enviado.",
+      "Non serve il cavo audio. All’avvio si verifica il descrittore HID e si invia un comando a intensità zero.",
+      "无需音频线。启动时会检查 HID 描述符并发送零强度指令。",
+      "音声ケーブルは不要です。開始時にHID記述子を確認し、強度ゼロの指令を送信します。",
+      "오디오 케이블은 필요 없습니다. 시작 시 HID 설명자를 확인하고 강도 0 명령을 보냅니다.",
+      "Аудіокабель не потрібен. Під час запуску перевіряється HID-дескриптор і надсилається команда нульової сили."
+    ]
+  },
+  {
+    "source": "Ошибка поиска: {error}",
+    "text": [
+      "Search failed: {0}",
+      "Suche fehlgeschlagen: {0}",
+      "Échec de la recherche : {0}",
+      "Error de búsqueda: {0}",
+      "Falha na busca: {0}",
+      "Ricerca non riuscita: {0}",
+      "搜索失败：{0}",
+      "検索に失敗しました：{0}",
+      "검색 실패: {0}",
+      "Помилка пошуку: {0}"
+    ]
+  },
+  {
+    "source": "Сеанс остановлен после сна компьютера или длительной паузы приложения.",
+    "text": [
+      "Session stopped after computer sleep or a long app pause.",
+      "Sitzung nach Ruhezustand oder langer App-Pause gestoppt.",
+      "Séance arrêtée après la veille ou une longue pause de l’application.",
+      "Sesión detenida tras la suspensión o una pausa prolongada.",
+      "Sessão encerrada após suspensão ou longa pausa do aplicativo.",
+      "Sessione interrotta dopo la sospensione o una lunga pausa dell’app.",
+      "电脑休眠或应用长时间暂停后，按摩已停止。",
+      "スリープまたはアプリの長時間停止によりセッションを終了しました。",
+      "컴퓨터 절전 또는 앱의 긴 일시 정지 후 세션이 중지되었습니다.",
+      "Сеанс зупинено після сну комп’ютера або тривалої паузи застосунку."
+    ]
+  },
+  {
+    "source": "Аудиосеанс остановлен.",
+    "text": [
+      "Audio session stopped.",
+      "Audiositzung gestoppt.",
+      "Séance audio arrêtée.",
+      "Sesión de audio detenida.",
+      "Sessão de áudio encerrada.",
+      "Sessione audio interrotta.",
+      "音频按摩已停止。",
+      "音声セッションを停止しました。",
+      "오디오 세션이 중지되었습니다.",
+      "Аудіосеанс зупинено."
+    ]
+  },
+  {
+    "source": "Аудиовыход недоступен: {error}",
+    "text": [
+      "Audio output unavailable: {0}",
+      "Audioausgang nicht verfügbar: {0}",
+      "Sortie audio indisponible : {0}",
+      "Salida de audio no disponible: {0}",
+      "Saída de áudio indisponível: {0}",
+      "Uscita audio non disponibile: {0}",
+      "音频输出不可用：{0}",
+      "音声出力を利用できません：{0}",
+      "오디오 출력을 사용할 수 없습니다: {0}",
+      "Аудіовихід недоступний: {0}"
+    ]
+  },
+  {
+    "source": "USB-сеанс остановлен.",
+    "text": [
+      "USB session stopped.",
+      "USB-Sitzung gestoppt.",
+      "Séance USB arrêtée.",
+      "Sesión USB detenida.",
+      "Sessão USB encerrada.",
+      "Sessione USB interrotta.",
+      "USB 按摩已停止。",
+      "USBセッションを停止しました。",
+      "USB 세션이 중지되었습니다.",
+      "USB-сеанс зупинено."
+    ]
+  },
+  {
+    "source": "USB: {error}. Если вибрация продолжается, выключите питание на пульте.",
+    "text": [
+      "USB: {0}. If vibration continues, turn off power on the controller.",
+      "USB: {0}. Bei anhaltender Vibration am Steuergerät ausschalten.",
+      "USB : {0}. Si les vibrations continuent, coupez l’alimentation sur la télécommande.",
+      "USB: {0}. Si continúa la vibración, apaga el mando.",
+      "USB: {0}. Se a vibração continuar, desligue a alimentação no controle.",
+      "USB: {0}. Se la vibrazione continua, spegni il telecomando.",
+      "USB：{0}。如仍有振动，请在控制器上关闭电源。",
+      "USB：{0}。振動が続く場合はコントローラーで電源を切ってください。",
+      "USB: {0}. 진동이 계속되면 컨트롤러에서 전원을 끄세요.",
+      "USB: {0}. Якщо вібрація триває, вимкніть живлення на пульті."
+    ]
+  },
+  {
+    "source": "Сеанс завершён. Сигнал выключен.",
+    "text": [
+      "Session complete. Signal off.",
+      "Sitzung beendet. Signal aus.",
+      "Séance terminée. Signal coupé.",
+      "Sesión finalizada. Señal apagada.",
+      "Sessão concluída. Sinal desligado.",
+      "Sessione completata. Segnale spento.",
+      "按摩已结束，信号已关闭。",
+      "セッションが終了しました。信号は停止しています。",
+      "세션 완료. 신호가 꺼졌습니다.",
+      "Сеанс завершено. Сигнал вимкнено."
+    ]
+  },
+  {
+    "source": "Сигнал остановлен. Для продолжения нажмите «Начать».",
+    "text": [
+      "Signal stopped. Click Start to continue.",
+      "Signal gestoppt. Zum Fortfahren „Start“ wählen.",
+      "Signal arrêté. Cliquez sur Démarrer pour continuer.",
+      "Señal detenida. Pulsa Iniciar para continuar.",
+      "Sinal interrompido. Clique em Iniciar para continuar.",
+      "Segnale interrotto. Premi Avvia per continuare.",
+      "信号已停止。点击“开始”继续。",
+      "信号を停止しました。「開始」で再開できます。",
+      "신호가 중지되었습니다. 계속하려면 시작을 누르세요.",
+      "Сигнал зупинено. Щоб продовжити, натисніть «Почати»."
+    ]
+  },
+  {
+    "source": "HID-интерфейсов: {}. Совпадение по названию: {}.",
+    "text": [
+      "HID interfaces: {0}. Name matches: {1}.",
+      "HID-Schnittstellen: {0}. Namenstreffer: {1}.",
+      "Interfaces HID : {0}. Noms correspondants : {1}.",
+      "Interfaces HID: {0}. Coincidencias de nombre: {1}.",
+      "Interfaces HID: {0}. Nomes correspondentes: {1}.",
+      "Interfacce HID: {0}. Nomi corrispondenti: {1}.",
+      "HID 接口：{0}。名称匹配：{1}。",
+      "HIDインターフェース：{0}。名前の一致：{1}。",
+      "HID 인터페이스: {0}. 이름 일치: {1}.",
+      "HID-інтерфейсів: {0}. Збігів за назвою: {1}."
+    ]
+  },
+  {
+    "source": "Ошибка поиска: {e}",
+    "text": [
+      "Search failed: {0}",
+      "Suche fehlgeschlagen: {0}",
+      "Échec de la recherche : {0}",
+      "Error de búsqueda: {0}",
+      "Falha na busca: {0}",
+      "Ricerca non riuscita: {0}",
+      "搜索失败：{0}",
+      "検索に失敗しました：{0}",
+      "검색 실패: {0}",
+      "Помилка пошуку: {0}"
+    ]
+  },
+  {
+    "source": "Остановлено клавишей Escape.",
+    "text": [
+      "Stopped with Escape.",
+      "Mit Escape gestoppt.",
+      "Arrêt par la touche Échap.",
+      "Detenido con Escape.",
+      "Interrompido com Escape.",
+      "Interrotto con Esc.",
+      "已通过 Escape 停止。",
+      "Escapeキーで停止しました。",
+      "Escape 키로 중지했습니다.",
+      "Зупинено клавішею Escape."
+    ]
+  },
+  {
+    "source": "Остановлено при закрытии приложения.",
+    "text": [
+      "Stopped when closing the app.",
+      "Beim Schließen der App gestoppt.",
+      "Arrêt à la fermeture de l’application.",
+      "Detenido al cerrar la aplicación.",
+      "Interrompido ao fechar o aplicativo.",
+      "Interrotto alla chiusura dell’app.",
+      "已在关闭应用时停止。",
+      "アプリを閉じたため停止しました。",
+      "앱을 닫아 중지했습니다.",
+      "Зупинено під час закриття застосунку."
+    ]
+  },
+  {
+    "source": "Массаж в вашем ритме",
+    "text": [
+      "Massage at your pace",
+      "Massage in Ihrem Rhythmus",
+      "Le massage à votre rythme",
+      "Masaje a tu ritmo",
+      "Massagem no seu ritmo",
+      "Massaggio al tuo ritmo",
+      "随心律动按摩",
+      "あなたのリズムでマッサージ",
+      "내 리듬에 맞춘 마사지",
+      "Масаж у вашому ритмі"
+    ]
+  },
+  {
+    "source": "ДЕМОСЕАНС",
+    "text": [
+      "DEMO SESSION",
+      "DEMO AKTIV",
+      "DÉMONSTRATION",
+      "DEMOSTRACIÓN",
+      "DEMONSTRAÇÃO",
+      "DEMO ATTIVA",
+      "演示模式",
+      "デモ実行中",
+      "데모 실행 중",
+      "ДЕМОНСТРАЦІЯ"
+    ]
+  },
+  {
+    "source": "USB-СЕАНС",
+    "text": [
+      "USB SESSION",
+      "USB AKTIV",
+      "SÉANCE USB",
+      "SESIÓN USB",
+      "SESSÃO USB",
+      "SESSIONE USB",
+      "USB 按摩中",
+      "USB実行中",
+      "USB 실행 중",
+      "USB-СЕАНС"
+    ]
+  },
+  {
+    "source": "АУДИО ВКЛЮЧЕНО",
+    "text": [
+      "AUDIO ON",
+      "AUDIO AKTIV",
+      "AUDIO ACTIF",
+      "AUDIO ACTIVO",
+      "ÁUDIO ATIVO",
+      "AUDIO ATTIVO",
+      "音频已开启",
+      "音声出力中",
+      "오디오 켜짐",
+      "АУДІО УВІМКНЕНО"
+    ]
+  },
+  {
+    "source": "ГОТОВ К ЗАПУСКУ",
+    "text": [
+      "READY",
+      "BEREIT",
+      "PRÊT",
+      "LISTO",
+      "PRONTO",
+      "PRONTO",
+      "就绪",
+      "準備完了",
+      "준비 완료",
+      "ГОТОВО ДО ЗАПУСКУ"
+    ]
+  },
+  {
+    "source": "Массаж",
+    "text": [
+      "Massage",
+      "Massage",
+      "Massage",
+      "Masaje",
+      "Massagem",
+      "Massaggio",
+      "按摩",
+      "マッサージ",
+      "마사지",
+      "Масаж"
+    ]
+  },
+  {
+    "source": "USB-диагностика",
+    "text": [
+      "USB diagnostics",
+      "USB-Diagnose",
+      "Diagnostic USB",
+      "Diagnóstico USB",
+      "Diagnóstico USB",
+      "Diagnostica USB",
+      "USB 诊断",
+      "USB診断",
+      "USB 진단",
+      "USB-діагностика"
+    ]
+  },
+  {
+    "source": "Подключение",
+    "text": [
+      "Connection",
+      "Anschluss",
+      "Connexion",
+      "Conexión",
+      "Conexão",
+      "Collegamento",
+      "连接",
+      "接続",
+      "연결",
+      "Підключення"
+    ]
+  },
+  {
+    "source": "Обновление готово",
+    "text": [
+      "Update ready",
+      "Update bereit",
+      "Mise à jour prête",
+      "Actualización lista",
+      "Atualização pronta",
+      "Aggiornamento pronto",
+      "更新已就绪",
+      "更新の準備完了",
+      "업데이트 준비 완료",
+      "Оновлення готове"
+    ]
+  },
+  {
+    "source": "Обновления",
+    "text": [
+      "Updates",
+      "Updates",
+      "Mises à jour",
+      "Actualizaciones",
+      "Atualizações",
+      "Aggiornamenti",
+      "更新",
+      "更新",
+      "업데이트",
+      "Оновлення"
+    ]
+  },
+  {
+    "source": "Демо",
+    "text": [
+      "Demo",
+      "Demo",
+      "Démo",
+      "Demo",
+      "Demo",
+      "Demo",
+      "演示",
+      "デモ",
+      "데모",
+      "Демо"
+    ]
+  },
+  {
+    "source": "USB · 6 зон",
+    "text": [
+      "USB · 6 zones",
+      "USB · 6 Zonen",
+      "USB · 6 zones",
+      "USB · 6 zonas",
+      "USB · 6 zonas",
+      "USB · 6 zone",
+      "USB · 6 区域",
+      "USB · 6ゾーン",
+      "USB · 6개 구역",
+      "USB · 6 зон"
+    ]
+  },
+  {
+    "source": "Аудио · 3,5 мм",
+    "text": [
+      "Audio · 3.5 mm",
+      "Audio · 3,5 mm",
+      "Audio · 3,5 mm",
+      "Audio · 3,5 mm",
+      "Áudio · 3,5 mm",
+      "Audio · 3,5 mm",
+      "音频 · 3.5 毫米",
+      "音声 · 3.5 mm",
+      "오디오 · 3.5 mm",
+      "Аудіо · 3,5 мм"
+    ]
+  },
+  {
+    "source": "Посмотрите программы без подключения",
+    "text": [
+      "Preview programs without a device",
+      "Programme ohne Gerät ansehen",
+      "Découvrez les programmes sans appareil",
+      "Prueba programas sin conectar el dispositivo",
+      "Veja os programas sem conectar o dispositivo",
+      "Prova i programmi senza dispositivo",
+      "无需连接即可预览程序",
+      "未接続でもプログラムを確認できます",
+      "장치 없이 프로그램 미리 보기",
+      "Перегляньте програми без підключення"
+    ]
+  },
+  {
+    "source": "Отдельное управление моторами",
+    "text": [
+      "Independent motor control",
+      "Einzelne Motorsteuerung",
+      "Commande individuelle des moteurs",
+      "Control independiente de motores",
+      "Controle independente dos motores",
+      "Controllo indipendente dei motori",
+      "独立控制电机",
+      "モーターを個別に制御",
+      "모터 개별 제어",
+      "Окреме керування моторами"
+    ]
+  },
+  {
+    "source": "Общая реакция на звук",
+    "text": [
+      "Overall response to audio",
+      "Gesamtreaktion auf Ton",
+      "Réaction globale au son",
+      "Respuesta general al sonido",
+      "Reação geral ao som",
+      "Risposta generale al suono",
+      "对音频整体响应",
+      "音声に合わせた全体の振動",
+      "오디오에 대한 전체 반응",
+      "Загальна реакція на звук"
+    ]
+  },
+  {
+    "source": "Аудиовыход",
+    "text": [
+      "Audio output",
+      "Audioausgang",
+      "Sortie audio",
+      "Salida de audio",
+      "Saída de áudio",
+      "Uscita audio",
+      "音频输出",
+      "音声出力",
+      "오디오 출력",
+      "Аудіовихід"
+    ]
+  },
+  {
+    "source": "Выберите выход…",
+    "text": [
+      "Select output…",
+      "Ausgang wählen…",
+      "Choisir une sortie…",
+      "Seleccionar salida…",
+      "Selecionar saída…",
+      "Seleziona uscita…",
+      "选择输出…",
+      "出力を選択…",
+      "출력 선택…",
+      "Виберіть вихід…"
+    ]
+  },
+  {
+    "source": "Обновить",
+    "text": [
+      "Refresh",
+      "Aktualisieren",
+      "Actualiser",
+      "Actualizar",
+      "Atualizar",
+      "Aggiorna",
+      "刷新",
+      "更新",
+      "새로 고침",
+      "Оновити"
+    ]
+  },
+  {
+    "source": "Подключите аудиокабель накидки к выбранному выходу и включите перехват звука. Если выбрать динамики, сигнал будет слышен.",
+    "text": [
+      "Connect the seat audio cable to this output and enable audio capture on the controller. Selecting speakers makes the signal audible.",
+      "Audiokabel an diesen Ausgang anschließen und Tonerfassung am Steuergerät aktivieren. Bei Lautsprechern ist das Signal hörbar.",
+      "Branchez le câble audio à cette sortie et activez la capture audio sur la télécommande. Avec des haut-parleurs, le signal sera audible.",
+      "Conecta el cable de audio a esta salida y activa la captura de sonido en el mando. Si eliges altavoces, se oirá la señal.",
+      "Conecte o cabo de áudio a esta saída e ative a captura de som no controle. Ao selecionar alto-falantes, o sinal será audível.",
+      "Collega il cavo audio a questa uscita e attiva la cattura audio sul telecomando. Con gli altoparlanti il segnale sarà udibile.",
+      "将坐垫音频线连接到此输出，并在控制器上开启音频捕获。选择扬声器时会听到信号声。",
+      "シートの音声ケーブルをこの出力に接続し、コントローラーで音声連動を有効にします。スピーカーを選ぶと信号音が鳴ります。",
+      "시트 오디오 케이블을 이 출력에 연결하고 컨트롤러에서 오디오 감지를 켜세요. 스피커를 선택하면 신호음이 들립니다.",
+      "Під’єднайте аудіокабель накидки до вибраного виходу й увімкніть перехоплення звуку на пульті. Якщо вибрати динаміки, сигнал буде чутно."
+    ]
+  },
+  {
+    "source": "Выберите KW-901…",
+    "text": [
+      "Select KW-901…",
+      "KW-901 wählen…",
+      "Choisir le KW-901…",
+      "Seleccionar KW-901…",
+      "Selecionar KW-901…",
+      "Seleziona KW-901…",
+      "选择 KW-901…",
+      "KW-901を選択…",
+      "KW-901 선택…",
+      "Виберіть KW-901…"
+    ]
+  },
+  {
+    "source": "Найти накидку",
+    "text": [
+      "Find seat",
+      "Sitz suchen",
+      "Rechercher le siège",
+      "Buscar asiento",
+      "Buscar assento",
+      "Cerca sedile",
+      "查找坐垫",
+      "シートを検索",
+      "시트 검색",
+      "Знайти накидку"
+    ]
+  },
+  {
+    "source": "01  ПРОГРАММА",
+    "text": [
+      "01  PROGRAM",
+      "01  PROGRAMM",
+      "01  PROGRAMME",
+      "01  PROGRAMA",
+      "01  PROGRAMA",
+      "01  PROGRAMMA",
+      "01  程序",
+      "01  プログラム",
+      "01  프로그램",
+      "01  ПРОГРАМА"
+    ]
+  },
+  {
+    "source": "02  НАСТРОЙКИ СЕАНСА",
+    "text": [
+      "02  SESSION SETTINGS",
+      "02  SITZUNG",
+      "02  RÉGLAGES",
+      "02  AJUSTES DE SESIÓN",
+      "02  AJUSTES DA SESSÃO",
+      "02  IMPOSTAZIONI",
+      "02  按摩设置",
+      "02  セッション設定",
+      "02  세션 설정",
+      "02  НАЛАШТУВАННЯ СЕАНСУ"
+    ]
+  },
+  {
+    "source": "Сила сигнала",
+    "text": [
+      "Signal strength",
+      "Signalstärke",
+      "Intensité du signal",
+      "Intensidad de señal",
+      "Intensidade do sinal",
+      "Intensità del segnale",
+      "信号强度",
+      "信号強度",
+      "신호 강도",
+      "Сила сигналу"
+    ]
+  },
+  {
+    "source": "Сила вибрации",
+    "text": [
+      "Vibration strength",
+      "Vibrationsstärke",
+      "Intensité des vibrations",
+      "Intensidad de vibración",
+      "Intensidade da vibração",
+      "Intensità della vibrazione",
+      "振动强度",
+      "振動の強さ",
+      "진동 강도",
+      "Сила вібрації"
+    ]
+  },
+  {
+    "source": "Зависит также от громкости выхода и пульта.",
+    "text": [
+      "Also depends on output volume and controller settings.",
+      "Hängt auch von Lautstärke und Steuergerät ab.",
+      "Dépend aussi du volume et de la télécommande.",
+      "También depende del volumen y del mando.",
+      "Também depende do volume e do controle.",
+      "Dipende anche dal volume e dal telecomando.",
+      "还取决于输出音量和控制器设置。",
+      "音量とコントローラーの設定にも依存します。",
+      "출력 볼륨과 컨트롤러 설정에도 영향을 받습니다.",
+      "Залежить також від гучності виходу та пульта."
+    ]
+  },
+  {
+    "source": "Уровень команды моторам. Начальная сила — 25%.",
+    "text": [
+      "Motor command level. Starts at 25%.",
+      "Motor-Befehlsstärke. Startwert: 25 %.",
+      "Niveau de commande des moteurs. Départ à 25 %.",
+      "Nivel de comando a los motores. Inicial: 25 %.",
+      "Nível do comando aos motores. Inicial: 25%.",
+      "Livello del comando ai motori. Iniziale: 25%.",
+      "电机指令强度，初始为 25%。",
+      "モーターへの指令強度。初期値は25%です。",
+      "모터 명령 강도. 초기값은 25%입니다.",
+      "Рівень команди моторам. Початкова сила — 25%."
+    ]
+  },
+  {
+    "source": "Темп программы",
+    "text": [
+      "Program pace",
+      "Programmtempo",
+      "Rythme du programme",
+      "Ritmo del programa",
+      "Ritmo do programa",
+      "Ritmo del programma",
+      "程序节奏",
+      "プログラムの速さ",
+      "프로그램 속도",
+      "Темп програми"
+    ]
+  },
+  {
+    "source": "Длительность",
+    "text": [
+      "Duration",
+      "Dauer",
+      "Durée",
+      "Duración",
+      "Duração",
+      "Durata",
+      "时长",
+      "時間",
+      "시간",
+      "Тривалість"
+    ]
+  },
+  {
+    "source": "{minutes} мин",
+    "text": [
+      "{0} min",
+      "{0} Min.",
+      "{0} min",
+      "{0} min",
+      "{0} min",
+      "{0} min",
+      "{0} 分钟",
+      "{0} 分",
+      "{0}분",
+      "{0} хв"
+    ]
+  },
+  {
+    "source": " мин",
+    "text": [
+      " min",
+      " Min.",
+      " min",
+      " min",
+      " min",
+      " min",
+      " 分钟",
+      " 分",
+      "분",
+      " хв"
+    ]
+  },
+  {
+    "source": "Настройка аудиосигнала",
+    "text": [
+      "Audio signal settings",
+      "Audiosignal-Einstellungen",
+      "Réglages du signal audio",
+      "Ajustes de señal de audio",
+      "Ajustes do sinal de áudio",
+      "Impostazioni segnale audio",
+      "音频信号设置",
+      "音声信号の設定",
+      "오디오 신호 설정",
+      "Налаштування аудіосигналу"
+    ]
+  },
+  {
+    "source": "Частота звука, а не обороты моторов.",
+    "text": [
+      "Audio frequency, not motor speed.",
+      "Tonfrequenz, keine Motordrehzahl.",
+      "Fréquence audio, pas vitesse des moteurs.",
+      "Frecuencia de audio, no velocidad del motor.",
+      "Frequência de áudio, não rotação dos motores.",
+      "Frequenza audio, non velocità dei motori.",
+      "此为音频频率，并非电机转速。",
+      "音の周波数です。モーターの回転数ではありません。",
+      "모터 속도가 아닌 오디오 주파수입니다.",
+      "Частота звуку, а не оберти моторів."
+    ]
+  },
+  {
+    "source": " Гц",
+    "text": [
+      " Hz",
+      " Hz",
+      " Hz",
+      " Hz",
+      " Hz",
+      " Hz",
+      " Hz",
+      " Hz",
+      " Hz",
+      " Гц"
+    ]
+  },
+  {
+    "source": "03  ЗОНЫ НАКИДКИ",
+    "text": [
+      "03  SEAT ZONES",
+      "03  SITZZONEN",
+      "03  ZONES DU SIÈGE",
+      "03  ZONAS DEL ASIENTO",
+      "03  ZONAS DO ASSENTO",
+      "03  ZONE DEL SEDILE",
+      "03  坐垫区域",
+      "03  シートのゾーン",
+      "03  시트 구역",
+      "03  ЗОНИ НАКИДКИ"
+    ]
+  },
+  {
+    "source": "Начать демосеанс",
+    "text": [
+      "Start demo",
+      "Demo starten",
+      "Démarrer la démo",
+      "Iniciar demo",
+      "Iniciar demo",
+      "Avvia demo",
+      "开始演示",
+      "デモを開始",
+      "데모 시작",
+      "Почати демонстрацію"
+    ]
+  },
+  {
+    "source": "Начать массаж",
+    "text": [
+      "Start massage",
+      "Massage starten",
+      "Démarrer le massage",
+      "Iniciar masaje",
+      "Iniciar massagem",
+      "Avvia massaggio",
+      "开始按摩",
+      "マッサージ開始",
+      "마사지 시작",
+      "Почати масаж"
+    ]
+  },
+  {
+    "source": "Стоп · Esc",
+    "text": [
+      "Stop · Esc",
+      "Stopp · Esc",
+      "Arrêter · Échap",
+      "Detener · Esc",
+      "Parar · Esc",
+      "Ferma · Esc",
+      "停止 · Esc",
+      "停止 · Esc",
+      "중지 · Esc",
+      "Стоп · Esc"
+    ]
+  },
+  {
+    "source": "Сеанс остановлен. Сигнал выключен.",
+    "text": [
+      "Session stopped. Signal off.",
+      "Sitzung gestoppt. Signal aus.",
+      "Séance arrêtée. Signal coupé.",
+      "Sesión detenida. Señal apagada.",
+      "Sessão interrompida. Sinal desligado.",
+      "Sessione interrotta. Segnale spento.",
+      "按摩已停止，信号已关闭。",
+      "セッションを停止しました。信号は停止しています。",
+      "세션 중지. 신호가 꺼졌습니다.",
+      "Сеанс зупинено. Сигнал вимкнено."
+    ]
+  },
+  {
+    "source": "Уровень: {:.0}%",
+    "text": [
+      "Level: {0}%",
+      "Pegel: {0}%",
+      "Niveau : {0}%",
+      "Nivel: {0}%",
+      "Nível: {0}%",
+      "Livello: {0}%",
+      "强度：{0}%",
+      "レベル：{0}%",
+      "수준: {0}%",
+      "Рівень: {0}%"
+    ]
+  },
+  {
+    "source": "Подключение по USB",
+    "text": [
+      "USB connection",
+      "USB-Verbindung",
+      "Connexion USB",
+      "Conexión USB",
+      "Conexão USB",
+      "Collegamento USB",
+      "USB 连接",
+      "USB接続",
+      "USB 연결",
+      "Підключення через USB"
+    ]
+  },
+  {
+    "source": "Прямое USB-управление добавлено: на вкладке «Массаж» выберите «USB · 6 зон». Здесь можно проверить идентификаторы устройства.",
+    "text": [
+      "For direct USB control, choose USB · 6 zones on the Massage tab. Device identifiers can be checked here.",
+      "Für direkte USB-Steuerung auf „Massage“ die Option „USB · 6 Zonen“ wählen. Hier lassen sich Gerätekennungen prüfen.",
+      "Pour la commande USB directe, choisissez USB · 6 zones dans Massage. Vérifiez ici les identifiants de l’appareil.",
+      "Para el control USB directo, elige USB · 6 zonas en Masaje. Aquí puedes comprobar los identificadores.",
+      "Para controle USB direto, escolha USB · 6 zonas na aba Massagem. Confira os identificadores aqui.",
+      "Per il controllo USB diretto, scegli USB · 6 zone in Massaggio. Qui puoi verificare gli identificativi.",
+      "如需直接 USB 控制，请在“按摩”页选择“USB · 6 区域”。此处可查看设备标识。",
+      "直接USB制御には「マッサージ」で「USB · 6ゾーン」を選びます。ここではデバイスの識別情報を確認できます。",
+      "직접 USB 제어를 하려면 마사지 탭에서 USB · 6개 구역을 선택하세요. 여기서 장치 식별 정보를 확인할 수 있습니다.",
+      "Для прямого USB-керування виберіть «USB · 6 зон» на вкладці «Масаж». Тут можна перевірити ідентифікатори пристрою."
+    ]
+  },
+  {
+    "source": "Перед отправкой команд проверяются VID/PID и формат HID-отчёта. Для USB-массажа аудиокабель не нужен.",
+    "text": [
+      "VID/PID and HID report format are checked before commands are sent. USB massage needs no audio cable.",
+      "Vor Befehlen werden VID/PID und HID-Berichtsformat geprüft. USB-Massage benötigt kein Audiokabel.",
+      "Les VID/PID et le format HID sont vérifiés avant l’envoi. Le massage USB ne nécessite aucun câble audio.",
+      "Se comprueban VID/PID y formato HID antes de enviar comandos. El masaje USB no requiere cable de audio.",
+      "VID/PID e formato HID são verificados antes dos comandos. A massagem USB dispensa cabo de áudio.",
+      "VID/PID e formato HID vengono verificati prima dei comandi. Il massaggio USB non richiede il cavo audio.",
+      "发送指令前会检查 VID/PID 和 HID 报告格式。USB 按摩无需音频线。",
+      "指令送信前にVID/PIDとHIDレポート形式を確認します。USBマッサージに音声ケーブルは不要です。",
+      "명령 전송 전에 VID/PID와 HID 보고서 형식을 확인합니다. USB 마사지에는 오디오 케이블이 필요 없습니다.",
+      "Перед надсиланням команд перевіряються VID/PID і формат HID-звіту. Для USB-масажу аудіокабель не потрібен."
+    ]
+  },
+  {
+    "source": "Обновить устройства",
+    "text": [
+      "Refresh devices",
+      "Geräte aktualisieren",
+      "Actualiser les appareils",
+      "Actualizar dispositivos",
+      "Atualizar dispositivos",
+      "Aggiorna dispositivi",
+      "刷新设备",
+      "デバイスを更新",
+      "장치 새로 고침",
+      "Оновити пристрої"
+    ]
+  },
+  {
+    "source": "Копировать JSON-отчёт",
+    "text": [
+      "Copy JSON report",
+      "JSON-Bericht kopieren",
+      "Copier le rapport JSON",
+      "Copiar informe JSON",
+      "Copiar relatório JSON",
+      "Copia rapporto JSON",
+      "复制 JSON 报告",
+      "JSONレポートをコピー",
+      "JSON 보고서 복사",
+      "Копіювати JSON-звіт"
+    ]
+  },
+  {
+    "source": "Отчёт скопирован. Его можно прислать для проверки подключения.",
+    "text": [
+      "Report copied. Share it to help diagnose the connection.",
+      "Bericht kopiert. Er kann zur Anschlussprüfung geteilt werden.",
+      "Rapport copié. Partagez-le pour vérifier la connexion.",
+      "Informe copiado. Compártelo para revisar la conexión.",
+      "Relatório copiado. Compartilhe para verificar a conexão.",
+      "Rapporto copiato. Condividilo per verificare il collegamento.",
+      "报告已复制，可用于排查连接问题。",
+      "レポートをコピーしました。接続の診断に共有できます。",
+      "보고서를 복사했습니다. 연결 진단을 위해 공유할 수 있습니다.",
+      "Звіт скопійовано. Його можна надіслати для перевірки підключення."
+    ]
+  },
+  {
+    "source": "Без названия",
+    "text": [
+      "Unnamed",
+      "Ohne Namen",
+      "Sans nom",
+      "Sin nombre",
+      "Sem nome",
+      "Senza nome",
+      "未命名",
+      "名前なし",
+      "이름 없음",
+      "Без назви"
+    ]
+  },
+  {
+    "source": "ПРОТОКОЛ GAMETRIX",
+    "text": [
+      "GAMETRIX PROTOCOL",
+      "GAMETRIX-PROTOKOLL",
+      "PROTOCOLE GAMETRIX",
+      "PROTOCOLO GAMETRIX",
+      "PROTOCOLO GAMETRIX",
+      "PROTOCOLLO GAMETRIX",
+      "GAMETRIX 协议",
+      "GAMETRIXプロトコル",
+      "GAMETRIX 프로토콜",
+      "ПРОТОКОЛ GAMETRIX"
+    ]
+  },
+  {
+    "source": "ВОЗМОЖНО, JETSEAT",
+    "text": [
+      "POSSIBLE JETSEAT",
+      "MÖGLICHER JETSEAT",
+      "JETSEAT POSSIBLE",
+      "POSIBLE JETSEAT",
+      "POSSÍVEL JETSEAT",
+      "POSSIBILE JETSEAT",
+      "可能为 JETSEAT",
+      "JETSEATの候補",
+      "JETSEAT 추정",
+      "МОЖЛИВО, JETSEAT"
+    ]
+  },
+  {
+    "source": "VID {:04X} · PID {:04X} · Usage {:04X}:{:04X} · интерфейс {}",
+    "text": [
+      "VID {0} · PID {1} · Usage {2}:{3} · interface {4}",
+      "VID {0} · PID {1} · Usage {2}:{3} · Schnittstelle {4}",
+      "VID {0} · PID {1} · Usage {2}:{3} · interface {4}",
+      "VID {0} · PID {1} · Usage {2}:{3} · interfaz {4}",
+      "VID {0} · PID {1} · Usage {2}:{3} · interface {4}",
+      "VID {0} · PID {1} · Usage {2}:{3} · interfaccia {4}",
+      "VID {0} · PID {1} · Usage {2}:{3} · 接口 {4}",
+      "VID {0} · PID {1} · Usage {2}:{3} · インターフェース {4}",
+      "VID {0} · PID {1} · Usage {2}:{3} · 인터페이스 {4}",
+      "VID {0} · PID {1} · Usage {2}:{3} · інтерфейс {4}"
+    ]
+  },
+  {
+    "source": "USB: шесть отдельных зон",
+    "text": [
+      "USB: six independent zones",
+      "USB: sechs einzelne Zonen",
+      "USB : six zones indépendantes",
+      "USB: seis zonas independientes",
+      "USB: seis zonas independentes",
+      "USB: sei zone indipendenti",
+      "USB：六个独立区域",
+      "USB：6つの独立ゾーン",
+      "USB: 6개 개별 구역",
+      "USB: шість окремих зон"
+    ]
+  },
+  {
+    "source": "1. Подключите штатное питание KW-901 и включите пульт.",
+    "text": [
+      "1. Connect the original KW-901 power supply and turn on the controller.",
+      "1. Originalnetzteil des KW-901 anschließen und Steuergerät einschalten.",
+      "1. Branchez l’alimentation d’origine du KW-901 et allumez la télécommande.",
+      "1. Conecta la fuente original del KW-901 y enciende el mando.",
+      "1. Conecte a fonte original do KW-901 e ligue o controle.",
+      "1. Collega l’alimentatore originale del KW-901 e accendi il telecomando.",
+      "1. 连接 KW-901 原装电源并打开控制器。",
+      "1. KW-901の純正電源を接続し、コントローラーをオンにします。",
+      "1. KW-901 정품 전원을 연결하고 컨트롤러를 켜세요.",
+      "1. Під’єднайте штатне живлення KW-901 та увімкніть пульт."
+    ]
+  },
+  {
+    "source": "2. Подключите USB к компьютеру.",
+    "text": [
+      "2. Connect USB to your computer.",
+      "2. USB an den Computer anschließen.",
+      "2. Branchez l’USB à votre ordinateur.",
+      "2. Conecta el USB al ordenador.",
+      "2. Conecte o USB ao computador.",
+      "2. Collega l’USB al computer.",
+      "2. 将 USB 连接到电脑。",
+      "2. USBをパソコンに接続します。",
+      "2. USB를 컴퓨터에 연결하세요.",
+      "2. Під’єднайте USB до комп’ютера."
+    ]
+  },
+  {
+    "source": "3. На вкладке «Массаж» выберите «USB · 6 зон», нажмите «Найти накидку» и выберите устройство.",
+    "text": [
+      "3. In Massage, choose USB · 6 zones, click Find seat and select the device.",
+      "3. Unter „Massage“ die Option „USB · 6 Zonen“ wählen, „Sitz suchen“ anklicken und Gerät wählen.",
+      "3. Dans Massage, choisissez USB · 6 zones, cliquez sur Rechercher le siège et sélectionnez l’appareil.",
+      "3. En Masaje, elige USB · 6 zonas, pulsa Buscar asiento y selecciona el dispositivo.",
+      "3. Em Massagem, escolha USB · 6 zonas, clique em Buscar assento e selecione o dispositivo.",
+      "3. In Massaggio, scegli USB · 6 zone, premi Cerca sedile e seleziona il dispositivo.",
+      "3. 在“按摩”页选择“USB · 6 区域”，点击“查找坐垫”并选择设备。",
+      "3. 「マッサージ」で「USB · 6ゾーン」を選び、「シートを検索」からデバイスを選択します。",
+      "3. 마사지에서 USB · 6개 구역을 선택하고 시트 검색을 누른 후 장치를 선택하세요.",
+      "3. На вкладці «Масаж» виберіть «USB · 6 зон», натисніть «Знайти накидку» та виберіть пристрій."
+    ]
+  },
+  {
+    "source": "4. Выберите программу, зоны и силу. Нажмите «Начать массаж».",
+    "text": [
+      "4. Choose a program, zones and strength. Click Start massage.",
+      "4. Programm, Zonen und Stärke wählen. „Massage starten“ anklicken.",
+      "4. Choisissez programme, zones et intensité. Cliquez sur Démarrer le massage.",
+      "4. Elige programa, zonas e intensidad. Pulsa Iniciar masaje.",
+      "4. Escolha programa, zonas e intensidade. Clique em Iniciar massagem.",
+      "4. Scegli programma, zone e intensità. Premi Avvia massaggio.",
+      "4. 选择程序、区域和强度，然后点击“开始按摩”。",
+      "4. プログラム、ゾーン、強さを選び、「マッサージ開始」を押します。",
+      "4. 프로그램, 구역, 강도를 선택하고 마사지 시작을 누르세요.",
+      "4. Виберіть програму, зони та силу. Натисніть «Почати масаж»."
+    ]
+  },
+  {
+    "source": "Аудиокабель не требуется. Если устройство найдено, но не вибрирует, проверьте питание и USB-режим контроллера. Эта версия не меняет прошивку или сохранённые настройки контроллера.",
+    "text": [
+      "No audio cable needed. If the seat is detected but does not vibrate, check power and the controller USB mode. The app does not change firmware or saved controller settings.",
+      "Kein Audiokabel nötig. Wird der Sitz erkannt, vibriert aber nicht, Stromversorgung und USB-Modus prüfen. Firmware und gespeicherte Einstellungen werden nicht geändert.",
+      "Aucun câble audio requis. Si le siège est détecté sans vibrer, vérifiez l’alimentation et le mode USB. L’application ne modifie ni le micrologiciel ni les réglages mémorisés.",
+      "No hace falta cable de audio. Si se detecta el asiento pero no vibra, comprueba alimentación y modo USB. La aplicación no cambia el firmware ni los ajustes guardados.",
+      "Dispensa cabo de áudio. Se o assento for detectado mas não vibrar, verifique a alimentação e o modo USB. O aplicativo não altera firmware nem ajustes salvos.",
+      "Non serve il cavo audio. Se il sedile è rilevato ma non vibra, controlla alimentazione e modalità USB. L’app non modifica firmware o impostazioni memorizzate.",
+      "无需音频线。如已检测到坐垫却没有振动，请检查电源及控制器的 USB 模式。应用不会修改固件或控制器的已保存设置。",
+      "音声ケーブルは不要です。認識されても振動しない場合は、電源とコントローラーのUSBモードを確認してください。ファームウェアや保存済み設定は変更しません。",
+      "오디오 케이블은 필요 없습니다. 시트가 감지되지만 진동하지 않으면 전원과 컨트롤러 USB 모드를 확인하세요. 앱은 펌웨어나 저장된 설정을 변경하지 않습니다.",
+      "Аудіокабель не потрібен. Якщо пристрій знайдено, але він не вібрує, перевірте живлення та USB-режим контролера. Застосунок не змінює прошивку чи збережені налаштування контролера."
+    ]
+  },
+  {
+    "source": "Аудио: общая реакция на звук",
+    "text": [
+      "Audio: overall response to sound",
+      "Audio: Gesamtreaktion auf Ton",
+      "Audio : réaction globale au son",
+      "Audio: respuesta general al sonido",
+      "Áudio: reação geral ao som",
+      "Audio: risposta generale al suono",
+      "音频：整体响应声音",
+      "音声：音に合わせて全体が振動",
+      "오디오: 소리에 대한 전체 반응",
+      "Аудіо: загальна реакція на звук"
+    ]
+  },
+  {
+    "source": "Подключите аудиокабель 3,5 мм к выходу компьютера или звуковой карты, включите перехват звука на пульте, выберите «Аудио · 3,5 мм» и соответствующий аудиовыход.",
+    "text": [
+      "Connect the 3.5 mm cable to your computer or sound card, enable audio capture on the controller, then choose Audio · 3.5 mm and the matching output.",
+      "3,5-mm-Kabel an Computer oder Soundkarte anschließen, Tonerfassung am Steuergerät aktivieren, dann „Audio · 3,5 mm“ und den passenden Ausgang wählen.",
+      "Branchez le câble 3,5 mm à l’ordinateur ou à la carte son, activez la capture audio, puis choisissez Audio · 3,5 mm et la sortie correspondante.",
+      "Conecta el cable de 3,5 mm al ordenador o tarjeta de sonido, activa la captura de sonido y elige Audio · 3,5 mm y la salida correspondiente.",
+      "Conecte o cabo de 3,5 mm ao computador ou placa de som, ative a captura de áudio e escolha Áudio · 3,5 mm e a saída correspondente.",
+      "Collega il cavo da 3,5 mm al computer o alla scheda audio, attiva la cattura audio e scegli Audio · 3,5 mm e l’uscita corretta.",
+      "将 3.5 毫米音频线连接到电脑或声卡，在控制器上启用音频捕获，然后选择“音频 · 3.5 毫米”及对应输出。",
+      "3.5 mmケーブルをパソコンやサウンドカードに接続し、音声連動を有効にして「音声 · 3.5 mm」と該当する出力を選びます。",
+      "3.5 mm 케이블을 컴퓨터나 사운드 카드에 연결하고 오디오 감지를 켠 후 오디오 · 3.5 mm와 해당 출력을 선택하세요.",
+      "Під’єднайте аудіокабель 3,5 мм до виходу комп’ютера або звукової карти, увімкніть перехоплення звуку на пульті, виберіть «Аудіо · 3,5 мм» та відповідний аудіовихід."
+    ]
+  },
+  {
+    "source": "Начните с небольшой системной громкости и силы 25%. Другие звуки на этом выходе тоже могут вызывать вибрацию. Стоп выключает только сигнал этого приложения.",
+    "text": [
+      "Start with low system volume and 25% strength. Other sounds on this output may also trigger vibration. Stop turns off only this app’s signal.",
+      "Mit geringer Systemlautstärke und 25 % Stärke beginnen. Andere Töne am selben Ausgang können ebenfalls Vibration auslösen. Stopp beendet nur das App-Signal.",
+      "Commencez à faible volume et à 25 % d’intensité. Les autres sons peuvent aussi déclencher des vibrations. Arrêter coupe uniquement le signal de cette application.",
+      "Empieza con volumen bajo e intensidad del 25 %. Otros sonidos también pueden causar vibración. Detener apaga solo la señal de esta aplicación.",
+      "Comece com volume baixo e intensidade de 25%. Outros sons também podem causar vibração. Parar desliga apenas o sinal deste aplicativo.",
+      "Inizia con volume basso e intensità al 25%. Anche altri suoni possono causare vibrazioni. Ferma disattiva solo il segnale di questa app.",
+      "请从较低系统音量和 25% 强度开始。同一输出的其他声音也可能引发振动。“停止”仅关闭本应用的信号。",
+      "システム音量を低くし、強度25%から始めてください。同じ出力の他の音でも振動する場合があります。「停止」はこのアプリの信号のみ止めます。",
+      "낮은 시스템 볼륨과 25% 강도로 시작하세요. 같은 출력의 다른 소리도 진동을 일으킬 수 있습니다. 중지는 이 앱의 신호만 끕니다.",
+      "Почніть із невеликої системної гучності та сили 25%. Інші звуки на цьому виході також можуть викликати вібрацію. Стоп вимикає лише сигнал цього застосунку."
+    ]
+  },
+  {
+    "source": "Программы",
+    "text": [
+      "Programs",
+      "Programme",
+      "Programmes",
+      "Programas",
+      "Programas",
+      "Programmi",
+      "程序",
+      "プログラム",
+      "프로그램",
+      "Програми"
+    ]
+  },
+  {
+    "source": "Релакс — общее плавное нарастание. Волна по USB — движение от сиденья к спине. Пульс — импульсы с отдыхом. Ровный — постоянная сила. Змейка — обход всех зон. Лево / право — чередование сторон.",
+    "text": [
+      "Relax ramps smoothly up and down. Wave moves from seat to back over USB. Pulse alternates bursts and rest. Steady holds strength. Snake visits all zones. Left / right alternates sides.",
+      "Entspannen steigt sanft an und ab. Welle wandert per USB vom Sitz zum Rücken. Puls wechselt Impulse und Pausen. Konstant hält die Stärke. Schlange durchläuft alle Zonen. Links / rechts wechselt die Seiten.",
+      "Relaxation monte et descend doucement. Vague va de l’assise au dos en USB. Pulsation alterne impulsions et repos. Continu maintient l’intensité. Serpent parcourt les zones. Gauche / droite alterne les côtés.",
+      "Relax sube y baja suavemente. Ola se mueve del asiento a la espalda por USB. Pulso alterna impulsos y descanso. Constante mantiene la fuerza. Serpiente recorre las zonas. Izquierda / derecha alterna lados.",
+      "Relaxar sobe e desce suavemente. Onda percorre do assento às costas via USB. Pulso alterna impulsos e descanso. Constante mantém a força. Serpente percorre as zonas. Esquerda / direita alterna os lados.",
+      "Relax sale e scende gradualmente. Onda va dalla seduta alla schiena via USB. Impulsi alterna vibrazione e riposo. Costante mantiene l’intensità. Serpente percorre le zone. Sinistra / destra alterna i lati.",
+      "放松：强度平缓升降。波浪：通过 USB 从坐部移动到背部。脉冲：交替振动与休息。恒定：保持强度。蛇形：依次经过各区域。左右交替：轮流按摩两侧。",
+      "リラックスは強弱が緩やかに変化。ウェーブはUSBで座面から背中へ移動。パルスは振動と休止を交互に行い、一定は強さを維持。スネークは全ゾーンを巡り、左右交互は左右を切り替えます。",
+      "릴랙스는 강도를 부드럽게 높이고 낮춥니다. 웨이브는 USB로 좌석에서 등으로 이동합니다. 펄스는 진동과 휴식을 반복하고 일정은 강도를 유지합니다. 스네이크는 모든 구역을 순회하며 좌우 교대는 양쪽을 번갈아 작동합니다.",
+      "Релакс — плавне наростання та спад. Хвиля через USB — рух від сидіння до спини. Пульс — імпульси з відпочинком. Рівний — стала сила. Змійка — обхід усіх зон. Ліворуч / праворуч — чергування сторін."
+    ]
+  },
+  {
+    "source": "Змейка, чередование сторон и выбор отдельных зон доступны через USB и в деморежиме. По аудиокабелю доступны четыре общих программы.",
+    "text": [
+      "Snake, alternating sides and individual zones require USB or Demo. Audio offers four overall programs.",
+      "Schlange, Seitenwechsel und einzelne Zonen sind per USB oder Demo verfügbar. Audio bietet vier Gesamtprogramme.",
+      "Serpent, l’alternance des côtés et les zones individuelles nécessitent USB ou Démo. L’audio propose quatre programmes globaux.",
+      "Serpiente, alternancia y zonas individuales requieren USB o Demo. Audio ofrece cuatro programas generales.",
+      "Serpente, alternância e zonas individuais exigem USB ou Demo. Áudio oferece quatro programas gerais.",
+      "Serpente, alternanza e zone singole richiedono USB o Demo. L’audio offre quattro programmi generali.",
+      "蛇形、左右交替和独立区域选择仅适用于 USB 或演示模式。音频模式提供四种整体程序。",
+      "スネーク、左右交互、個別ゾーンはUSBまたはデモで利用できます。音声では4つの全体プログラムを使用できます。",
+      "스네이크, 좌우 교대, 개별 구역은 USB 또는 데모에서 사용할 수 있습니다. 오디오는 전체 작동 프로그램 4개를 제공합니다.",
+      "Змійка, чергування сторін і вибір окремих зон доступні через USB та в деморежимі. Через аудіокабель доступні чотири загальні програми."
+    ]
+  },
+  {
+    "source": "KW-901: инструкция производителя",
+    "text": [
+      "KW-901: manufacturer’s instructions",
+      "KW-901: Herstelleranleitung",
+      "KW-901 : notice du fabricant",
+      "KW-901: instrucciones del fabricante",
+      "KW-901: instruções do fabricante",
+      "KW-901: istruzioni del produttore",
+      "KW-901：厂商说明书",
+      "KW-901：メーカーの説明書",
+      "KW-901: 제조사 설명서",
+      "KW-901: інструкція виробника"
+    ]
+  },
+  {
+    "source": "Установлена версия {}",
+    "text": [
+      "Installed version {0}",
+      "Installierte Version {0}",
+      "Version installée : {0}",
+      "Versión instalada {0}",
+      "Versão instalada {0}",
+      "Versione installata {0}",
+      "已安装版本 {0}",
+      "インストール済み：{0}",
+      "설치된 버전 {0}",
+      "Встановлена версія {0}"
+    ]
+  },
+  {
+    "source": "Автоматически проверять и скачивать обновления",
+    "text": [
+      "Automatically check for and download updates",
+      "Updates automatisch suchen und herunterladen",
+      "Rechercher et télécharger les mises à jour automatiquement",
+      "Buscar y descargar actualizaciones automáticamente",
+      "Buscar e baixar atualizações automaticamente",
+      "Cerca e scarica aggiornamenti automaticamente",
+      "自动检查并下载更新",
+      "更新を自動で確認・ダウンロード",
+      "업데이트 자동 확인 및 다운로드",
+      "Автоматично перевіряти та завантажувати оновлення"
+    ]
+  },
+  {
+    "source": "Проверка при запуске и каждые 6 часов, когда массаж остановлен. Перед установкой сверяется SHA-256.",
+    "text": [
+      "Checks at startup and every 6 hours while massage is stopped. SHA-256 is verified before installation.",
+      "Prüfung beim Start und alle 6 Stunden ohne aktive Massage. SHA-256 wird vor der Installation geprüft.",
+      "Vérification au démarrage puis toutes les 6 heures hors massage. SHA-256 est vérifié avant l’installation.",
+      "Se comprueba al iniciar y cada 6 horas sin masaje activo. Se verifica SHA-256 antes de instalar.",
+      "Verifica ao iniciar e a cada 6 horas sem massagem ativa. Confere SHA-256 antes de instalar.",
+      "Controlla all’avvio e ogni 6 ore senza massaggio attivo. Verifica SHA-256 prima di installare.",
+      "启动时及每隔 6 小时在按摩停止时检查。安装前会校验 SHA-256。",
+      "起動時と6時間ごとに、マッサージ停止中に確認します。インストール前にSHA-256を検証します。",
+      "시작 시와 마사지가 중지된 동안 6시간마다 확인합니다. 설치 전에 SHA-256을 검증합니다.",
+      "Перевірка під час запуску та кожні 6 годин, коли масаж зупинено. Перед встановленням звіряється SHA-256."
+    ]
+  },
+  {
+    "source": "Обновления ещё не проверялись.",
+    "text": [
+      "Updates have not been checked yet.",
+      "Noch nicht nach Updates gesucht.",
+      "Aucune recherche de mise à jour effectuée.",
+      "Aún no se han buscado actualizaciones.",
+      "Atualizações ainda não verificadas.",
+      "Aggiornamenti non ancora verificati.",
+      "尚未检查更新。",
+      "更新はまだ確認していません。",
+      "아직 업데이트를 확인하지 않았습니다.",
+      "Оновлення ще не перевірялися."
+    ]
+  },
+  {
+    "source": "Проверяем новые версии…",
+    "text": [
+      "Checking for new versions…",
+      "Neue Versionen werden gesucht…",
+      "Recherche de nouvelles versions…",
+      "Buscando nuevas versiones…",
+      "Buscando novas versões…",
+      "Ricerca nuove versioni…",
+      "正在检查新版本…",
+      "新しいバージョンを確認中…",
+      "새 버전 확인 중…",
+      "Перевіряємо нові версії…"
+    ]
+  },
+  {
+    "source": "Установлена актуальная версия.",
+    "text": [
+      "You’re up to date.",
+      "Die Version ist aktuell.",
+      "Votre version est à jour.",
+      "Tienes la versión más reciente.",
+      "Você está na versão mais recente.",
+      "La versione è aggiornata.",
+      "已是最新版本。",
+      "最新バージョンです。",
+      "최신 버전입니다.",
+      "Встановлена актуальна версія."
+    ]
+  },
+  {
+    "source": "Доступна версия {}",
+    "text": [
+      "Version {0} is available",
+      "Version {0} ist verfügbar",
+      "Version {0} disponible",
+      "Versión {0} disponible",
+      "Versão {0} disponível",
+      "Versione {0} disponibile",
+      "版本 {0} 可用",
+      "バージョン{0}が利用できます",
+      "버전 {0} 사용 가능",
+      "Доступна версія {0}"
+    ]
+  },
+  {
+    "source": "Скачать обновление",
+    "text": [
+      "Download update",
+      "Update herunterladen",
+      "Télécharger la mise à jour",
+      "Descargar actualización",
+      "Baixar atualização",
+      "Scarica aggiornamento",
+      "下载更新",
+      "更新をダウンロード",
+      "업데이트 다운로드",
+      "Завантажити оновлення"
+    ]
+  },
+  {
+    "source": "Скачиваем и проверяем обновление…",
+    "text": [
+      "Downloading and verifying update…",
+      "Update wird geladen und geprüft…",
+      "Téléchargement et vérification…",
+      "Descargando y verificando…",
+      "Baixando e verificando…",
+      "Download e verifica in corso…",
+      "正在下载并校验更新…",
+      "更新をダウンロード・検証中…",
+      "업데이트 다운로드 및 검증 중…",
+      "Завантажуємо та перевіряємо оновлення…"
+    ]
+  },
+  {
+    "source": "Версия {} готова к установке",
+    "text": [
+      "Version {0} is ready to install",
+      "Version {0} ist installationsbereit",
+      "La version {0} est prête à installer",
+      "Versión {0} lista para instalar",
+      "Versão {0} pronta para instalar",
+      "Versione {0} pronta da installare",
+      "版本 {0} 已准备好安装",
+      "バージョン{0}のインストール準備ができました",
+      "버전 {0} 설치 준비 완료",
+      "Версія {0} готова до встановлення"
+    ]
+  },
+  {
+    "source": "Обновление устанавливается системным установщиком; может понадобиться пароль администратора. После установки запустите JetSeat Massage снова.",
+    "text": [
+      "The system installer will install the update and may request an administrator password. Relaunch JetSeat Massage afterwards.",
+      "Der Systeminstaller installiert das Update und benötigt eventuell ein Administratorpasswort. JetSeat Massage danach erneut starten.",
+      "Le programme d’installation système peut demander un mot de passe administrateur. Relancez ensuite JetSeat Massage.",
+      "El instalador del sistema puede pedir la contraseña de administrador. Después, vuelve a abrir JetSeat Massage.",
+      "O instalador do sistema pode pedir a senha de administrador. Depois, abra o JetSeat Massage novamente.",
+      "Il programma di installazione può richiedere la password di amministratore. Poi riapri JetSeat Massage.",
+      "系统安装程序将安装更新，可能需要管理员密码。完成后请重新启动 JetSeat Massage。",
+      "システムのインストーラーが更新を行います。管理者パスワードが必要な場合があります。完了後にJetSeat Massageを再起動してください。",
+      "시스템 설치 프로그램이 업데이트하며 관리자 암호가 필요할 수 있습니다. 설치 후 JetSeat Massage를 다시 실행하세요.",
+      "Оновлення встановлюється системним інсталятором; може знадобитися пароль адміністратора. Після встановлення запустіть JetSeat Massage знову."
+    ]
+  },
+  {
+    "source": "Остановите массаж перед установкой.",
+    "text": [
+      "Stop massage before installing.",
+      "Massage vor der Installation stoppen.",
+      "Arrêtez le massage avant l’installation.",
+      "Detén el masaje antes de instalar.",
+      "Pare a massagem antes de instalar.",
+      "Ferma il massaggio prima di installare.",
+      "请先停止按摩再安装。",
+      "インストール前にマッサージを停止してください。",
+      "설치 전에 마사지를 중지하세요.",
+      "Зупиніть масаж перед встановленням."
+    ]
+  },
+  {
+    "source": "Установить обновление",
+    "text": [
+      "Install update",
+      "Update installieren",
+      "Installer la mise à jour",
+      "Instalar actualización",
+      "Instalar atualização",
+      "Installa aggiornamento",
+      "安装更新",
+      "更新をインストール",
+      "업데이트 설치",
+      "Встановити оновлення"
+    ]
+  },
+  {
+    "source": "Открываем установщик…",
+    "text": [
+      "Opening installer…",
+      "Installer wird geöffnet…",
+      "Ouverture du programme d’installation…",
+      "Abriendo instalador…",
+      "Abrindo instalador…",
+      "Apertura programma di installazione…",
+      "正在打开安装程序…",
+      "インストーラーを起動中…",
+      "설치 프로그램 여는 중…",
+      "Відкриваємо інсталятор…"
+    ]
+  },
+  {
+    "source": "Проверить сейчас",
+    "text": [
+      "Check now",
+      "Jetzt prüfen",
+      "Vérifier maintenant",
+      "Comprobar ahora",
+      "Verificar agora",
+      "Verifica ora",
+      "立即检查",
+      "今すぐ確認",
+      "지금 확인",
+      "Перевірити зараз"
+    ]
+  },
+  {
+    "source": "Все версии на GitHub",
+    "text": [
+      "All releases on GitHub",
+      "Alle Versionen auf GitHub",
+      "Toutes les versions sur GitHub",
+      "Todas las versiones en GitHub",
+      "Todas as versões no GitHub",
+      "Tutte le versioni su GitHub",
+      "GitHub 上的所有版本",
+      "GitHubの全リリース",
+      "GitHub의 모든 버전",
+      "Усі версії на GitHub"
+    ]
+  },
+  {
+    "source": "Установка обновления. Сигнал выключен.",
+    "text": [
+      "Installing update. Signal off.",
+      "Update wird installiert. Signal aus.",
+      "Installation de la mise à jour. Signal coupé.",
+      "Instalando actualización. Señal apagada.",
+      "Instalando atualização. Sinal desligado.",
+      "Installazione aggiornamento. Segnale spento.",
+      "正在安装更新，信号已关闭。",
+      "更新をインストール中。信号は停止しています。",
+      "업데이트 설치 중. 신호가 꺼졌습니다.",
+      "Встановлення оновлення. Сигнал вимкнено."
+    ]
+  },
+  {
+    "source": "Релакс",
+    "text": [
+      "Relax",
+      "Entspannen",
+      "Relaxation",
+      "Relax",
+      "Relaxar",
+      "Relax",
+      "放松",
+      "リラックス",
+      "릴랙스",
+      "Релакс"
+    ]
+  },
+  {
+    "source": "Волна",
+    "text": [
+      "Wave",
+      "Welle",
+      "Vague",
+      "Ola",
+      "Onda",
+      "Onda",
+      "波浪",
+      "ウェーブ",
+      "웨이브",
+      "Хвиля"
+    ]
+  },
+  {
+    "source": "Пульс",
+    "text": [
+      "Pulse",
+      "Puls",
+      "Pulsation",
+      "Pulso",
+      "Pulso",
+      "Impulsi",
+      "脉冲",
+      "パルス",
+      "펄스",
+      "Пульс"
+    ]
+  },
+  {
+    "source": "Ровный",
+    "text": [
+      "Steady",
+      "Konstant",
+      "Continu",
+      "Constante",
+      "Constante",
+      "Costante",
+      "恒定",
+      "一定",
+      "일정",
+      "Рівний"
+    ]
+  },
+  {
+    "source": "Змейка",
+    "text": [
+      "Snake",
+      "Schlange",
+      "Serpent",
+      "Serpiente",
+      "Serpente",
+      "Serpente",
+      "蛇形",
+      "スネーク",
+      "스네이크",
+      "Змійка"
+    ]
+  },
+  {
+    "source": "Лево / право",
+    "text": [
+      "Left / right",
+      "Links / rechts",
+      "Gauche / droite",
+      "Izquierda / derecha",
+      "Esquerda / direita",
+      "Sinistra / destra",
+      "左右交替",
+      "左右交互",
+      "좌우 교대",
+      "Ліворуч / праворуч"
+    ]
+  },
+  {
+    "source": "Медленное нарастание и мягкий спад",
+    "text": [
+      "Slow rise and gentle fall",
+      "Langsamer Anstieg, sanfter Abfall",
+      "Montée lente et descente douce",
+      "Subida lenta y bajada suave",
+      "Subida lenta e descida suave",
+      "Salita lenta e discesa dolce",
+      "缓慢增强，柔和减弱",
+      "ゆっくり強まり、穏やかに弱まる",
+      "천천히 높이고 부드럽게 낮춤",
+      "Повільне наростання та м’який спад"
+    ]
+  },
+  {
+    "source": "Плавные волны с короткими паузами",
+    "text": [
+      "Smooth waves with brief pauses",
+      "Sanfte Wellen mit kurzen Pausen",
+      "Vagues douces et brèves pauses",
+      "Olas suaves con pausas breves",
+      "Ondas suaves com pausas curtas",
+      "Onde morbide con brevi pause",
+      "平滑波动，短暂间歇",
+      "滑らかな波と短い休止",
+      "짧은 휴식을 동반한 부드러운 파동",
+      "Плавні хвилі з короткими паузами"
+    ]
+  },
+  {
+    "source": "Чередование импульсов и отдыха",
+    "text": [
+      "Alternating pulses and rest",
+      "Impulse im Wechsel mit Ruhe",
+      "Alternance d’impulsions et de repos",
+      "Impulsos y descanso alternados",
+      "Alternância de pulsos e descanso",
+      "Alternanza di impulsi e riposo",
+      "脉冲与休息交替",
+      "振動と休止を交互に",
+      "진동과 휴식 반복",
+      "Чергування імпульсів і відпочинку"
+    ]
+  },
+  {
+    "source": "Постоянный уровень сигнала",
+    "text": [
+      "Constant signal level",
+      "Konstanter Signalpegel",
+      "Niveau de signal constant",
+      "Nivel de señal constante",
+      "Nível de sinal constante",
+      "Livello del segnale costante",
+      "保持恒定强度",
+      "一定の信号強度",
+      "일정한 신호 강도",
+      "Сталий рівень сигналу"
+    ]
+  },
+  {
+    "source": "Последовательный проход по шести зонам",
+    "text": [
+      "Sequential sweep of all six zones",
+      "Sechs Zonen nacheinander",
+      "Parcours successif des six zones",
+      "Recorrido por las seis zonas",
+      "Percurso pelas seis zonas",
+      "Passaggio sulle sei zone in sequenza",
+      "依次经过六个区域",
+      "6ゾーンを順番に巡る",
+      "6개 구역 순차 작동",
+      "Послідовний прохід шістьма зонами"
+    ]
+  },
+  {
+    "source": "Чередование левой и правой стороны",
+    "text": [
+      "Alternating left and right sides",
+      "Linke und rechte Seite im Wechsel",
+      "Alternance gauche et droite",
+      "Alternancia de izquierda y derecha",
+      "Alternância entre esquerda e direita",
+      "Alternanza tra sinistra e destra",
+      "左右两侧交替",
+      "左右を交互に切り替え",
+      "왼쪽과 오른쪽 교대",
+      "Чергування лівої та правої сторони"
+    ]
+  },
+  {
+    "source": "Сиденье · Л",
+    "text": [
+      "Seat · L",
+      "Sitz · L",
+      "Assise · G",
+      "Asiento · I",
+      "Assento · E",
+      "Seduta · S",
+      "坐部 · 左",
+      "座面 · 左",
+      "좌석 · 왼쪽",
+      "Сидіння · Л"
+    ]
+  },
+  {
+    "source": "Сиденье · П",
+    "text": [
+      "Seat · R",
+      "Sitz · R",
+      "Assise · D",
+      "Asiento · D",
+      "Assento · D",
+      "Seduta · D",
+      "坐部 · 右",
+      "座面 · 右",
+      "좌석 · 오른쪽",
+      "Сидіння · П"
+    ]
+  },
+  {
+    "source": "Низ спины · Л",
+    "text": [
+      "Lower back · L",
+      "Lenden · L",
+      "Lombaires · G",
+      "Lumbar · I",
+      "Lombar · E",
+      "Lombare · S",
+      "下背 · 左",
+      "腰 · 左",
+      "허리 · 왼쪽",
+      "Поперек · Л"
+    ]
+  },
+  {
+    "source": "Низ спины · П",
+    "text": [
+      "Lower back · R",
+      "Lenden · R",
+      "Lombaires · D",
+      "Lumbar · D",
+      "Lombar · D",
+      "Lombare · D",
+      "下背 · 右",
+      "腰 · 右",
+      "허리 · 오른쪽",
+      "Поперек · П"
+    ]
+  },
+  {
+    "source": "Середина · Л",
+    "text": [
+      "Mid-back · L",
+      "Rücken · L",
+      "Dos · G",
+      "Espalda · I",
+      "Costas · E",
+      "Schiena · S",
+      "中背 · 左",
+      "背中 · 左",
+      "등 · 왼쪽",
+      "Спина · Л"
+    ]
+  },
+  {
+    "source": "Середина · П",
+    "text": [
+      "Mid-back · R",
+      "Rücken · R",
+      "Dos · D",
+      "Espalda · D",
+      "Costas · D",
+      "Schiena · D",
+      "中背 · 右",
+      "背中 · 右",
+      "등 · 오른쪽",
+      "Спина · П"
+    ]
+  },
+  {
+    "source": "{} · {:04X}:{:04X} · интерфейс {}",
+    "text": [
+      "{0} · {1}:{2} · interface {3}",
+      "{0} · {1}:{2} · Schnittstelle {3}",
+      "{0} · {1}:{2} · interface {3}",
+      "{0} · {1}:{2} · interfaz {3}",
+      "{0} · {1}:{2} · interface {3}",
+      "{0} · {1}:{2} · interfaccia {3}",
+      "{0} · {1}:{2} · 接口 {3}",
+      "{0} · {1}:{2} · インターフェース {3}",
+      "{0} · {1}:{2} · 인터페이스 {3}",
+      "{0} · {1}:{2} · інтерфейс {3}"
+    ]
+  },
+  {
+    "source": "Ошибка потока поиска USB",
+    "text": [
+      "USB search thread failed",
+      "USB-Suchthread fehlgeschlagen",
+      "Échec du processus de recherche USB",
+      "Error del proceso de búsqueda USB",
+      "Falha no processo de busca USB",
+      "Errore del processo di ricerca USB",
+      "USB 搜索线程出错",
+      "USB検索スレッドのエラー",
+      "USB 검색 스레드 오류",
+      "Помилка потоку пошуку USB"
+    ]
+  },
+  {
+    "source": "Для проверки нужна одна накидка, найдено: {}",
+    "text": [
+      "Self-test requires one seat; found: {0}",
+      "Selbsttest benötigt einen Sitz; gefunden: {0}",
+      "Le test nécessite un seul siège ; trouvés : {0}",
+      "La prueba requiere un asiento; encontrados: {0}",
+      "O teste requer um assento; encontrados: {0}",
+      "Il test richiede un sedile; trovati: {0}",
+      "自检需要一个坐垫，找到：{0}",
+      "テストにはシート1台が必要です。検出数：{0}",
+      "자가 테스트에는 시트 1개가 필요합니다. 발견: {0}",
+      "Для перевірки потрібна одна накидка, знайдено: {0}"
+    ]
+  },
+  {
+    "source": "USB-устройство не поддерживается",
+    "text": [
+      "USB device not supported",
+      "USB-Gerät nicht unterstützt",
+      "Appareil USB non pris en charge",
+      "Dispositivo USB no compatible",
+      "Dispositivo USB não compatível",
+      "Dispositivo USB non supportato",
+      "不支持此 USB 设备",
+      "未対応のUSBデバイスです",
+      "지원하지 않는 USB 장치",
+      "USB-пристрій не підтримується"
+    ]
+  },
+  {
+    "source": "Не удалось открыть KW-901: {e}",
+    "text": [
+      "Could not open KW-901: {0}",
+      "KW-901 nicht zu öffnen: {0}",
+      "Impossible d’ouvrir le KW-901 : {0}",
+      "No se pudo abrir KW-901: {0}",
+      "Não foi possível abrir o KW-901: {0}",
+      "Impossibile aprire KW-901: {0}",
+      "无法打开 KW-901：{0}",
+      "KW-901を開けません：{0}",
+      "KW-901을 열 수 없습니다: {0}",
+      "Не вдалося відкрити KW-901: {0}"
+    ]
+  },
+  {
+    "source": "Идентификатор подключённого устройства изменился",
+    "text": [
+      "Connected device identifier changed",
+      "Kennung des angeschlossenen Geräts geändert",
+      "L’identifiant de l’appareil a changé",
+      "Cambió el identificador del dispositivo conectado",
+      "O identificador do dispositivo mudou",
+      "L’identificativo del dispositivo è cambiato",
+      "已连接设备的标识已更改",
+      "接続デバイスの識別情報が変わりました",
+      "연결된 장치의 식별 정보가 변경됨",
+      "Ідентифікатор підключеного пристрою змінився"
+    ]
+  },
+  {
+    "source": "Не удалось прочитать HID-дескриптор: {e}",
+    "text": [
+      "Could not read HID descriptor: {0}",
+      "HID-Deskriptor nicht lesbar: {0}",
+      "Impossible de lire le descripteur HID : {0}",
+      "No se pudo leer el descriptor HID: {0}",
+      "Não foi possível ler o descritor HID: {0}",
+      "Impossibile leggere il descrittore HID: {0}",
+      "无法读取 HID 描述符：{0}",
+      "HID記述子を読み取れません：{0}",
+      "HID 설명자를 읽을 수 없습니다: {0}",
+      "Не вдалося прочитати HID-дескриптор: {0}"
+    ]
+  },
+  {
+    "source": "USB не подтвердил остановку. Выключите накидку кнопкой питания.",
+    "text": [
+      "USB stop was not confirmed. Turn off the seat using its power button.",
+      "USB-Stopp nicht bestätigt. Sitz mit der Ein/Aus-Taste ausschalten.",
+      "Arrêt USB non confirmé. Éteignez le siège avec son bouton d’alimentation.",
+      "No se confirmó la parada USB. Apaga el asiento con su botón.",
+      "Parada USB não confirmada. Desligue o assento pelo botão de energia.",
+      "Arresto USB non confermato. Spegni il sedile con il pulsante di alimentazione.",
+      "未确认 USB 已停止，请使用坐垫电源按钮关闭。",
+      "USBの停止を確認できません。シートの電源ボタンでオフにしてください。",
+      "USB 중지를 확인하지 못했습니다. 전원 버튼으로 시트를 끄세요.",
+      "USB не підтвердив зупинку. Вимкніть накидку кнопкою живлення."
+    ]
+  },
+  {
+    "source": "Ошибка USB-потока",
+    "text": [
+      "USB thread failed",
+      "USB-Thread fehlgeschlagen",
+      "Échec du processus USB",
+      "Error del proceso USB",
+      "Falha no processo USB",
+      "Errore del processo USB",
+      "USB 线程出错",
+      "USBスレッドのエラー",
+      "USB 스레드 오류",
+      "Помилка USB-потоку"
+    ]
+  },
+  {
+    "source": "Неполная USB-запись: {written}/{}",
+    "text": [
+      "Incomplete USB write: {0}/{1}",
+      "Unvollständige USB-Übertragung: {0}/{1}",
+      "Écriture USB incomplète : {0}/{1}",
+      "Escritura USB incompleta: {0}/{1}",
+      "Gravação USB incompleta: {0}/{1}",
+      "Scrittura USB incompleta: {0}/{1}",
+      "USB 写入不完整：{0}/{1}",
+      "USB書き込みが不完全です：{0}/{1}",
+      "불완전한 USB 쓰기: {0}/{1}",
+      "Неповний USB-запис: {0}/{1}"
+    ]
+  },
+  {
+    "source": "Ошибка контроля USB-потока",
+    "text": [
+      "USB watchdog failed",
+      "USB-Überwachung fehlgeschlagen",
+      "Échec de la surveillance USB",
+      "Error de supervisión USB",
+      "Falha no monitoramento USB",
+      "Errore nel monitoraggio USB",
+      "USB 看门狗出错",
+      "USB監視のエラー",
+      "USB 감시 오류",
+      "Помилка контролю USB-потоку"
+    ]
+  },
+  {
+    "source": "Ошибка настроек USB",
+    "text": [
+      "USB configuration failed",
+      "USB-Konfiguration fehlgeschlagen",
+      "Échec de la configuration USB",
+      "Error de configuración USB",
+      "Falha na configuração USB",
+      "Configurazione USB non riuscita",
+      "USB 配置出错",
+      "USB設定のエラー",
+      "USB 설정 오류",
+      "Помилка налаштувань USB"
+    ]
+  },
+  {
+    "source": "Ошибка отображения зон",
+    "text": [
+      "Zone mapping failed",
+      "Zonenzuordnung fehlgeschlagen",
+      "Échec de l’affectation des zones",
+      "Error de asignación de zonas",
+      "Falha no mapeamento de zonas",
+      "Mappatura delle zone non riuscita",
+      "区域映射出错",
+      "ゾーン割り当てのエラー",
+      "구역 매핑 오류",
+      "Помилка відображення зон"
+    ]
+  },
+  {
+    "source": "Поток обновления завершился",
+    "text": [
+      "Update worker stopped",
+      "Update-Prozess beendet",
+      "Le processus de mise à jour s’est arrêté",
+      "Se detuvo el proceso de actualización",
+      "O processo de atualização parou",
+      "Processo di aggiornamento terminato",
+      "更新线程已停止",
+      "更新処理が停止しました",
+      "업데이트 작업 중지됨",
+      "Потік оновлення завершився"
+    ]
+  },
+  {
+    "source": "Для автообновления Linux нужен CachyOS/Arch с pacman. Другие системы обновляются из исходников.",
+    "text": [
+      "Linux updates require CachyOS/Arch with pacman. Build from source on other distributions.",
+      "Linux-Updates benötigen CachyOS/Arch mit pacman. Andere Distributionen aus dem Quellcode aktualisieren.",
+      "Les mises à jour Linux nécessitent CachyOS/Arch avec pacman. Compilez les sources sur les autres distributions.",
+      "Las actualizaciones Linux requieren CachyOS/Arch con pacman. En otras distribuciones, compila desde el código fuente.",
+      "Atualizações Linux exigem CachyOS/Arch com pacman. Em outras distribuições, compile a partir do código-fonte.",
+      "Gli aggiornamenti Linux richiedono CachyOS/Arch con pacman. Sulle altre distribuzioni compila dai sorgenti.",
+      "Linux 更新需要带 pacman 的 CachyOS/Arch。其他发行版请从源码构建。",
+      "Linuxの更新にはpacmanを備えたCachyOS/Archが必要です。他のディストリビューションはソースからビルドしてください。",
+      "Linux 업데이트에는 pacman이 있는 CachyOS/Arch가 필요합니다. 다른 배포판에서는 소스에서 빌드하세요.",
+      "Для автооновлення Linux потрібен CachyOS/Arch із pacman. Інші системи оновлюються з вихідного коду."
+    ]
+  },
+  {
+    "source": "GitHub недоступен: {e}",
+    "text": [
+      "GitHub unavailable: {0}",
+      "GitHub nicht erreichbar: {0}",
+      "GitHub indisponible : {0}",
+      "GitHub no disponible: {0}",
+      "GitHub indisponível: {0}",
+      "GitHub non disponibile: {0}",
+      "GitHub 不可用：{0}",
+      "GitHubに接続できません：{0}",
+      "GitHub 사용 불가: {0}",
+      "GitHub недоступний: {0}"
+    ]
+  },
+  {
+    "source": "Не удалось прочитать список обновлений: {e}",
+    "text": [
+      "Could not read update list: {0}",
+      "Update-Liste nicht lesbar: {0}",
+      "Impossible de lire les mises à jour : {0}",
+      "No se pudo leer la lista de actualizaciones: {0}",
+      "Não foi possível ler as atualizações: {0}",
+      "Impossibile leggere gli aggiornamenti: {0}",
+      "无法读取更新列表：{0}",
+      "更新リストを読み取れません：{0}",
+      "업데이트 목록을 읽을 수 없습니다: {0}",
+      "Не вдалося прочитати список оновлень: {0}"
+    ]
+  },
+  {
+    "source": "Некорректный ответ GitHub: {e}",
+    "text": [
+      "Invalid GitHub response: {0}",
+      "Ungültige GitHub-Antwort: {0}",
+      "Réponse GitHub invalide : {0}",
+      "Respuesta de GitHub no válida: {0}",
+      "Resposta inválida do GitHub: {0}",
+      "Risposta GitHub non valida: {0}",
+      "GitHub 响应无效：{0}",
+      "GitHubからの応答が無効です：{0}",
+      "잘못된 GitHub 응답: {0}",
+      "Некоректна відповідь GitHub: {0}"
+    ]
+  },
+  {
+    "source": "Размер обновления не совпадает",
+    "text": [
+      "Update size does not match",
+      "Update-Größe stimmt nicht überein",
+      "La taille de la mise à jour ne correspond pas",
+      "El tamaño de la actualización no coincide",
+      "O tamanho da atualização não corresponde",
+      "La dimensione dell’aggiornamento non corrisponde",
+      "更新文件大小不匹配",
+      "更新ファイルのサイズが一致しません",
+      "업데이트 크기가 일치하지 않음",
+      "Розмір оновлення не збігається"
+    ]
+  },
+  {
+    "source": "Проверка SHA-256 обновления не пройдена. Файл не будет установлен.",
+    "text": [
+      "Update SHA-256 verification failed. The file will not be installed.",
+      "SHA-256-Prüfung fehlgeschlagen. Datei wird nicht installiert.",
+      "Échec de la vérification SHA-256. Le fichier ne sera pas installé.",
+      "Falló la verificación SHA-256. No se instalará el archivo.",
+      "Falha na verificação SHA-256. O arquivo não será instalado.",
+      "Verifica SHA-256 non riuscita. Il file non verrà installato.",
+      "更新 SHA-256 校验失败，不会安装此文件。",
+      "SHA-256の検証に失敗しました。ファイルはインストールされません。",
+      "SHA-256 검증 실패. 파일을 설치하지 않습니다.",
+      "Перевірку SHA-256 не пройдено. Файл не буде встановлено."
+    ]
+  },
+  {
+    "source": "Не удалось найти каталог обновлений",
+    "text": [
+      "Update directory not found",
+      "Update-Verzeichnis nicht gefunden",
+      "Dossier de mise à jour introuvable",
+      "No se encontró la carpeta de actualizaciones",
+      "Pasta de atualizações não encontrada",
+      "Cartella aggiornamenti non trovata",
+      "找不到更新目录",
+      "更新フォルダーが見つかりません",
+      "업데이트 폴더를 찾을 수 없음",
+      "Не вдалося знайти каталог оновлень"
+    ]
+  },
+  {
+    "source": "Не удалось скачать обновление: {e}",
+    "text": [
+      "Could not download update: {0}",
+      "Update nicht herunterladbar: {0}",
+      "Impossible de télécharger la mise à jour : {0}",
+      "No se pudo descargar la actualización: {0}",
+      "Não foi possível baixar a atualização: {0}",
+      "Impossibile scaricare l’aggiornamento: {0}",
+      "无法下载更新：{0}",
+      "更新をダウンロードできません：{0}",
+      "업데이트를 다운로드할 수 없습니다: {0}",
+      "Не вдалося завантажити оновлення: {0}"
+    ]
+  },
+  {
+    "source": "Не удалось открыть установщик: {e}",
+    "text": [
+      "Could not open installer: {0}",
+      "Installer nicht zu öffnen: {0}",
+      "Impossible d’ouvrir le programme d’installation : {0}",
+      "No se pudo abrir el instalador: {0}",
+      "Não foi possível abrir o instalador: {0}",
+      "Impossibile aprire il programma di installazione: {0}",
+      "无法打开安装程序：{0}",
+      "インストーラーを起動できません：{0}",
+      "설치 프로그램을 열 수 없습니다: {0}",
+      "Не вдалося відкрити інсталятор: {0}"
+    ]
+  },
+  {
+    "source": "Установка отменена или не удалась: {}",
+    "text": [
+      "Installation cancelled or failed: {0}",
+      "Installation abgebrochen oder fehlgeschlagen: {0}",
+      "Installation annulée ou échouée : {0}",
+      "Instalación cancelada o fallida: {0}",
+      "Instalação cancelada ou malsucedida: {0}",
+      "Installazione annullata o non riuscita: {0}",
+      "安装已取消或失败：{0}",
+      "インストールがキャンセルされたか失敗しました：{0}",
+      "설치가 취소되었거나 실패했습니다: {0}",
+      "Встановлення скасовано або не вдалося: {0}"
+    ]
+  },
+  {
+    "source": "Установка для этой системы не поддерживается",
+    "text": [
+      "Installation is not supported on this system",
+      "Installation auf diesem System nicht unterstützt",
+      "Installation non prise en charge sur ce système",
+      "Instalación no compatible con este sistema",
+      "Instalação não compatível com este sistema",
+      "Installazione non supportata su questo sistema",
+      "此系统不支持安装",
+      "このシステムでのインストールは未対応です",
+      "이 시스템에서는 설치를 지원하지 않음",
+      "Встановлення для цієї системи не підтримується"
+    ]
+  },
+  {
+    "source": "USB-поток недоступен. Перезапустите приложение.",
+    "text": [
+      "USB service unavailable. Restart the app.",
+      "USB-Dienst nicht verfügbar. App neu starten.",
+      "Service USB indisponible. Relancez l’application.",
+      "Servicio USB no disponible. Reinicia la aplicación.",
+      "Serviço USB indisponível. Reinicie o aplicativo.",
+      "Servizio USB non disponibile. Riavvia l’app.",
+      "USB 服务不可用，请重启应用。",
+      "USBサービスを利用できません。アプリを再起動してください。",
+      "USB 서비스를 사용할 수 없습니다. 앱을 다시 시작하세요.",
+      "USB-потік недоступний. Перезапустіть застосунок."
+    ]
+  },
+  {
+    "source": "USB-поток завершился. Перезапустите приложение.",
+    "text": [
+      "USB service stopped. Restart the app.",
+      "USB-Dienst beendet. App neu starten.",
+      "Service USB arrêté. Relancez l’application.",
+      "Servicio USB detenido. Reinicia la aplicación.",
+      "Serviço USB encerrado. Reinicie o aplicativo.",
+      "Servizio USB interrotto. Riavvia l’app.",
+      "USB 服务已停止，请重启应用。",
+      "USBサービスが停止しました。アプリを再起動してください。",
+      "USB 서비스가 중지되었습니다. 앱을 다시 시작하세요.",
+      "USB-потік завершився. Перезапустіть застосунок."
+    ]
+  },
+  {
+    "source": "HID Long Item не поддерживается",
+    "text": [
+      "HID long items are not supported",
+      "Lange HID-Elemente nicht unterstützt",
+      "Éléments HID longs non pris en charge",
+      "Elementos HID largos no compatibles",
+      "Itens HID longos não compatíveis",
+      "Elementi HID lunghi non supportati",
+      "不支持 HID 长项目",
+      "HIDロングアイテムは未対応です",
+      "HID 긴 항목을 지원하지 않음",
+      "Довгі елементи HID не підтримуються"
+    ]
+  },
+  {
+    "source": "Повреждённый HID-дескриптор",
+    "text": [
+      "Malformed HID descriptor",
+      "Beschädigter HID-Deskriptor",
+      "Descripteur HID corrompu",
+      "Descriptor HID dañado",
+      "Descritor HID corrompido",
+      "Descrittore HID danneggiato",
+      "HID 描述符损坏",
+      "HID記述子が破損しています",
+      "손상된 HID 설명자",
+      "Пошкоджений HID-дескриптор"
+    ]
+  },
+  {
+    "source": "Номерные HID-отчёты не соответствуют протоколу KW-901",
+    "text": [
+      "Numbered HID reports do not match the KW-901 protocol",
+      "Nummerierte HID-Berichte passen nicht zum KW-901-Protokoll",
+      "Les rapports HID numérotés ne correspondent pas au protocole KW-901",
+      "Los informes HID numerados no coinciden con el protocolo KW-901",
+      "Relatórios HID numerados não correspondem ao protocolo KW-901",
+      "I rapporti HID numerati non corrispondono al protocollo KW-901",
+      "带编号的 HID 报告不符合 KW-901 协议",
+      "番号付きHIDレポートがKW-901のプロトコルと一致しません",
+      "번호가 있는 HID 보고서가 KW-901 프로토콜과 일치하지 않음",
+      "Нумеровані HID-звіти не відповідають протоколу KW-901"
+    ]
+  },
+  {
+    "source": "HID POP без PUSH",
+    "text": [
+      "HID POP without PUSH",
+      "HID POP ohne PUSH",
+      "HID POP sans PUSH",
+      "HID POP sin PUSH",
+      "HID POP sem PUSH",
+      "HID POP senza PUSH",
+      "HID POP 缺少 PUSH",
+      "PUSHのないHID POP",
+      "PUSH 없는 HID POP",
+      "HID POP без PUSH"
+    ]
+  },
+  {
+    "source": "Слишком большой HID-отчёт",
+    "text": [
+      "HID report too large",
+      "HID-Bericht zu groß",
+      "Rapport HID trop volumineux",
+      "Informe HID demasiado grande",
+      "Relatório HID muito grande",
+      "Rapporto HID troppo grande",
+      "HID 报告过大",
+      "HIDレポートが大きすぎます",
+      "HID 보고서가 너무 큼",
+      "Завеликий HID-звіт"
+    ]
+  },
+  {
+    "source": "Ожидался Output report 64 бит, получено {output_bits}",
+    "text": [
+      "Expected a 64-bit output report, got {0}",
+      "64-Bit-Output-Report erwartet, erhalten: {0}",
+      "Rapport de sortie de 64 bits attendu, reçu : {0}",
+      "Se esperaba un informe de salida de 64 bits, recibido: {0}",
+      "Esperado relatório de saída de 64 bits, recebido: {0}",
+      "Atteso report di uscita a 64 bit, ricevuto: {0}",
+      "应为 64 位输出报告，实际为 {0}",
+      "64ビット出力レポートが必要です。実際：{0}",
+      "64비트 출력 보고서가 필요합니다. 실제: {0}",
+      "Очікувався Output report 64 біти, отримано {0}"
+    ]
+  },
+  {
+    "source": "Язык",
+    "text": [
+      "Language",
+      "Sprache",
+      "Langue",
+      "Idioma",
+      "Idioma",
+      "Lingua",
+      "语言",
+      "言語",
+      "언어",
+      "Мова"
+    ]
+  },
+  {
+    "source": "Windows использует встроенный драйвер Microsoft HID. Дополнительные драйверы и DLL скачивать не нужно.",
+    "text": [
+      "Windows uses the built-in Microsoft HID driver. No extra drivers or DLL downloads are needed.",
+      "Windows verwendet den integrierten Microsoft-HID-Treiber. Zusätzliche Treiber oder DLL-Downloads sind nicht nötig.",
+      "Windows utilise le pilote Microsoft HID intégré. Aucun pilote ni DLL supplémentaire à télécharger.",
+      "Windows utiliza el controlador Microsoft HID integrado. No hace falta descargar controladores ni DLL adicionales.",
+      "O Windows usa o driver Microsoft HID integrado. Não é necessário baixar drivers ou DLLs adicionais.",
+      "Windows usa il driver Microsoft HID integrato. Non occorre scaricare altri driver o DLL.",
+      "Windows 使用内置的 Microsoft HID 驱动，无需另外下载驱动或 DLL。",
+      "Windows内蔵のMicrosoft HIDドライバーを使用します。追加ドライバーやDLLのダウンロードは不要です。",
+      "Windows에 내장된 Microsoft HID 드라이버를 사용합니다. 추가 드라이버나 DLL 다운로드는 필요 없습니다.",
+      "Windows використовує вбудований драйвер Microsoft HID. Додаткові драйвери та DLL завантажувати не потрібно."
+    ]
+  },
+  {
+    "source": "Аудиоформат {format:?} пока не поддерживается",
+    "text": [
+      "Audio format {0} is not supported",
+      "Audioformat {0} nicht unterstützt",
+      "Format audio {0} non pris en charge",
+      "Formato de audio {0} no compatible",
+      "Formato de áudio {0} não compatível",
+      "Formato audio {0} non supportato",
+      "不支持音频格式 {0}",
+      "音声形式{0}は未対応です",
+      "오디오 형식 {0}은 지원하지 않습니다",
+      "Аудіоформат {0} поки не підтримується"
+    ]
+  }
+]

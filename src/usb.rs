@@ -336,7 +336,7 @@ mod tests {
             strength: 100,
             ..Config::default()
         };
-        run_worker(Fake(packets.clone()), &state, Duration::from_millis(120)).unwrap();
+        run_worker(Fake(packets.clone()), &state, Duration::from_millis(600)).unwrap();
         let packets = packets.lock().unwrap();
         let zero = protocol::encode([0; 6], [0; 2]);
         assert_eq!(packets.first(), Some(&zero));

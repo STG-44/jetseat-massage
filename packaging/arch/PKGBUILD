@@ -27,6 +27,7 @@ package() {
     install -Dm644 "assets/icons/app-$_size.png" "$pkgdir/usr/share/icons/hicolor/${_size}x${_size}/apps/jetseat-massage.png"
   done
   install -Dm644 assets/70-jetseat.rules "$pkgdir/usr/lib/udev/rules.d/70-jetseat.rules"
+  install -Dm644 assets/fonts/OFL.txt "$pkgdir/usr/share/licenses/$pkgname/OFL-NotoSansCJK.txt"
   install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
   install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
   install -Dm644 PROTOCOL.md "$pkgdir/usr/share/doc/$pkgname/PROTOCOL.md"

@@ -1,24 +1,24 @@
-# USB-протокол Gametrix: основание реализации
+# Gametrix USB protocol: implementation evidence
 
-Статус: пакетный кодировщик восстановлен и проверен независимо; на подключённой GTX JetSeat 231D:2002 проверены открытие/запись нулевой силы/закрытие (8 циклов); вибрация и раскладка зон ещё не подтверждены. Реализация относится к формату оригинального `uwApi.dll`.
+The packet encoder was independently reconstructed and verified against the original `uwApi.dll`. A connected GTX JetSeat (231D:2002, interface 0) passed eight zero-force open/write/close cycles. Physical vibration and zone placement have not yet been confirmed.
 
-## Источники
+## Sources
 
-Установщик панели управления скачан со [страницы KW-901 Gametrix](https://gametrix.ru/catalog/gaming/vibration-pads/kw901-jetseat-live-sense), распакован без запуска Windows-программ. Исследована `{app}/uwAPI/uwApi.dll`, PE32, 203776 байт, база `0x10000000`.
+The control-panel installer was downloaded from the [Gametrix KW-901 page](https://gametrix.ru/catalog/gaming/vibration-pads/kw901-jetseat-live-sense) and extracted without running Windows programs. The examined file was `{app}/uwAPI/uwApi.dll`, PE32, 203776 bytes, base address `0x10000000`.
 
-SHA-256 DLL:
+DLL SHA-256:
 
 ```
 ac6b2b72d8254878741c7bf694ee1f9ed9a97ec8c1909a77a0f490d15bc31b29
 ```
 
-Дизассемблирование и исполнение отдельной функции кодирования в эмуляторе x86 дали векторы в `tests/usb-golden-vectors.json`. `WriteFile` заменён перехватчиком, аппаратных обращений нет. Код кодировщика не заменялся Rust-реализацией. Проверка стекового cookie пропущена; `IsDebuggerPresent` возвращает 0.
+Disassembly and execution of the original encoder in an x86 emulator produced `tests/usb-golden-vectors.json`. `WriteFile` was intercepted; no hardware was accessed. The original encoder was not replaced with the Rust implementation. The stack-cookie check was skipped and `IsDebuggerPresent` returned zero.
 
-Маски зон дополнительно сверены с [IUberwoorf.h проекта irFFB](https://github.com/nlp80/irFFB/blob/master/irFFB/IUberwoorf.h).
+Zone masks were also compared with [irFFB’s IUberwoorf.h](https://github.com/nlp80/irFFB/blob/master/irFFB/IUberwoorf.h).
 
-## Идентификаторы и формат
+## Device IDs and report format
 
-Проверка устройств в DLL по адресам `0x100098ea`–`0x10009942` допускает:
+The DLL’s checks at `0x100098ea`–`0x10009942` accept:
 
 | VID | PID |
 | --- | --- |
@@ -27,63 +27,63 @@ ac6b2b72d8254878741c7bf694ee1f9ed9a97ec8c1909a77a0f490d15bc31b29
 | 231D | 2001 |
 | 231D | 2002 |
 
-Это список устройств семейства из DLL; совместимость всех прошивок физически не проверена. Приложение также требует HID-дескриптор с ненумерованным Output report ровно 64 бита. Одного VID/PID недостаточно.
+These identify a device family; compatibility with every firmware has not been physically tested. The application also requires an unnumbered HID Output report of exactly 64 bits. VID/PID alone is insufficient.
 
-Функция записи `0x10003df0` передаёт 9 байт: `00` (Report ID для HID API) и 8 закодированных байт. [hidapi::write](https://docs.rs/hidapi/2.6.7/hidapi/struct.HidDevice.html#method.write) требует начальный байт и для ненумерованных отчётов.
+The write function at `0x10003df0` submits nine bytes: `00` as the HID API Report ID, then eight encoded bytes. [hidapi::write](https://docs.rs/hidapi/2.6.7/hidapi/struct.HidDevice.html#method.write) requires this leading byte even for unnumbered reports.
 
-Исходные 8 байт: шесть уровней моторов 0–255 и два служебных байта. Оригинал может менять служебные байты; приложение использует нули. Порядок из функции `0x10006030`:
+The input consists of six motor levels (0–255) and two service bytes. The original library can vary service bytes; this application uses zeros. The order from `0x10006030` is:
 
-| Байт | Зона | Маска SDK (hex) |
+| Byte | Zone | SDK mask (hex) |
 | --- | --- | --- |
-| 0 | Сиденье слева | 0200 |
-| 1 | Сиденье справа | 0002 |
-| 2 | Низ спины слева | 0400 |
-| 3 | Низ спины справа | 0004 |
-| 4 | Середина спины слева | 0800 |
-| 5 | Середина спины справа | 0008 |
+| 0 | Left seat | 0200 |
+| 1 | Right seat | 0002 |
+| 2 | Left lower back | 0400 |
+| 3 | Right lower back | 0004 |
+| 4 | Left mid-back | 0800 |
+| 5 | Right mid-back | 0008 |
 
-Привязку лево/право нужно подтвердить на накидке.
+Left/right placement requires confirmation on the seat.
 
-## Кодирование
+## Encoding
 
-Функция `0x10003970` даёт восемь ключей:
+Function `0x10003970` produces eight keys:
 
 ```
 9f3be6c9 4502ab6f 80944295 e0f578ec
 1907fa1f 439e493a 6401749d 99447f2b
 ```
 
-Исходные байты делятся на два 32-битных слова little endian. Выполняются 64 раунда, арифметика по модулю 2³²:
+The eight input bytes form two little-endian 32-bit words. Perform 64 rounds with arithmetic modulo 2³²:
 
 ```
-input = low для чётного round, иначе high
+input = low on even rounds, high on odd rounds
 term = ((input >> 8) XOR (input << 6)) + key[round % 8] + round + input
-high += term для чётного round, иначе low += term
+high += term on even rounds; low += term on odd rounds
 report = 00 || little_endian(low) || little_endian(high)
 ```
 
-Нулевая сила соответствует остановке из `0x10004260`:
+Zero strength matches the stop function at `0x10004260`:
 
 ```
 00 4d 60 a7 a6 ed 2b 34 db
 ```
 
-Тест `packets_match_original_dll_execution` проверяет шесть векторов: нулевая сила, различные моторы, максимум и ненулевые служебные байты. Это входы кодировщика; команды на оборудование тесты не отправляют.
+`packets_match_original_dll_execution` tests six vectors: zeros, distinct motor levels, maximum levels, and nonzero service bytes. These are encoder inputs; unit tests do not send hardware commands.
 
-Для повторения независимой проверки разработчиком приложен `tools/usb_oracle.py`. Нужны Python, `pefile`, `unicorn` и собственная копия оригинальной DLL с указанным SHA-256:
+To reproduce the independent oracle, use Python, `pefile`, `unicorn`, and your own original DLL with the SHA-256 above:
 
 ```sh
 python3 tools/usb_oracle.py /path/to/uwApi.dll /tmp/usb-vectors.json
 ```
 
-Скрипт не открывает USB-устройства. DLL другой версии отклоняется до эмуляции; файл с векторами можно сравнить с `tests/usb-golden-vectors.json`.
+The script does not open USB devices and rejects a different DLL before emulation. Compare its output with `tests/usb-golden-vectors.json`.
 
-## Управление и границы
+## Runtime and limits
 
-`usb.rs` открывает выбранный HID-путь, повторно проверяет идентификатор и дескриптор, отправляет нули, затем обновляет уровни с частотой 50 Гц. Завершение, ошибка и выход потока пытаются отправить нулевую силу. Таймер ограничен 30 минутами; контроль отклика GUI — 1,5 секунды.
+`usb.rs` opens the selected HID path, rechecks the ID and descriptor, sends zeros, then updates levels at 50 Hz. Completion, errors, and worker exit attempt zero strength. The timer is limited to 30 minutes; the GUI watchdog is 1.5 seconds. Feature reports, persistent controller mode changes, and firmware updates are not implemented. Stop depends on a working process, USB connection, and OS HID call.
 
-Feature reports, изменение сохранённого режима контроллера и прошивка не реализованы. Восстановлена отправка уровней через Output report. Передача «Стоп» зависит от работающего процесса, USB и системного HID-вызова.
+Since version 0.3, `hid_service.rs` owns every HID operation on one permanent thread. On macOS the HID manager retains the initializing thread’s CFRunLoop. Allowing that thread to exit between enumeration and Start caused SIGILL. Evidence includes private system crash reports from November 1, 2026 and the [HIDAPI multithreading notes](https://github.com/libusb/hidapi/wiki/Multi%E2%80%90threading-Notes). Crash reports are not included in this public repository.
 
-Оригинальная DLL в поставку не включена. Контрольные данные и самостоятельный Rust-код включены; физическая совместимость остаётся отдельным этапом проверки.
+Windows uses the native HIDAPI backend with the [in-box Microsoft HID USB driver](https://learn.microsoft.com/en-us/windows-hardware/drivers/hid/hid-over-usb). No replacement kernel driver or proprietary Gametrix DLL is installed.
 
-В версии 0.3 все HID-вызовы переданы одному постоянному потоку `hid_service.rs`. В macOS глобальный HID-менеджер привязан к CFRunLoop инициализирующего потока; завершение этого потока между поиском и стартом приводило к SIGILL. Основание: системные отчёты от 1 ноября 2026 года (не включены в публичный репозиторий) и [правила многопоточности HIDAPI](https://github.com/libusb/hidapi/wiki/Multi%E2%80%90threading-Notes).
+The proprietary DLL is not redistributed. The repository contains independent Rust code and test vectors; physical compatibility remains a separate validation step.

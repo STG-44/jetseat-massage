@@ -1,32 +1,31 @@
-# Проверка поставки 0.3.0
+# Release validation
 
-Дата: 1 ноября 2026 года. Среда: Intel x86_64, macOS 15.8.2, Rust 1.96.0.
+Version 0.4.0, November 1, 2026. Local environment: Intel x86_64, macOS 15.8.2, Rust 1.96.0.
 
-| Проверка | Результат |
-| --- | --- |
-| `cargo fmt --check` | Пройдено |
-| `cargo clippy --all-targets --all-features --locked -- -D warnings` | Пройдено без предупреждений |
-| `cargo test --locked` | 12 тестов пройдено, аппаратный аудиотест по умолчанию пропущен |
-| USB-кодирование | Шесть контрольных пакетов оригинальной DLL совпадают с Rust-кодировщиком |
-| Реальная GTX JetSeat | Подключена по USB, VID 231D, PID 2002, интерфейс 0 |
-| `--usb-self-test` | 8 повторных циклов поиска из временных потоков, открытия HID, записи нулевой силы и закрытия — пройдено без падений |
-| Пакет Mac | Подпись приложения после распаковки `.pkg` проверена; бинарник из установщика прошёл те же 8 USB-циклов |
-| Причина вылета 0.2 | SIGILL в CoreFoundation/IOKit при повторном использовании HID-менеджером CFRunLoop завершившегося потока. Устранено постоянным потоком-владельцем всех HID-вызовов |
-| Обновления: выбор версии | Проверены semver (0.10 > 0.9), исключение черновиков, неправильных платформ, посторонних URL и пакетов без SHA-256 |
-| Обновления: целостность | Правильные данные принимаются; подмена, обрезка и лишние байты блокируются до установки |
-| GUI | Просмотрена вкладка «Обновления», подпись «/ macOS + Linux» удалена |
-| Linux | Release x86_64 успешно собран через Zig 0.15.2, повторная сборка подтвердила актуальность; ELF без RPATH. Запуск в CachyOS и системная установка не выполнялись |
-| Пакет CachyOS | Архив, PKGINFO, MTREE, содержимое файлов и права проверены; добавлена зависимость polkit для обновлений |
-| Обновления: реальный GitHub | Анонимная проверка из финальной Mac-сборки пройдена. Код Updater скачал реальный установщик из публичного GitHub Releases и подтвердил размер и SHA-256; установщик не запускался |
+## Automated checks
 
-## Границы проверки
+- Formatting and Clippy with all targets/features and warnings denied.
+- 16 tests passed locally; the real-audio test is intentionally opt-in.
+- Six packet vectors match independent execution of the original Gametrix encoder.
+- Software watchdog, session expiry, stop-on-error, zone masks, and bounded signal levels are covered.
+- Updater tests cover semver ordering, platform/CPU matching for all five installers, rejected URLs/drafts/missing hashes, and corrupt, truncated, or oversized files.
+- Localization tests cover system locale mapping, fallback, every translated placeholder, dynamic version/level labels, and nested errors.
+- Native CI covers Windows x64, Windows ARM64, macOS Intel, macOS ARM64, and Linux x86_64. Windows packaging checks executable architecture/version and exercises installation, installed diagnostics, and removal. See the [workflow results](https://github.com/STG-44/jetseat-massage/actions).
 
-Реальные USB-проверки используют только нулевую силу и не вызывают массаж. Это подтверждение устойчивого открытия, записи и закрытия подключённого устройства. Субъективные ощущения, силу вибрации и привязку всех зон должен подтвердить пользователь при обычном запуске.
+## Hardware evidence
 
-Обновления скачиваются по HTTPS из GitHub Releases. Размер и SHA-256 берутся из API GitHub и проверяются до сохранения установщика, а также перед его запуском. Это проверка целостности относительно доверенного репозитория, не отдельная подпись разработчика.
+A real GTX JetSeat, VID 231D/PID 2002, interface 0, passed eight repeated zero-force USB cycles in version 0.3, including the executable extracted from the final Mac installer. These exercise temporary-caller enumeration, descriptor validation, open, zero write, and close without activating massage. They establish USB communication and stability, not perceived massage quality.
 
-Установка начинается только по кнопке и при остановленном сеансе. Новые сеансы заблокированы на время установки. На macOS открывается Installer; на CachyOS pacman запускается через pkexec с системной авторизацией, а ошибка или отмена остаются в GUI. Новые токены или пароли GitHub в приложении не хранятся.
+The version 0.2 macOS crash was SIGILL in CoreFoundation/IOKit after reuse of a HID manager tied to an exited thread. All HID calls now belong to one permanent owner thread. The USB protocol and owner-thread lifecycle remain unchanged in version 0.4.
 
-Для анонимного доступа к обновлениям репозиторий должен быть публичным. Репозиторий сделан публичным 1 ноября 2026 года по явному выбору владельца через уже авторизованный GitHub API. Одноразовый код для текущего действия больше не нужен.
+Physical massage, the mapping of all six zones, Windows seat operation, and Linux seat operation require testing on those systems. Windows/macOS ARM64 CI verifies native binaries and software behavior, not a connected seat.
 
-Mac-сборка имеет ad-hoc подпись без Developer ID и нотарификации. Проверка пакета не является установкой в /Applications. Встроенные тесты не запускают системный установщик. Linux-сборка требует отдельной проверки на CachyOS.
+## Packaging and update boundaries
+
+The icon is embedded as ICNS on macOS, an EXE/installer ICO resource on Windows, and hicolor PNGs on Linux. CJK fonts and their SIL OFL notice are bundled. Windows uses the Microsoft HID driver already present in Windows, with no third-party driver download.
+
+macOS builds are ad-hoc signed, without Developer ID or notarization. Linux portable builds need the libraries listed in the Arch package. Package inspection is distinct from installing onto the user’s system.
+
+Updates use HTTPS GitHub Releases. The GitHub API supplies the expected size and SHA-256; both are checked during download and before installer launch. This verifies integrity relative to the repository, not an independent developer signature. Installation requires an explicit click with massage stopped. New sessions are blocked while installing. Windows Setup waits for the previous process to exit before replacing the executable; CachyOS uses pkexec/pacman and reports cancellation/failure in the GUI.
+
+The actual public release download and SHA-256 path were exercised with the version 0.3 Mac installer. No installer was launched by that probe. GitHub credentials are not stored in the application.
