@@ -37,3 +37,5 @@ The Linux release workflow targets a glibc 2.34 baseline on AlmaLinux 9 and reje
 Updater tests cover distribution-family detection without shell evaluation, exact installer arguments with paths containing spaces or shell characters, and atomic AppImage replacement with executable permissions and symlink rejection. Package installations use fixed manager paths through pkexec; no command string is evaluated by a shell.
 
 Source ZIP and tar.gz archives are generated from the same committed source and checked for the lockfile, build instructions, translations and font license. CI results distinguish tested base distributions from compatible derivatives. No container test exercises a connected seat.
+
+Native installation/runtime/removal checks passed on Ubuntu 22.04, 24.04 and 26.04; Debian 12 and 13; Fedora 44 and 45; AlmaLinux 9 and 10; openSUSE Leap 16.0 and Tumbleweed; and Arch Linux. Ubuntu/Debian packaged GUI checks also passed under Xvfb. These are isolated container checks, not full desktop or physical-device certification.

@@ -50,7 +50,7 @@ chmod +x JetSeat-Massage-0.5.0-x86_64.AppImage
 
 The USB rule operation asks for system authorization; it does not activate massage. Native packages already include the rule. AppImage uses the host OpenGL/audio stack and bundles selected keyboard libraries and fonts.
 
-Published Linux binaries require x86_64 and glibc 2.34+. Intended desktop families include Ubuntu 22.04+, Debian 12+, Mint 21+, Pop!_OS 22.04+, Zorin 17+, Fedora, RHEL/Rocky/AlmaLinux 9+, openSUSE Leap 16/Tumbleweed, and current Arch derivatives. Family compatibility does not mean every derivative has been tested. Alpine/musl and NixOS need distribution-specific handling; see [BUILDING.md](BUILDING.md).
+Published Linux binaries require x86_64 and glibc 2.34+. Intended desktop families include Ubuntu 22.04+, Debian 12+, Mint 21+, Pop!_OS 22.04+, Zorin 17+, Fedora, RHEL/Rocky/AlmaLinux 9+, openSUSE Leap 16/Tumbleweed, and current Arch derivatives. Native installation, diagnostics and removal were tested in containers on Ubuntu 22.04/24.04/26.04, Debian 12/13, Fedora 44/45, AlmaLinux 9/10, openSUSE Leap 16/Tumbleweed, and Arch Linux. Mint, Pop!_OS, Zorin, Manjaro and other derivatives inherit their base-family compatibility; they were not individually tested. Alpine/musl and NixOS need distribution-specific handling; see [BUILDING.md](BUILDING.md).
 
 **Source archives:** both `JetSeat-Massage-0.5.0-source.zip` and `JetSeat-Massage-0.5.0-source.tar.gz` include the full application source, lockfile, translations, font and icon assets, licenses, tests, and packaging scripts. [BUILDING.md](BUILDING.md) has instructions for each Linux family, macOS and Windows.
 
