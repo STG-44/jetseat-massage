@@ -1,6 +1,6 @@
 [package]
 name = "jetseat-massage"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2024"
 rust-version = "1.88"
 description = "Rust desktop USB and audio massage controller for Gametrix KW-901"
@@ -9,10 +9,15 @@ license = "MIT"
 [dependencies]
 eframe = { version = "=0.33.3", default-features = false, features = ["default_fonts", "glow", "wayland", "x11", "accesskit", "persistence"] }
 cpal = "=0.16.0"
-hidapi = { version = "=2.6.7", default-features = false, features = ["linux-native-basic-udev"] }
+hidapi = { version = "=2.6.7", default-features = false, features = ["linux-native-basic-udev", "macos-shared-device"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 image = { version = "=0.25.10", default-features = false, features = ["png"], optional = true }
+ureq = { version = "=3.5.0", default-features = false, features = ["rustls", "json"] }
+sha2 = "0.10"
+semver = "1"
+tempfile = "3"
+directories-next = "2"
 
 [features]
 screenshot = ["dep:image"]

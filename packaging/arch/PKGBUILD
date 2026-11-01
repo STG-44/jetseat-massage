@@ -1,12 +1,12 @@
 # Local source package: run makepkg -si from packaging/arch in the project.
 pkgname=jetseat-massage
-pkgver=0.2.0
+pkgver=0.3.0
 pkgrel=1
 pkgdesc='USB and audio massage controller for Gametrix KW-901'
 arch=('x86_64')
 license=('MIT')
 install=jetseat-massage.install
-depends=('glibc>=2.30' 'gcc-libs' 'alsa-lib' 'libxkbcommon' 'libxkbcommon-x11' 'libx11' 'libxcursor' 'libxrandr' 'libxi' 'wayland' 'mesa')
+depends=('glibc>=2.30' 'gcc-libs' 'alsa-lib' 'libxkbcommon' 'libxkbcommon-x11' 'libx11' 'libxcursor' 'libxrandr' 'libxi' 'wayland' 'mesa' 'polkit')
 makedepends=('cargo' 'pkgconf')
 optdepends=('pipewire-alsa: ALSA output through PipeWire')
 options=('!debug' '!strip')

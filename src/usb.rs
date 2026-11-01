@@ -2,7 +2,7 @@ use crate::{
     protocol,
     signal::{self, Pattern},
 };
-use hidapi::{HidApi, HidDevice};
+use hidapi::HidDevice;
 use std::{
     ffi::CString,
     sync::{
@@ -23,23 +23,61 @@ pub struct Device {
 }
 
 pub fn devices() -> Result<Vec<Device>, String> {
-    let api = HidApi::new().map_err(|e| e.to_string())?;
-    Ok(api
-        .device_list()
-        .filter(|d| protocol::supported_id(d.vendor_id(), d.product_id()))
-        .map(|d| Device {
-            name: format!(
-                "{} · {:04X}:{:04X} · интерфейс {}",
-                d.product_string().unwrap_or("Gametrix JetSeat"),
-                d.vendor_id(),
-                d.product_id(),
-                d.interface_number()
-            ),
-            path: d.path().to_owned(),
-            vendor: d.vendor_id(),
-            product: d.product_id(),
-        })
-        .collect())
+    crate::hid_service::with_api(|api| {
+        api.refresh_devices().map_err(|e| e.to_string())?;
+        Ok(api
+            .device_list()
+            .filter(|d| protocol::supported_id(d.vendor_id(), d.product_id()))
+            .map(|d| Device {
+                name: format!(
+                    "{} · {:04X}:{:04X} · интерфейс {}",
+                    d.product_string().unwrap_or("Gametrix JetSeat"),
+                    d.vendor_id(),
+                    d.product_id(),
+                    d.interface_number()
+                ),
+                path: d.path().to_owned(),
+                vendor: d.vendor_id(),
+                product: d.product_id(),
+            })
+            .collect())
+    })
+}
+
+/// Exercises the real enumerate/open/write/close path without vibration.
+/// Short-lived callers reproduce the macOS 0.2 lifetime regression.
+pub fn self_test() -> Result<(), String> {
+    for cycle in 1..=8 {
+        let devices = thread::spawn(devices)
+            .join()
+            .map_err(|_| "Ошибка потока поиска USB".to_owned())??;
+        if devices.len() != 1 {
+            return Err(format!(
+                "Для проверки нужна одна накидка, найдено: {}",
+                devices.len()
+            ));
+        }
+        let mut usb = Usb::default();
+        usb.configure(Config {
+            strength: 0,
+            ..Config::default()
+        });
+        usb.start(&devices[0], 2)?;
+        let deadline = Instant::now() + Duration::from_millis(220);
+        while Instant::now() < deadline {
+            usb.heartbeat();
+            if let Some(error) = usb.poll_error() {
+                return Err(error);
+            }
+            thread::sleep(Duration::from_millis(20));
+        }
+        usb.stop()?;
+        if let Some(error) = usb.poll_error() {
+            return Err(error);
+        }
+        println!("USB zero-force cycle {cycle}/8: OK · {}", devices[0].name);
+    }
+    Ok(())
 }
 
 #[derive(Clone, Copy)]
@@ -123,8 +161,8 @@ impl Usb {
         let state = self.state.clone();
         let tx = self.tx.clone();
         self.worker = Some(thread::spawn(move || {
-            let result = (|| {
-                let api = HidApi::new().map_err(|e| e.to_string())?;
+            let control = state.clone();
+            let result = crate::hid_service::with_api(move |api| {
                 let handle = api
                     .open_path(&selected.path)
                     .map_err(|e| format!("Не удалось открыть KW-901: {e}"))?;
@@ -137,8 +175,12 @@ impl Usb {
                     .get_report_descriptor(&mut descriptor)
                     .map_err(|e| format!("Не удалось прочитать HID-дескриптор: {e}"))?;
                 protocol::validate_descriptor(&descriptor[..length])?;
-                run_worker(handle, &state, Duration::from_secs(seconds.clamp(1, 1800)))
-            })();
+                run_worker(
+                    handle,
+                    &control,
+                    Duration::from_secs(seconds.clamp(1, 1800)),
+                )
+            });
             state.active.store(false, Ordering::Release);
             if let Ok(mut levels) = state.levels.lock() {
                 *levels = [0.0; 6];

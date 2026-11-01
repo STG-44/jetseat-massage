@@ -4,6 +4,7 @@ use jetseat_massage::{
     audio::{self, Audio, Endpoint},
     diagnostic::{self, HidInfo},
     signal::{self, Pattern},
+    updater::{self, Status as UpdateStatus, Updater},
     usb::{self, Usb},
 };
 use serde::{Deserialize, Serialize};
@@ -28,6 +29,7 @@ struct Settings {
     minutes: u64,
     frequency: u32,
     zones: [bool; 6],
+    auto_updates: bool,
 }
 
 impl Default for Settings {
@@ -39,6 +41,7 @@ impl Default for Settings {
             minutes: 10,
             frequency: 70,
             zones: [true; 6],
+            auto_updates: true,
         }
     }
 }
@@ -61,6 +64,7 @@ enum Page {
     Massage,
     Usb,
     Help,
+    Updates,
 }
 
 #[derive(Clone, Copy, PartialEq)]
@@ -78,6 +82,7 @@ struct Run {
 
 struct App {
     settings: Settings,
+    updater: Updater,
     audio: Audio,
     usb_output: Usb,
     usb_devices: Vec<usb::Device>,
@@ -147,6 +152,7 @@ impl App {
         };
         let mut app = Self {
             settings,
+            updater: Updater::default(),
             audio: Audio::default(),
             usb_output: Usb::default(),
             usb_devices: Vec::new(),
@@ -170,6 +176,7 @@ impl App {
         match std::env::var("JETSEAT_PREVIEW").as_deref() {
             Ok("usb") => app.output = Output::Usb,
             Ok("help") => app.page = Page::Help,
+            Ok("updates") => app.page = Page::Updates,
             _ => {}
         }
         app
@@ -185,6 +192,11 @@ impl App {
     }
 
     fn start(&mut self) {
+        if matches!(self.updater.status, UpdateStatus::Installing) {
+            self.message = "Дождитесь завершения установки обновления.".into();
+            self.error = true;
+            return;
+        }
         self.settings.sanitize();
         let seconds = self.settings.minutes * 60;
         let result = match self.output {
@@ -241,6 +253,14 @@ impl App {
     }
 
     fn scan(&mut self) {
+        if self
+            .run
+            .as_ref()
+            .is_some_and(|run| run.output == Output::Usb)
+        {
+            self.scan_message = "Остановите USB-массаж перед диагностикой устройств.".into();
+            return;
+        }
         if self.scan_rx.is_some() {
             return;
         }
@@ -267,6 +287,18 @@ impl App {
     }
 
     fn tick(&mut self, ctx: &egui::Context) {
+        self.updater.poll();
+        if self.updater.close_requested {
+            ctx.send_viewport_cmd(egui::ViewportCommand::Close);
+        }
+        if self.settings.auto_updates && self.run.is_none() {
+            if self.updater.due() {
+                self.updater.check();
+            } else if matches!(self.updater.status, UpdateStatus::Available(_)) {
+                self.updater.download();
+            }
+        }
+        ctx.request_repaint_after(Duration::from_secs(1));
         if let Some(rx) = &self.usb_scan_rx
             && let Ok(result) = rx.try_recv()
         {
@@ -353,7 +385,7 @@ impl App {
             ui.vertical(|ui| {
                 ui.label(RichText::new("JETSEAT").size(12.0).color(ACCENT).strong());
                 ui.heading("Массаж в вашем ритме");
-                ui.label(RichText::new("Gametrix KW-901  /  macOS + Linux").color(MUTED));
+                ui.label(RichText::new("Gametrix KW-901").color(MUTED));
             });
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                 let (label, color) = if self.run.is_some() {
@@ -380,6 +412,15 @@ impl App {
             ui.selectable_value(&mut self.page, Page::Massage, "Массаж");
             ui.selectable_value(&mut self.page, Page::Usb, "USB-диагностика");
             ui.selectable_value(&mut self.page, Page::Help, "Подключение");
+            ui.selectable_value(
+                &mut self.page,
+                Page::Updates,
+                if matches!(self.updater.status, UpdateStatus::Ready(_)) {
+                    "Обновление готово"
+                } else {
+                    "Обновления"
+                },
+            );
         });
         ui.add_space(4.0);
         ui.separator();
@@ -702,6 +743,7 @@ impl App {
             );
             ui.add_space(12.0);
             let ready = self.run.is_none()
+                && !matches!(self.updater.status, UpdateStatus::Installing)
                 && match self.output {
                     Output::Demo => true,
                     Output::Audio => self.selected.is_some(),
@@ -851,11 +893,88 @@ impl App {
                 "KW-901: инструкция производителя",
                 "https://gametrix.ru/catalog/gaming/vibration-pads/kw901-jetseat-live-sense",
             );
-            ui.small(format!(
-                "JetSeat Massage {} · Rust / egui / CPAL / HIDAPI",
-                env!("CARGO_PKG_VERSION")
-            ));
+            ui.small(format!("JetSeat Massage {}", env!("CARGO_PKG_VERSION")));
         });
+    }
+
+    fn updates(&mut self, ui: &mut egui::Ui) {
+        let mut check = false;
+        let mut download = false;
+        let mut install = false;
+        card(ui, |ui| {
+            ui.heading("Обновления");
+            ui.label(format!("Установлена версия {}", env!("CARGO_PKG_VERSION")));
+            ui.add_space(10.0);
+            ui.checkbox(
+                &mut self.settings.auto_updates,
+                "Автоматически проверять и скачивать обновления",
+            );
+            ui.label(RichText::new("Проверка при запуске и каждые 6 часов, когда массаж остановлен. Перед установкой сверяется SHA-256.").color(MUTED));
+            ui.add_space(14.0);
+            match &self.updater.status {
+                UpdateStatus::Idle => {
+                    ui.label("Обновления ещё не проверялись.");
+                }
+                UpdateStatus::Checking => {
+                    ui.spinner();
+                    ui.label("Проверяем новые версии…");
+                }
+                UpdateStatus::Current => {
+                    ui.label("Установлена актуальная версия.");
+                }
+                UpdateStatus::Available(release) => {
+                    ui.label(format!("Доступна версия {}", release.version));
+                    download = ui.button("Скачать обновление").clicked();
+                }
+                UpdateStatus::Downloading => {
+                    ui.spinner();
+                    ui.label("Скачиваем и проверяем обновление…");
+                }
+                UpdateStatus::Ready(prepared) => {
+                    ui.label(
+                        RichText::new(format!(
+                            "Версия {} готова к установке",
+                            prepared.release.version
+                        ))
+                        .color(ACCENT),
+                    );
+                    ui.label("Обновление устанавливается системным установщиком; может понадобиться пароль администратора. После установки запустите JetSeat Massage снова.");
+                    if self.run.is_some() {
+                        ui.label("Остановите массаж перед установкой.");
+                    }
+                    install = ui
+                        .add_enabled(
+                            self.run.is_none(),
+                            egui::Button::new("Установить обновление"),
+                        )
+                        .clicked();
+                }
+                UpdateStatus::Installing => {
+                    ui.spinner();
+                    ui.label("Открываем установщик…");
+                }
+                UpdateStatus::Error(error) => {
+                    ui.label(RichText::new(error).color(WARNING));
+                }
+            }
+            ui.add_space(12.0);
+            check = ui
+                .add_enabled(!self.updater.busy(), egui::Button::new("Проверить сейчас"))
+                .clicked();
+            ui.hyperlink_to("Все версии на GitHub", updater::RELEASES_URL);
+        });
+        if check {
+            self.updater.check();
+        }
+        if download {
+            self.updater.download();
+        }
+        if install {
+            self.stop("Установка обновления. Сигнал выключен.");
+            if !self.error {
+                self.updater.install();
+            }
+        }
     }
 }
 
@@ -919,6 +1038,7 @@ impl eframe::App for App {
                         Page::Massage => self.massage(ui),
                         Page::Usb => self.usb(ui),
                         Page::Help => self.help(ui),
+                        Page::Updates => self.updates(ui),
                     });
             });
     }
@@ -962,9 +1082,20 @@ fn cli(args: &[String]) -> Result<bool, String> {
             }
             Ok(true)
         }
+        Some("--usb-self-test") => {
+            usb::self_test()?;
+            Ok(true)
+        }
+        Some("--check-updates") => {
+            match updater::check()? {
+                Some(release) => println!("Доступна версия {}: {}", release.version, release.url),
+                None => println!("Версия {} актуальна", env!("CARGO_PKG_VERSION")),
+            }
+            Ok(true)
+        }
         Some("--help" | "-h") => {
             println!(
-                "JetSeat Massage\nБез аргументов: GUI\n--diagnose [file.json]: USB/HID-отчёт без отправки команд\n--list-audio: доступные аудиовыходы"
+                "JetSeat Massage\nБез аргументов: GUI\n--diagnose [file.json]: USB/HID-отчёт без отправки команд\n--list-audio: доступные аудиовыходы\n--usb-self-test: 8 циклов USB с нулевой силой\n--check-updates: проверить доступную версию на GitHub"
             );
             Ok(true)
         }
@@ -985,7 +1116,7 @@ fn main() -> eframe::Result {
         }
     }
     eframe::run_native(
-        "JetSeat Massage · KW-901",
+        concat!("JetSeat Massage ", env!("CARGO_PKG_VERSION"), " · KW-901"),
         eframe::NativeOptions {
             viewport: egui::ViewportBuilder::default()
                 .with_inner_size([1050.0, 860.0])
