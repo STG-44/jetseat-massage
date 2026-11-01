@@ -1,11 +1,12 @@
 use semver::Version;
 use serde::Deserialize;
 use sha2::{Digest, Sha256};
+#[cfg(any(target_os = "macos", target_os = "windows"))]
+use std::process::Command;
 use std::{
     fs::{self, File},
     io::{Read, Write},
     path::{Path, PathBuf},
-    process::Command,
     sync::mpsc::{self, Receiver},
     time::{Duration, Instant},
 };
