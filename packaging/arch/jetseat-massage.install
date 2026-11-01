@@ -2,7 +2,7 @@ post_install() {
   if command -v udevadm >/dev/null; then
     udevadm control --reload-rules || true
   fi
-  printf '%s\n' 'JetSeat Massage: переподключите USB накидки для доступа без root.'
+  printf '%s\n' 'JetSeat Massage: reconnect the seat USB for access without root.'
 }
 
 post_upgrade() {

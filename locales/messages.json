@@ -1500,18 +1500,18 @@
     ]
   },
   {
-    "source": "Обновление устанавливается системным установщиком; может понадобиться пароль администратора. После установки запустите JetSeat Massage снова.",
+    "source": "После установки снова запустите JetSeat Massage. Для системных пакетов может понадобиться пароль администратора.",
     "text": [
-      "The system installer will install the update and may request an administrator password. Relaunch JetSeat Massage afterwards.",
-      "Der Systeminstaller installiert das Update und benötigt eventuell ein Administratorpasswort. JetSeat Massage danach erneut starten.",
-      "Le programme d’installation système peut demander un mot de passe administrateur. Relancez ensuite JetSeat Massage.",
-      "El instalador del sistema puede pedir la contraseña de administrador. Después, vuelve a abrir JetSeat Massage.",
-      "O instalador do sistema pode pedir a senha de administrador. Depois, abra o JetSeat Massage novamente.",
-      "Il programma di installazione può richiedere la password di amministratore. Poi riapri JetSeat Massage.",
-      "系统安装程序将安装更新，可能需要管理员密码。完成后请重新启动 JetSeat Massage。",
-      "システムのインストーラーが更新を行います。管理者パスワードが必要な場合があります。完了後にJetSeat Massageを再起動してください。",
-      "시스템 설치 프로그램이 업데이트하며 관리자 암호가 필요할 수 있습니다. 설치 후 JetSeat Massage를 다시 실행하세요.",
-      "Оновлення встановлюється системним інсталятором; може знадобитися пароль адміністратора. Після встановлення запустіть JetSeat Massage знову."
+      "Relaunch JetSeat Massage after updating. System packages may require an administrator password.",
+      "JetSeat Massage nach dem Update neu starten. Systempakete benötigen eventuell ein Administratorpasswort.",
+      "Relancez JetSeat Massage après la mise à jour. Les paquets système peuvent demander un mot de passe administrateur.",
+      "Vuelve a abrir JetSeat Massage tras actualizar. Los paquetes del sistema pueden pedir contraseña de administrador.",
+      "Abra o JetSeat Massage novamente após atualizar. Pacotes do sistema podem pedir senha de administrador.",
+      "Riapri JetSeat Massage dopo l’aggiornamento. I pacchetti di sistema possono richiedere una password di amministratore.",
+      "更新后请重新启动 JetSeat Massage。安装系统软件包可能需要管理员密码。",
+      "更新後にJetSeat Massageを再起動してください。システムパッケージには管理者パスワードが必要な場合があります。",
+      "업데이트 후 JetSeat Massage를 다시 실행하세요. 시스템 패키지 설치에는 관리자 암호가 필요할 수 있습니다.",
+      "Після оновлення запустіть JetSeat Massage знову. Для системних пакетів може знадобитися пароль адміністратора."
     ]
   },
   {
@@ -2085,21 +2085,6 @@
     ]
   },
   {
-    "source": "Для автообновления Linux нужен CachyOS/Arch с pacman. Другие системы обновляются из исходников.",
-    "text": [
-      "Linux updates require CachyOS/Arch with pacman. Build from source on other distributions.",
-      "Linux-Updates benötigen CachyOS/Arch mit pacman. Andere Distributionen aus dem Quellcode aktualisieren.",
-      "Les mises à jour Linux nécessitent CachyOS/Arch avec pacman. Compilez les sources sur les autres distributions.",
-      "Las actualizaciones Linux requieren CachyOS/Arch con pacman. En otras distribuciones, compila desde el código fuente.",
-      "Atualizações Linux exigem CachyOS/Arch com pacman. Em outras distribuições, compile a partir do código-fonte.",
-      "Gli aggiornamenti Linux richiedono CachyOS/Arch con pacman. Sulle altre distribuzioni compila dai sorgenti.",
-      "Linux 更新需要带 pacman 的 CachyOS/Arch。其他发行版请从源码构建。",
-      "Linuxの更新にはpacmanを備えたCachyOS/Archが必要です。他のディストリビューションはソースからビルドしてください。",
-      "Linux 업데이트에는 pacman이 있는 CachyOS/Arch가 필요합니다. 다른 배포판에서는 소스에서 빌드하세요.",
-      "Для автооновлення Linux потрібен CachyOS/Arch із pacman. Інші системи оновлюються з вихідного коду."
-    ]
-  },
-  {
     "source": "GitHub недоступен: {e}",
     "text": [
       "GitHub unavailable: {0}",
@@ -2412,6 +2397,21 @@
       "音声形式{0}は未対応です",
       "오디오 형식 {0}은 지원하지 않습니다",
       "Аудіоформат {0} поки не підтримується"
+    ]
+  },
+  {
+    "source": "Не удалось определить формат пакета Linux. Используйте AppImage или установите пакет вручную.",
+    "text": [
+      "Linux package format could not be detected. Use AppImage or install the package manually.",
+      "Das Linux-Paketformat wurde nicht erkannt. AppImage verwenden oder manuell installieren.",
+      "Format de paquet Linux non détecté. Utilisez AppImage ou installez le paquet manuellement.",
+      "No se detectó el formato del paquete Linux. Usa AppImage o instala el paquete manualmente.",
+      "Não foi possível detectar o formato Linux. Use AppImage ou instale o pacote manualmente.",
+      "Formato del pacchetto Linux non rilevato. Usa AppImage o installa il pacchetto manualmente.",
+      "无法识别 Linux 软件包格式。请使用 AppImage 或手动安装软件包。",
+      "Linuxパッケージ形式を検出できません。AppImageを使うか手動でインストールしてください。",
+      "Linux 패키지 형식을 감지할 수 없습니다. AppImage를 사용하거나 수동으로 설치하세요.",
+      "Не вдалося визначити формат пакета Linux. Використайте AppImage або встановіть пакет вручну."
     ]
   }
 ]

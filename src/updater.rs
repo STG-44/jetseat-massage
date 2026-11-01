@@ -160,6 +160,9 @@ fn asset_name(version: &Version, os: &str, arch: &str) -> Option<String> {
     match (os, arch) {
         ("macos", "x86_64") => Some(format!("JetSeat-Massage-{version}-macOS-Intel.pkg")),
         ("macos", "aarch64") => Some(format!("JetSeat-Massage-{version}-macOS-arm64.pkg")),
+        ("linux-deb", "x86_64") => Some(format!("jetseat-massage_{version}_amd64.deb")),
+        ("linux-rpm", "x86_64") => Some(format!("jetseat-massage-{version}-1.x86_64.rpm")),
+        ("linux-appimage", "x86_64") => Some(format!("JetSeat-Massage-{version}-x86_64.AppImage")),
         ("linux", "x86_64") => Some(format!("jetseat-massage-{version}-1-x86_64.pkg.tar.zst")),
         ("windows", "x86_64") => Some(format!("JetSeat-Massage-{version}-Windows-x64-Setup.exe")),
         ("windows", "aarch64") => {
@@ -214,9 +217,9 @@ fn agent(timeout: u64) -> ureq::Agent {
 
 pub fn check() -> Result<Option<Release>, String> {
     #[cfg(target_os = "linux")]
-    if !Path::new("/usr/bin/pacman").is_file() {
-        return Err("Для автообновления Linux нужен CachyOS/Arch с pacman. Другие системы обновляются из исходников.".into());
-    }
+    let os = crate::linux_update::runtime_format()?.target();
+    #[cfg(not(target_os = "linux"))]
+    let os = std::env::consts::OS;
     let mut response = agent(20)
         .get(API)
         .header(
@@ -235,12 +238,7 @@ pub fn check() -> Result<Option<Release>, String> {
     let releases =
         serde_json::from_slice(&bytes).map_err(|e| format!("Некорректный ответ GitHub: {e}"))?;
     let version = Version::parse(env!("CARGO_PKG_VERSION")).map_err(|e| e.to_string())?;
-    Ok(select(
-        releases,
-        &version,
-        std::env::consts::OS,
-        std::env::consts::ARCH,
-    ))
+    Ok(select(releases, &version, os, std::env::consts::ARCH))
 }
 
 fn verify(mut reader: impl Read, release: &Release, mut output: impl Write) -> Result<(), String> {
@@ -330,24 +328,7 @@ fn launch(path: &Path) -> Result<(), String> {
     }
     #[cfg(target_os = "linux")]
     {
-        let result = Command::new("/usr/bin/pkexec")
-            .arg("/usr/bin/pacman")
-            .arg("-U")
-            .arg("--noconfirm")
-            .arg(path)
-            .output()
-            .map_err(|e| format!("Не удалось открыть установщик: {e}"))?;
-        if result.status.success() {
-            Ok(())
-        } else {
-            Err(format!(
-                "Установка отменена или не удалась: {}",
-                String::from_utf8_lossy(&result.stderr)
-                    .chars()
-                    .take(400)
-                    .collect::<String>()
-            ))
-        }
+        crate::linux_update::install(path)
     }
     #[cfg(target_os = "windows")]
     {
@@ -430,6 +411,9 @@ mod tests {
             ("windows", "x86_64"),
             ("windows", "aarch64"),
             ("linux", "x86_64"),
+            ("linux-deb", "x86_64"),
+            ("linux-rpm", "x86_64"),
+            ("linux-appimage", "x86_64"),
         ];
         let assets = targets
             .iter()

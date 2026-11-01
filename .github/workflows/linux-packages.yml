@@ -1,0 +1,145 @@
+name: Linux distribution packages
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  baseline:
+    runs-on: ubuntu-24.04
+    container: almalinux:9
+    timeout-minutes: 40
+    steps:
+      - name: Install baseline build dependencies
+        run: |
+          dnf install -y dnf-plugins-core
+          dnf config-manager --set-enabled crb
+          dnf install -y git gcc gcc-c++ make curl tar gzip xz zip unzip zstd file findutils pkgconf-pkg-config alsa-lib-devel systemd-devel libxkbcommon-devel libxkbcommon-x11-devel wayland-devel libX11-devel libXcursor-devel libXi-devel libXrandr-devel mesa-libGL-devel python3
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: almalinux9-release
+      - run: cargo fmt --check
+      - run: cargo clippy --all-targets --all-features --locked -- -D warnings
+      - run: cargo test --locked
+      - run: cargo build --release --locked
+      - name: Build portable package and AppImage on glibc 2.34
+        run: python3 scripts/package-linux.py --binary target/release/jetseat-massage --max-glibc 2.34 --format portable appimage
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-baseline-binary
+          path: target/release/jetseat-massage
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-portable-packages
+          path: |
+            dist/*.AppImage
+            dist/*.tar.gz
+  native:
+    needs: baseline
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: linux-baseline-binary
+          path: release-bin
+      - run: sudo apt-get update && sudo apt-get install -y rpm zstd
+      - run: chmod +x release-bin/jetseat-massage
+      - run: python3 scripts/package-linux.py --binary release-bin/jetseat-massage --max-glibc 2.34 --format deb rpm arch
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-native-packages
+          path: |
+            dist/*.deb
+            dist/*.rpm
+            dist/*.pkg.tar.zst
+  install:
+    needs: native
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Ubuntu-22.04
+            image: ubuntu:22.04
+            family: deb
+          - name: Ubuntu-24.04
+            image: ubuntu:24.04
+            family: deb
+          - name: Ubuntu-26.04
+            image: ubuntu:26.04
+            family: deb
+          - name: Debian-12
+            image: debian:12
+            family: deb
+          - name: Debian-13
+            image: debian:13
+            family: deb
+          - name: Fedora-44
+            image: fedora:44
+            family: rpm
+          - name: Fedora-45
+            image: fedora:45
+            family: rpm
+          - name: AlmaLinux-9
+            image: almalinux:9
+            family: rpm
+          - name: AlmaLinux-10
+            image: almalinux:10
+            family: rpm
+          - name: openSUSE-Leap-16
+            image: opensuse/leap:16.0
+            family: suse
+          - name: openSUSE-Tumbleweed
+            image: opensuse/tumbleweed:latest
+            family: suse
+          - name: Arch-Linux
+            image: archlinux:base
+            family: arch
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: linux-native-packages
+          path: packages
+      - name: Install, run and remove native package
+        run: docker run --rm -v "$PWD:/work:ro" ${{ matrix.image }} bash /work/scripts/smoke-linux.sh ${{ matrix.family }}
+  appimage:
+    needs: baseline
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: linux-portable-packages
+          path: packages
+      - name: Run AppImage without FUSE and start the GUI
+        run: docker run --rm -v "$PWD:/work:ro" ubuntu:22.04 bash /work/scripts/smoke-appimage.sh
+  source:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash scripts/package-source.sh
+      - name: Validate source archive contents
+        run: |
+          python3 - <<'PY'
+          import tarfile,zipfile
+          from pathlib import Path
+          for archive in Path('dist').glob('*-source.zip'):
+              with zipfile.ZipFile(archive) as z:
+                  names=z.namelist()
+                  for required in ['Cargo.lock','BUILDING.md','src/main.rs','locales/messages.json','assets/fonts/OFL.txt']:
+                      assert any(n.endswith('/'+required) for n in names),required
+                  assert not any(n.lower().endswith(('.dll','.sys','.exe')) for n in names)
+          for archive in Path('dist').glob('*-source.tar.gz'):
+              with tarfile.open(archive) as t: assert any(n.endswith('/BUILDING.md') for n in t.getnames())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: source-archives
+          path: dist/*-source.*

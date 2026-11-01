@@ -5,3 +5,6 @@
 /packaging/arch/*.pkg.tar.*
 .DS_Store
 
+
+__pycache__/
+*.pyc

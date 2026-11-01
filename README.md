@@ -8,11 +8,14 @@ A Rust desktop application with a native egui interface for the **Gametrix KW-90
 
 | System | Installer |
 | --- | --- |
-| Windows 10/11, Intel or AMD x64 | `JetSeat-Massage-0.4.0-Windows-x64-Setup.exe` |
-| Windows 11, ARM64 | `JetSeat-Massage-0.4.0-Windows-arm64-Setup.exe` |
-| macOS 12+, Intel | `JetSeat-Massage-0.4.0-macOS-Intel.pkg` |
-| macOS 12+, Apple Silicon (M series) | `JetSeat-Massage-0.4.0-macOS-arm64.pkg` |
-| CachyOS / Arch Linux, x86_64 | `jetseat-massage-0.4.0-1-x86_64.pkg.tar.zst` |
+| Windows 10/11, Intel or AMD x64 | `JetSeat-Massage-0.5.0-Windows-x64-Setup.exe` |
+| Windows 11, ARM64 | `JetSeat-Massage-0.5.0-Windows-arm64-Setup.exe` |
+| macOS 12+, Intel | `JetSeat-Massage-0.5.0-macOS-Intel.pkg` |
+| macOS 12+, Apple Silicon (M series) | `JetSeat-Massage-0.5.0-macOS-arm64.pkg` |
+| Ubuntu / Debian / Mint / Pop!_OS / Zorin, x86_64 | `jetseat-massage_0.5.0_amd64.deb` |
+| Fedora / RHEL / Rocky / AlmaLinux / openSUSE, x86_64 | `jetseat-massage-0.5.0-1.x86_64.rpm` |
+| CachyOS / Arch / Manjaro / EndeavourOS, x86_64 | `jetseat-massage-0.5.0-1-x86_64.pkg.tar.zst` |
+| Portable Linux, x86_64 | `JetSeat-Massage-0.5.0-x86_64.AppImage` |
 
 Rust is not needed to install a ready-made package. Portable ZIP archives are also provided for Windows and macOS. This is a prerelease: physical vibration and zone placement still need user confirmation.
 
@@ -20,13 +23,36 @@ Rust is not needed to install a ready-made package. Portable ZIP archives are al
 
 **macOS:** open the `.pkg`; the application is installed in `/Applications`. Intel and Apple Silicon packages contain native binaries for their respective CPUs. The app is ad-hoc signed; the installer has no Developer ID signature or Apple notarization. macOS may require approval in Privacy & Security. To remove it, move the app to Trash.
 
-**CachyOS / Arch:** install the downloaded package:
+**Linux:** choose the format for your distribution. Native packages install the menu entry, icons, font notices and USB access rule. Reconnect the seat USB afterwards and run the app as a regular desktop user.
 
 ```sh
-sudo pacman -U ./jetseat-massage-0.4.0-1-x86_64.pkg.tar.zst
+# Ubuntu / Debian / Linux Mint / Pop!_OS / Zorin OS
+sudo apt install ./jetseat-massage_0.5.0_amd64.deb
+
+# Fedora / RHEL / Rocky / AlmaLinux
+sudo dnf install ./jetseat-massage-0.5.0-1.x86_64.rpm
+
+# openSUSE Leap / Tumbleweed
+sudo zypper install --allow-unsigned-rpm ./jetseat-massage-0.5.0-1.x86_64.rpm
+
+# Arch / CachyOS / Manjaro / EndeavourOS
+sudo pacman -U ./jetseat-massage-0.5.0-1-x86_64.pkg.tar.zst
 ```
 
-The package includes a udev rule. Reconnect the seat USB after installation and run the GUI as a regular user. For other distributions, the portable archive includes installation instructions; dependencies are listed in `packaging/arch/PKGBUILD`.
+**AppImage:** download, make executable, and run. It can run without FUSE using `--appimage-extract-and-run`:
+
+```sh
+chmod +x JetSeat-Massage-0.5.0-x86_64.AppImage
+./JetSeat-Massage-0.5.0-x86_64.AppImage
+# Once, to enable USB for the active desktop user:
+./JetSeat-Massage-0.5.0-x86_64.AppImage --install-usb-rule
+```
+
+The USB rule operation asks for system authorization; it does not activate massage. Native packages already include the rule. AppImage uses the host OpenGL/audio stack and bundles selected keyboard libraries and fonts.
+
+Published Linux binaries require x86_64 and glibc 2.34+. Intended desktop families include Ubuntu 22.04+, Debian 12+, Mint 21+, Pop!_OS 22.04+, Zorin 17+, Fedora, RHEL/Rocky/AlmaLinux 9+, openSUSE Leap 16/Tumbleweed, and current Arch derivatives. Family compatibility does not mean every derivative has been tested. Alpine/musl and NixOS need distribution-specific handling; see [BUILDING.md](BUILDING.md).
+
+**Source archives:** both `JetSeat-Massage-0.5.0-source.zip` and `JetSeat-Massage-0.5.0-source.tar.gz` include the full application source, lockfile, translations, font and icon assets, licenses, tests, and packaging scripts. [BUILDING.md](BUILDING.md) has instructions for each Linux family, macOS and Windows.
 
 ## Languages
 
@@ -70,7 +96,7 @@ Every launch starts in Demo with no active session. Strength, program, pace, dur
 
 Version 0.3 and later can check and download updates at startup and every six hours while massage is stopped. This can be disabled. A public GitHub release is selected by version, operating system, and CPU. File size and SHA-256 are checked after download and again before installation. No GitHub login is required.
 
-Installation begins with **Install update**, after the session is stopped. macOS opens Installer; Windows launches the bundled Setup and waits for the old process to exit; CachyOS uses pacman through system authorization with pkexec. Relaunch the application after installation. New sessions are blocked while installing. Version 0.2 users must install once manually.
+Installation begins with **Install update**, after the session is stopped. macOS opens Installer; Windows launches the bundled Setup and waits for the old process to exit; Linux uses apt, dnf, zypper or pacman through system authorization with pkexec. AppImage updates replace the original writable AppImage atomically, preserving executable permissions. Keep the `.AppImage` extension and launch the application from that file. Relaunch the application after installation. New sessions are blocked while installing. Version 0.2 users must install once manually.
 
 ## Diagnostics and development
 
@@ -113,7 +139,7 @@ cargo clippy --all-targets --all-features --locked -- -D warnings
 cargo test --locked
 ```
 
-CI checks and packages native Windows x64/ARM64, macOS Intel/ARM64, and Linux x86_64 builds. Windows CI also installs the package, runs the installed diagnostics executable, and uninstalls it.
+CI checks native Windows x64/ARM64, macOS Intel/ARM64, and Linux x86_64 builds. Linux release binaries are built on AlmaLinux 9 with glibc 2.34; separate jobs install, run and remove packages on Ubuntu, Debian, Fedora, AlmaLinux, openSUSE and Arch. AppImage is exercised without FUSE on Ubuntu 22.04. Windows CI also installs the package, runs the installed diagnostics executable, and uninstalls it.
 
 Translations are embedded in `locales/messages.json`; translation columns follow `Language::ALL` after Russian (the source column). Keep numeric placeholders intact. `cargo test` validates all translated placeholders. The generated icon source and prompt are under `assets/icons/`.
 

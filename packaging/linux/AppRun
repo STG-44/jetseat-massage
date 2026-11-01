@@ -1,0 +1,13 @@
+#!/bin/sh
+set -eu
+APPDIR="${APPDIR:-$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)}"
+export APPDIR
+if [ "${1:-}" = '--install-usb-rule' ]; then
+    exec /usr/bin/pkexec "$APPDIR/usr/share/jetseat-massage/install-usb-access.sh"
+fi
+export LD_LIBRARY_PATH="$APPDIR/usr/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+# ALSA plugins are provided by the host audio server (PipeWire/PulseAudio).
+for plugins in /usr/lib/x86_64-linux-gnu/alsa-lib /usr/lib64/alsa-lib; do
+    if [ -d "$plugins" ]; then export ALSA_PLUGIN_DIR="$plugins"; break; fi
+done
+exec "$APPDIR/usr/bin/jetseat-massage" "$@"
