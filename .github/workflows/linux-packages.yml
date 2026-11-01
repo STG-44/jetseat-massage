@@ -12,7 +12,7 @@ jobs:
         run: |
           dnf install -y dnf-plugins-core
           dnf config-manager --set-enabled crb
-          dnf install -y git gcc gcc-c++ make curl tar gzip xz zip unzip zstd file findutils pkgconf-pkg-config alsa-lib-devel systemd-devel libxkbcommon-devel libxkbcommon-x11-devel wayland-devel libX11-devel libXcursor-devel libXi-devel libXrandr-devel mesa-libGL-devel python3
+          dnf install -y git gcc gcc-c++ make curl-minimal tar gzip xz zip unzip zstd file findutils pkgconf-pkg-config alsa-lib-devel systemd-devel libxkbcommon-devel libxkbcommon-x11-devel wayland-devel libX11-devel libXcursor-devel libXi-devel libXrandr-devel mesa-libGL-devel python3
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
         with:
