@@ -115,9 +115,9 @@ impl App {
         visuals.extreme_bg_color = BG;
         visuals.override_text_color = Some(Color32::from_rgb(230, 239, 246));
         visuals.selection.bg_fill = Color32::from_rgb(41, 89, 78);
-        visuals.selection.stroke = Stroke::new(1.0, ACCENT);
+        visuals.selection.stroke = Stroke::new(1.0_f32, ACCENT);
         visuals.widgets.inactive.bg_fill = Color32::from_rgb(35, 47, 59);
-        visuals.widgets.inactive.bg_stroke = Stroke::new(1.0, LINE);
+        visuals.widgets.inactive.bg_stroke = Stroke::new(1.0_f32, LINE);
         visuals.widgets.hovered.bg_fill = Color32::from_rgb(47, 66, 76);
         visuals.widgets.active.bg_fill = Color32::from_rgb(48, 97, 84);
         cc.egui_ctx.set_visuals(visuals);
@@ -561,7 +561,7 @@ impl App {
                                 } else {
                                     Color32::from_rgb(29, 40, 51)
                                 })
-                                .stroke(Stroke::new(1.0, if chosen { ACCENT } else { LINE }))
+                                .stroke(Stroke::new(1.0_f32, if chosen { ACCENT } else { LINE }))
                                 .corner_radius(10)
                                 .inner_margin(10)
                                 .show(ui, |ui| {
@@ -988,7 +988,7 @@ fn card(ui: &mut egui::Ui, content: impl FnOnce(&mut egui::Ui)) {
         .fill(CARD)
         .corner_radius(14)
         .inner_margin(14)
-        .stroke(Stroke::new(1.0, LINE))
+        .stroke(Stroke::new(1.0_f32, LINE))
         .show(ui, |ui| {
             ui.set_width(ui.available_width());
             content(ui);
