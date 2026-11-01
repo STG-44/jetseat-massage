@@ -154,7 +154,16 @@ def appimage(stage, work):
         original=Path('/usr/lib64')/library.name
         if original.exists() and shutil.which('rpm'):
             result=subprocess.run(['rpm','-qf','--qf','%{NAME} %{VERSION}-%{RELEASE} | %{SOURCERPM} | %{LICENSE}\n',str(original)],capture_output=True,text=True)
-            if result.returncode==0:text.append(library.name+': '+result.stdout.strip())
+            if result.returncode==0:
+                text.append(library.name+': '+result.stdout.strip())
+                package = result.stdout.split()[0]
+                listed = subprocess.run(['rpm','-ql',package],capture_output=True,text=True,check=True)
+                for filename in listed.stdout.splitlines():
+                    source = Path(filename)
+                    is_notice = filename.startswith('/usr/share/licenses/') or (filename.startswith('/usr/share/doc/') and source.name.lower() in ['license','license.txt','copying','copyright'])
+                    if is_notice and source.is_file():
+                        relative = source.relative_to('/usr/share')
+                        copy(source,appdir/'usr/share/licenses/jetseat-massage/third-party'/relative)
     notice.write_text('\n'.join(text)+'\n')
     copy(ROOT/'packaging/linux/AppImage-runtime-LICENSE.txt',appdir/'usr/share/licenses/jetseat-massage/AppImage-runtime-LICENSE.txt')
     output=DIST/f'JetSeat-Massage-{VERSION}-x86_64.AppImage'
