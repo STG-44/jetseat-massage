@@ -1,4 +1,7 @@
-use crate::signal::{self, Pattern};
+use crate::{
+    session::{self, Supervisor},
+    signal::{self, Pattern},
+};
 use cpal::traits::{DeviceTrait, HostTrait, StreamTrait};
 use std::{
     f64::consts::TAU,
@@ -54,10 +57,7 @@ impl Shared {
 
     fn is_live(&self) -> bool {
         self.active.load(Ordering::Acquire)
-            && self
-                .millis()
-                .saturating_sub(self.heartbeat_ms.load(Ordering::Relaxed))
-                < 1500
+            && session::fresh(self.heartbeat_ms.load(Ordering::Acquire))
             && self.elapsed() < self.duration_ms.load(Ordering::Relaxed) as f64 / 1000.0
     }
 }
@@ -65,6 +65,7 @@ impl Shared {
 pub struct Audio {
     shared: Arc<Shared>,
     stream: Option<cpal::Stream>,
+    supervisor: Option<Supervisor>,
     errors: Receiver<String>,
     error_tx: Sender<String>,
 }
@@ -86,6 +87,7 @@ impl Default for Audio {
                 meter: AtomicU32::new(0),
             }),
             stream: None,
+            supervisor: None,
             errors,
             error_tx,
         }
@@ -104,12 +106,6 @@ impl Audio {
         self.shared
             .frequency
             .store(frequency.clamp(40, 120), Ordering::Relaxed);
-    }
-
-    pub fn heartbeat(&self) {
-        self.shared
-            .heartbeat_ms
-            .store(self.shared.millis(), Ordering::Relaxed);
     }
 
     pub fn start(&mut self, device: &cpal::Device, seconds: u64) -> Result<(), String> {
@@ -134,10 +130,30 @@ impl Audio {
         self.shared
             .duration_ms
             .store(seconds.clamp(1, 1800) * 1000, Ordering::Relaxed);
-        self.heartbeat();
+        self.shared
+            .heartbeat_ms
+            .store(session::wall_millis(), Ordering::Release);
         self.shared.active.store(true, Ordering::Release);
+        let watched = self.shared.clone();
+        let ended = self.shared.clone();
+        self.supervisor = Some(Supervisor::start(
+            std::time::Duration::from_secs(seconds.clamp(1, 1800)),
+            move || {
+                if !watched.active.load(Ordering::Acquire) {
+                    return false;
+                }
+                watched
+                    .heartbeat_ms
+                    .store(session::wall_millis(), Ordering::Release);
+                true
+            },
+            move |_| {
+                ended.active.store(false, Ordering::Release);
+                ended.meter.store(0, Ordering::Relaxed);
+            },
+        ));
         if let Err(e) = stream.play() {
-            self.shared.active.store(false, Ordering::Release);
+            self.stop();
             return Err(e.to_string());
         }
         self.stream = Some(stream);
@@ -146,6 +162,7 @@ impl Audio {
 
     pub fn stop(&mut self) {
         self.shared.active.store(false, Ordering::Release);
+        self.supervisor.take();
         self.shared.meter.store(0, Ordering::Relaxed);
         if let Some(stream) = self.stream.take() {
             let _ = stream.pause();
@@ -192,8 +209,8 @@ where
             config,
             move |data: &mut [T], _: &cpal::OutputCallbackInfo| {
                 if !shared.is_live() {
-                    // A missing GUI heartbeat or timer expiry latches off; playback
-                    // cannot resume by itself when the GUI starts responding again.
+                    // Missing background supervision, suspend or timer expiry latches off.
+                    // Repainting the window can never revive an expired session.
                     shared.active.store(false, Ordering::Release);
                     shared.meter.store(0, Ordering::Relaxed);
                     smoothed_level = 0.0;
@@ -246,7 +263,9 @@ mod tests {
         let shared = &audio.shared;
         shared.started_ms.store(shared.millis(), Ordering::Relaxed);
         shared.duration_ms.store(60_000, Ordering::Relaxed);
-        audio.heartbeat();
+        shared
+            .heartbeat_ms
+            .store(session::wall_millis(), Ordering::Release);
         shared.active.store(true, Ordering::Release);
         assert!(shared.is_live());
         shared.duration_ms.store(0, Ordering::Relaxed);
@@ -257,21 +276,26 @@ mod tests {
     }
 
     #[test]
-    fn stale_gui_heartbeat_disables_output() {
+    fn stale_background_heartbeat_disables_output() {
         let mut audio = Audio::default();
         let shared = Arc::get_mut(&mut audio.shared).unwrap();
-        shared.origin -= std::time::Duration::from_secs(2);
+        shared
+            .heartbeat_ms
+            .store(session::wall_millis() - 2000, Ordering::Release);
         shared.started_ms.store(shared.millis(), Ordering::Relaxed);
         shared.duration_ms.store(60_000, Ordering::Relaxed);
         shared.active.store(true, Ordering::Release);
         assert!(!shared.is_live());
-        audio.heartbeat();
+        audio
+            .shared
+            .heartbeat_ms
+            .store(session::wall_millis(), Ordering::Release);
         assert!(audio.shared.is_live());
     }
 
     #[test]
     #[ignore = "opens the system audio output with zero signal; run explicitly"]
-    fn real_audio_stream_silence_stop_and_watchdog() {
+    fn real_audio_stream_silence_background_and_stop() {
         let device = cpal::default_host()
             .default_output_device()
             .expect("No output device");
@@ -279,14 +303,16 @@ mod tests {
         audio.configure(Pattern::Steady, 0, 1.0, 70);
         audio.start(&device, 10).expect("Cannot start audio output");
         for _ in 0..20 {
-            audio.heartbeat();
             std::thread::sleep(std::time::Duration::from_millis(25));
             assert!(audio.is_active(), "Audio stopped unexpectedly");
             assert_eq!(audio.meter(), 0.0);
             assert!(audio.poll_error().is_none());
         }
         std::thread::sleep(std::time::Duration::from_millis(1800));
-        assert!(!audio.is_active(), "Watchdog did not silence the stream");
+        assert!(
+            audio.is_active(),
+            "Hidden GUI must not silence a supervised stream"
+        );
         audio.stop();
         assert!(audio.stream.is_none());
         audio.start(&device, 10).expect("Cannot restart after Stop");

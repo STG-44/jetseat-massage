@@ -54,9 +54,17 @@ Published Linux binaries require x86_64 and glibc 2.34+. Intended desktop famili
 
 **Source archives:** both `JetSeat-Massage-0.5.0-source.zip` and `JetSeat-Massage-0.5.0-source.tar.gz` include the full application source, lockfile, translations, font and icon assets, licenses, tests, and packaging scripts. [BUILDING.md](BUILDING.md) has instructions for each Linux family, macOS and Windows.
 
+## Main window and settings
+
+The compact main window contains the six massage programs, configured intensity, pace, duration presets (including 30 minutes), remaining time and Start/Stop. The gear opens connection, language and update settings. Advanced settings contain the zone switches and audio frequency. Developer mode unlocks HID diagnostics, raw commands and logs; these details are hidden in normal use. Stop remains outside the settings windows and is available while USB shutdown is pending.
+
+The USB protocol and program envelopes are unchanged. Session supervision is independent of GUI rendering. macOS claims exclusive HID access; all platforms also coordinate JetSeat instances with a per-device lock. Stop closes the device before releasing ownership. Arbitrary third-party applications on Windows/Linux do not necessarily honor this cooperative lock.
+
+The design and future profile/game integration boundaries are documented in [ARCHITECTURE.md](ARCHITECTURE.md). Named profiles and game adapters are not part of this release.
+
 ## Languages
 
-Choose the language at the top of the window. Changes take effect immediately and are saved. The first launch follows the system language; unsupported languages fall back to English.
+Choose the language in Settings. Changes take effect immediately and are saved. The first launch follows the system language; unsupported languages fall back to English.
 
 Russian, Ukrainian, English, German, French, Spanish, Brazilian Portuguese, Italian, Simplified Chinese, Japanese, and Korean are included. Help, diagnostics, update screens, and application error messages are translated. Device names and native operating system errors retain their original text. Noto Sans CJK is embedded, so Asian text does not depend on installed fonts.
 
@@ -77,30 +85,30 @@ USB and Demo support all six programs and individual zone switches: left/right s
 
 1. Connect the original KW-901 power supply and switch on its controller.
 2. Connect USB to the computer. No audio cable is needed.
-3. Choose **USB · 6 zones**, click **Find seat**, and select the device.
-4. Choose a program, zones, and strength, then click **Start massage**. Start at 25%.
+3. Open JetSeat. A single supported seat is selected automatically. If several are connected, choose one in Settings.
+4. Choose a program, intensity and duration, then click **Start**. Start at 25%; optional zone switches are in Advanced settings.
 
 The app validates both the device ID and a compatible HID descriptor before writing. If the device is detected but does not vibrate, check power and the controller’s USB mode. The app does not change firmware or saved controller settings.
 
-Stop, Escape, session expiry, and normal exit attempt to send zero strength. A 1.5-second GUI heartbeat watchdog also stops output. This is a software watchdog: stopping after a process crash, USB failure, or computer shutdown cannot be guaranteed. Use the controller’s power button if vibration continues.
+Stop, Escape, session expiry, and normal exit attempt to send zero strength. An independent background supervisor monitors the writer and timer; minimizing or hiding the window does not interrupt its heartbeat. On macOS, a user-initiated process activity keeps the session out of App Nap and prevents automatic idle system sleep until shutdown finishes. This is a software watchdog: stopping after a process crash, USB failure, or computer shutdown cannot be guaranteed. Use the controller’s power button if vibration continues.
 
 ## Connect by audio
 
-Connect the 3.5 mm cable to the computer or a sound card and enable audio capture on the seat controller. Choose **Audio · 3.5 mm** and the matching output. Begin with low system volume and 25% strength. Audio controls the overall response, while USB controls individual zones. The 40–120 Hz setting is an audio frequency, not motor speed.
+Connect the 3.5 mm cable to the computer or a sound card and enable audio capture on the seat controller. In Settings, choose **Audio · 3.5 mm** and the matching output. Begin with low system volume and 25% strength. Audio controls the overall response, while USB controls individual zones. The 40–120 Hz setting is an audio frequency, not motor speed.
 
 Selecting speakers makes the signal audible. Other applications on the same output may also cause vibration. Stop disables this application’s signal only.
 
-Every launch starts in Demo with no active session. Strength, program, pace, duration, zones, language, and update preferences are saved.
+Every launch restores the chosen connection mode with no active session. Strength, program, pace, duration, zones, language, connection mode and update preferences are saved. Auto-connect discovers a single seat, but never starts massage automatically.
 
 ## Updates
 
-Version 0.3 and later can check and download updates at startup and every six hours while massage is stopped. This can be disabled. A public GitHub release is selected by version, operating system, and CPU. File size and SHA-256 are checked after download and again before installation. No GitHub login is required.
+Version 0.3 and later can check and download updates at startup and every six hours while massage is stopped. This can be disabled in Settings. A public GitHub release is selected by version, operating system, and CPU. File size and SHA-256 are checked after download and again before installation. No GitHub login is required.
 
 Installation begins with **Install update**, after the session is stopped. macOS opens Installer; Windows launches the bundled Setup and waits for the old process to exit; Linux uses apt, dnf, zypper or pacman through system authorization with pkexec. AppImage updates replace the original writable AppImage atomically, preserving executable permissions. Keep the `.AppImage` extension and launch the application from that file. Relaunch the application after installation. New sessions are blocked while installing. Version 0.2 users must install once manually.
 
 ## Diagnostics and development
 
-The USB diagnostics page can enumerate devices and copy a JSON report without sending commands. Name matches are hints; known VID/PID matches are marked separately.
+Enable developer mode in Advanced settings to open Diagnostics. It can enumerate devices and copy a JSON report without sending commands. Name matches are hints; known VID/PID matches are marked separately.
 
 ```sh
 jetseat-massage --diagnose kw901-usb.json

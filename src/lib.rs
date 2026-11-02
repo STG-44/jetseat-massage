@@ -1,9 +1,12 @@
 pub mod audio;
+mod device_lock;
 pub mod diagnostic;
 mod hid_service;
 pub mod i18n;
 pub mod linux_update;
+mod power;
 pub mod protocol;
+pub mod session;
 pub mod signal;
 pub mod updater;
 pub mod usb;

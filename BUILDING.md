@@ -88,4 +88,4 @@ cargo clippy --all-targets --all-features --locked -- -D warnings
 cargo test --locked
 ```
 
-Default tests do not activate physical massage. The opt-in audio hardware test uses silence. `--usb-self-test` requires one connected compatible seat and sends zero force only.
+Default tests do not activate physical massage. The opt-in audio hardware test uses silence and checks background operation without GUI heartbeats. `--usb-self-test` requires one connected compatible seat and sends zero force only.

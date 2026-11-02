@@ -16,6 +16,11 @@ pub(crate) fn with_api<T: Send + 'static>(
             .name("jetseat-hid-owner".into())
             .spawn(move || {
                 let mut api = HidApi::new().map_err(|error| error.to_string());
+                #[cfg(target_os = "macos")]
+                if let Ok(api) = &api {
+                    // Claim only the selected supported device, never the HID manager.
+                    api.set_open_exclusive(true);
+                }
                 for job in rx {
                     job(&mut api);
                 }

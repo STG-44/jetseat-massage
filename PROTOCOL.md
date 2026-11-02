@@ -80,10 +80,16 @@ The script does not open USB devices and rejects a different DLL before emulatio
 
 ## Runtime and limits
 
-`usb.rs` opens the selected HID path, rechecks the ID and descriptor, sends zeros, then updates levels at 50 Hz. Completion, errors, and worker exit attempt zero strength. The timer is limited to 30 minutes; the GUI watchdog is 1.5 seconds. Feature reports, persistent controller mode changes, and firmware updates are not implemented. Stop depends on a working process, USB connection, and OS HID call.
+`usb.rs` opens the selected HID path, rechecks the ID and descriptor, sends zeros, then updates levels at 50 Hz. Completion, errors, and worker exit attempt repeated zero strength before closing. The timer is limited to 30 minutes. A 1.5-second watchdog now observes background supervision and successful writer progress, independent of GUI rendering. Feature reports, persistent controller mode changes, and firmware updates are not implemented. Stop depends on a working process, USB connection, and OS HID call.
 
 Since version 0.3, `hid_service.rs` owns every HID operation on one permanent thread. On macOS the HID manager retains the initializing thread’s CFRunLoop. Allowing that thread to exit between enumeration and Start caused SIGILL. Evidence includes private system crash reports from November 1, 2026 and the [HIDAPI multithreading notes](https://github.com/libusb/hidapi/wiki/Multi%E2%80%90threading-Notes). Crash reports are not included in this public repository.
 
 Windows uses the native HIDAPI backend with the [in-box Microsoft HID USB driver](https://learn.microsoft.com/en-us/windows-hardware/drivers/hid/hid-over-usb). No replacement kernel driver or proprietary Gametrix DLL is installed.
 
 The proprietary DLL is not redistributed. The repository contains independent Rust code and test vectors; physical compatibility remains a separate validation step.
+
+## Minimized-window regression in 0.5
+
+Previously, a missing GUI heartbeat after 1.5 seconds or a redraw pause after 3 seconds stopped the session. A minimized macOS window can stop repainting, so these guards confused window visibility with an unhealthy output worker. Version 0.5 moves supervision to a dedicated thread and uses [NSProcessInfo user-initiated activity](https://developer.apple.com/library/archive/documentation/Performance/Conceptual/power_efficiency_guidelines_osx/PrioritizeWorkAtTheAppLevel.html) during the session, retaining the activity through final zero reports and HID close. The supervisor detects actual process/sleep gaps before refreshing its heartbeat; waking cannot resume output.
+
+A cooperative per-device lock prevents competing JetSeat processes, with explicit unlock after HID close. macOS additionally requests exclusive device opening through HIDAPI. Native HID on Windows/Linux can still be shared by non-cooperating third-party software; JetSeat cannot impose its lock on those applications. No undocumented firmware/watchdog command has been added.

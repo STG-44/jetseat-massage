@@ -23,7 +23,7 @@ def common(stage, binary):
     copy(ROOT/'scripts/install-usb-access.sh', stage/'usr/share/jetseat-massage/install-usb-access.sh', True)
     for source, target in [('LICENSE','LICENSE'), ('assets/fonts/OFL.txt','OFL-NotoSansCJK.txt')]:
         copy(ROOT/source, stage/'usr/share/licenses/jetseat-massage'/target)
-    for name in ['README.md','PROTOCOL.md','VALIDATION.md','BUILDING.md']:
+    for name in ['README.md','PROTOCOL.md','VALIDATION.md','BUILDING.md','ARCHITECTURE.md']:
         copy(ROOT/name, stage/'usr/share/doc/jetseat-massage'/name)
 
 def glibc_version(binary):

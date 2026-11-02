@@ -2413,5 +2413,650 @@
       "Linux 패키지 형식을 감지할 수 없습니다. AppImage를 사용하거나 수동으로 설치하세요.",
       "Не вдалося визначити формат пакета Linux. Використайте AppImage або встановіть пакет вручну."
     ]
+  },
+  {
+    "source": "Накидка уже используется другим экземпляром JetSeat. Остановите сеанс в нём и повторите подключение.",
+    "text": [
+      "Another JetSeat instance is using this seat. Stop its session and reconnect.",
+      "Eine andere JetSeat-Instanz verwendet den Sitz. Dort stoppen und erneut verbinden.",
+      "Une autre instance de JetSeat utilise ce siège. Arrêtez sa séance et reconnectez-le.",
+      "Otra instancia de JetSeat usa el asiento. Detén su sesión y vuelve a conectar.",
+      "Outra instância do JetSeat está usando o assento. Pare a sessão e reconecte.",
+      "Un’altra istanza di JetSeat usa il sedile. Ferma la sessione e riconnetti.",
+      "其他 JetSeat 实例正在使用此坐垫。请先停止其按摩，再重新连接。",
+      "別のJetSeatがシートを使用中です。そちらのセッションを停止して再接続してください。",
+      "다른 JetSeat 인스턴스가 시트를 사용 중입니다. 해당 세션을 중지하고 다시 연결하세요.",
+      "Накидку вже використовує інший екземпляр JetSeat. Зупиніть сеанс у ньому та підключіться знову."
+    ]
+  },
+  {
+    "source": "Не удалось найти каталог настроек",
+    "text": [
+      "Settings directory not found",
+      "Einstellungsordner nicht gefunden",
+      "Dossier des réglages introuvable",
+      "No se encontró la carpeta de ajustes",
+      "Pasta de configurações não encontrada",
+      "Cartella impostazioni non trovata",
+      "找不到设置目录",
+      "設定フォルダーが見つかりません",
+      "설정 폴더를 찾을 수 없습니다",
+      "Не вдалося знайти каталог налаштувань"
+    ]
+  },
+  {
+    "source": "Нет ответа от USB. Остановите накидку кнопкой питания.",
+    "text": [
+      "USB is not responding. Turn off the seat using its power button.",
+      "USB antwortet nicht. Sitz mit der Ein/Aus-Taste ausschalten.",
+      "L’USB ne répond pas. Éteignez le siège avec son bouton.",
+      "El USB no responde. Apaga el asiento con su botón.",
+      "O USB não responde. Desligue o assento pelo botão de energia.",
+      "USB non risponde. Spegni il sedile con il pulsante di alimentazione.",
+      "USB 无响应。请使用坐垫电源按钮关闭。",
+      "USBが応答しません。シートの電源ボタンでオフにしてください。",
+      "USB가 응답하지 않습니다. 전원 버튼으로 시트를 끄세요.",
+      "USB не відповідає. Вимкніть накидку кнопкою живлення."
+    ]
+  },
+  {
+    "source": "Команда остановки не подтверждена. Отключите питание накидки.",
+    "text": [
+      "Stop was not confirmed. Turn off the seat’s power.",
+      "Stopp nicht bestätigt. Stromversorgung des Sitzes ausschalten.",
+      "Arrêt non confirmé. Coupez l’alimentation du siège.",
+      "Parada no confirmada. Apaga la alimentación del asiento.",
+      "Parada não confirmada. Desligue a alimentação do assento.",
+      "Arresto non confermato. Spegni l’alimentazione del sedile.",
+      "未确认停止，请关闭坐垫电源。",
+      "停止を確認できません。シートの電源を切ってください。",
+      "중지를 확인하지 못했습니다. 시트 전원을 끄세요.",
+      "Зупинку не підтверджено. Вимкніть живлення накидки."
+    ]
+  },
+  {
+    "source": "Не удалось начать сеанс. Проверьте подключение и питание.",
+    "text": [
+      "Could not start. Check the connection and power.",
+      "Start nicht möglich. Verbindung und Stromversorgung prüfen.",
+      "Démarrage impossible. Vérifiez la connexion et l’alimentation.",
+      "No se pudo iniciar. Comprueba la conexión y la alimentación.",
+      "Não foi possível iniciar. Verifique a conexão e a alimentação.",
+      "Avvio non riuscito. Controlla collegamento e alimentazione.",
+      "无法开始，请检查连接和电源。",
+      "開始できません。接続と電源を確認してください。",
+      "시작할 수 없습니다. 연결과 전원을 확인하세요.",
+      "Не вдалося почати сеанс. Перевірте підключення та живлення."
+    ]
+  },
+  {
+    "source": "Соединение с накидкой потеряно. Проверьте USB и питание.",
+    "text": [
+      "Seat connection lost. Check USB and power.",
+      "Verbindung zum Sitz verloren. USB und Stromversorgung prüfen.",
+      "Connexion au siège perdue. Vérifiez l’USB et l’alimentation.",
+      "Se perdió la conexión. Comprueba el USB y la alimentación.",
+      "Conexão com o assento perdida. Verifique USB e alimentação.",
+      "Collegamento perso. Controlla USB e alimentazione.",
+      "与坐垫的连接已断开，请检查 USB 和电源。",
+      "シートとの接続が切れました。USBと電源を確認してください。",
+      "시트 연결이 끊겼습니다. USB와 전원을 확인하세요.",
+      "Зв’язок із накидкою втрачено. Перевірте USB та живлення."
+    ]
+  },
+  {
+    "source": "Аудиовыход недоступен. Проверьте настройки подключения.",
+    "text": [
+      "Audio output unavailable. Check connection settings.",
+      "Audioausgang nicht verfügbar. Anschlusseinstellungen prüfen.",
+      "Sortie audio indisponible. Vérifiez les réglages de connexion.",
+      "Salida de audio no disponible. Revisa los ajustes de conexión.",
+      "Saída de áudio indisponível. Verifique os ajustes de conexão.",
+      "Uscita audio non disponibile. Controlla le impostazioni.",
+      "音频输出不可用，请检查连接设置。",
+      "音声出力を利用できません。接続設定を確認してください。",
+      "오디오 출력을 사용할 수 없습니다. 연결 설정을 확인하세요.",
+      "Аудіовихід недоступний. Перевірте налаштування підключення."
+    ]
+  },
+  {
+    "source": "Сеанс остановлен после сна компьютера.",
+    "text": [
+      "Session stopped after computer sleep.",
+      "Sitzung nach Ruhezustand gestoppt.",
+      "Séance arrêtée après la veille.",
+      "Sesión detenida tras la suspensión.",
+      "Sessão encerrada após a suspensão.",
+      "Sessione interrotta dopo la sospensione.",
+      "电脑休眠后，按摩已停止。",
+      "スリープ後にセッションを停止しました。",
+      "컴퓨터 절전 후 세션이 중지되었습니다.",
+      "Сеанс зупинено після сну комп’ютера."
+    ]
+  },
+  {
+    "source": "Сеанс остановлен.",
+    "text": [
+      "Session stopped.",
+      "Sitzung gestoppt.",
+      "Séance arrêtée.",
+      "Sesión detenida.",
+      "Sessão interrompida.",
+      "Sessione interrotta.",
+      "按摩已停止。",
+      "セッションを停止しました。",
+      "세션이 중지되었습니다.",
+      "Сеанс зупинено."
+    ]
+  },
+  {
+    "source": "Настройки",
+    "text": [
+      "Settings",
+      "Einstellungen",
+      "Réglages",
+      "Ajustes",
+      "Configurações",
+      "Impostazioni",
+      "设置",
+      "設定",
+      "설정",
+      "Налаштування"
+    ]
+  },
+  {
+    "source": "Аудио",
+    "text": [
+      "Audio",
+      "Audio",
+      "Audio",
+      "Audio",
+      "Áudio",
+      "Audio",
+      "音频",
+      "音声",
+      "오디오",
+      "Аудіо"
+    ]
+  },
+  {
+    "source": "Подключено",
+    "text": [
+      "Connected",
+      "Verbunden",
+      "Connecté",
+      "Conectado",
+      "Conectado",
+      "Collegato",
+      "已连接",
+      "接続済み",
+      "연결됨",
+      "Підключено"
+    ]
+  },
+  {
+    "source": "Подключение…",
+    "text": [
+      "Connecting…",
+      "Verbindung…",
+      "Connexion…",
+      "Conectando…",
+      "Conectando…",
+      "Collegamento…",
+      "正在连接…",
+      "接続中…",
+      "연결 중…",
+      "Підключення…"
+    ]
+  },
+  {
+    "source": "Не подключено",
+    "text": [
+      "Not connected",
+      "Nicht verbunden",
+      "Non connecté",
+      "Sin conexión",
+      "Desconectado",
+      "Non collegato",
+      "未连接",
+      "未接続",
+      "연결 안 됨",
+      "Не підключено"
+    ]
+  },
+  {
+    "source": "Выберите аудиовыход в настройках.",
+    "text": [
+      "Select an audio output in Settings.",
+      "Audioausgang in den Einstellungen wählen.",
+      "Choisissez une sortie audio dans les réglages.",
+      "Selecciona una salida de audio en Ajustes.",
+      "Selecione uma saída de áudio nas Configurações.",
+      "Scegli un’uscita audio nelle Impostazioni.",
+      "请在设置中选择音频输出。",
+      "設定で音声出力を選択してください。",
+      "설정에서 오디오 출력을 선택하세요.",
+      "Виберіть аудіовихід у налаштуваннях."
+    ]
+  },
+  {
+    "source": "Найдено несколько накидок. Выберите устройство.",
+    "text": [
+      "Multiple seats found. Select a device.",
+      "Mehrere Sitze gefunden. Gerät wählen.",
+      "Plusieurs sièges trouvés. Choisissez un appareil.",
+      "Se encontraron varios asientos. Selecciona uno.",
+      "Vários assentos encontrados. Selecione um dispositivo.",
+      "Trovati più sedili. Scegli un dispositivo.",
+      "找到多个坐垫，请选择设备。",
+      "複数のシートが見つかりました。選択してください。",
+      "여러 시트를 찾았습니다. 장치를 선택하세요.",
+      "Знайдено кілька накидок. Виберіть пристрій."
+    ]
+  },
+  {
+    "source": "Подключите накидку по USB.",
+    "text": [
+      "Connect your seat via USB.",
+      "Sitz per USB anschließen.",
+      "Branchez votre siège en USB.",
+      "Conecta el asiento por USB.",
+      "Conecte o assento via USB.",
+      "Collega il sedile via USB.",
+      "请通过 USB 连接坐垫。",
+      "シートをUSBで接続してください。",
+      "시트를 USB로 연결하세요.",
+      "Під’єднайте накидку через USB."
+    ]
+  },
+  {
+    "source": "Подключите штатное питание и включите пульт.",
+    "text": [
+      "Connect the original power supply and turn on the controller.",
+      "Originalnetzteil anschließen und Steuergerät einschalten.",
+      "Branchez l’alimentation d’origine et allumez la télécommande.",
+      "Conecta la fuente original y enciende el mando.",
+      "Conecte a fonte original e ligue o controle.",
+      "Collega l’alimentatore originale e accendi il telecomando.",
+      "请连接原装电源并打开控制器。",
+      "純正電源を接続し、コントローラーをオンにしてください。",
+      "정품 전원을 연결하고 컨트롤러를 켜세요.",
+      "Під’єднайте штатне живлення та увімкніть пульт."
+    ]
+  },
+  {
+    "source": "Подключить",
+    "text": [
+      "Connect",
+      "Verbinden",
+      "Connecter",
+      "Conectar",
+      "Conectar",
+      "Collega",
+      "连接",
+      "接続",
+      "연결",
+      "Підключити"
+    ]
+  },
+  {
+    "source": "Другие способы подключения",
+    "text": [
+      "Other connection options",
+      "Andere Anschlussmöglichkeiten",
+      "Autres connexions",
+      "Otras opciones de conexión",
+      "Outras opções de conexão",
+      "Altre opzioni di collegamento",
+      "其他连接方式",
+      "他の接続方法",
+      "다른 연결 방법",
+      "Інші способи підключення"
+    ]
+  },
+  {
+    "source": "Программы массажа",
+    "text": [
+      "Massage programs",
+      "Massageprogramme",
+      "Programmes de massage",
+      "Programas de masaje",
+      "Programas de massagem",
+      "Programmi di massaggio",
+      "按摩程序",
+      "マッサージプログラム",
+      "마사지 프로그램",
+      "Програми масажу"
+    ]
+  },
+  {
+    "source": "Интенсивность",
+    "text": [
+      "Intensity",
+      "Intensität",
+      "Intensité",
+      "Intensidad",
+      "Intensidade",
+      "Intensità",
+      "强度",
+      "強さ",
+      "강도",
+      "Інтенсивність"
+    ]
+  },
+  {
+    "source": "Медленно",
+    "text": [
+      "Slow",
+      "Langsam",
+      "Lent",
+      "Lento",
+      "Lento",
+      "Lento",
+      "慢",
+      "ゆっくり",
+      "느리게",
+      "Повільно"
+    ]
+  },
+  {
+    "source": "Быстро",
+    "text": [
+      "Fast",
+      "Schnell",
+      "Rapide",
+      "Rápido",
+      "Rápido",
+      "Veloce",
+      "快",
+      "速く",
+      "빠르게",
+      "Швидко"
+    ]
+  },
+  {
+    "source": "Осталось времени",
+    "text": [
+      "Time remaining",
+      "Verbleibende Zeit",
+      "Temps restant",
+      "Tiempo restante",
+      "Tempo restante",
+      "Tempo rimanente",
+      "剩余时间",
+      "残り時間",
+      "남은 시간",
+      "Залишилось часу"
+    ]
+  },
+  {
+    "source": "Начать",
+    "text": [
+      "Start",
+      "Starten",
+      "Démarrer",
+      "Iniciar",
+      "Iniciar",
+      "Avvia",
+      "开始",
+      "開始",
+      "시작",
+      "Почати"
+    ]
+  },
+  {
+    "source": "Стоп",
+    "text": [
+      "Stop",
+      "Stopp",
+      "Arrêter",
+      "Detener",
+      "Parar",
+      "Ferma",
+      "停止",
+      "停止",
+      "중지",
+      "Стоп"
+    ]
+  },
+  {
+    "source": "Подключаться автоматически",
+    "text": [
+      "Connect automatically",
+      "Automatisch verbinden",
+      "Connexion automatique",
+      "Conectar automáticamente",
+      "Conectar automaticamente",
+      "Collega automaticamente",
+      "自动连接",
+      "自動接続",
+      "자동 연결",
+      "Підключатися автоматично"
+    ]
+  },
+  {
+    "source": "Выберите устройство…",
+    "text": [
+      "Select a device…",
+      "Gerät wählen…",
+      "Choisir un appareil…",
+      "Seleccionar dispositivo…",
+      "Selecionar dispositivo…",
+      "Seleziona dispositivo…",
+      "选择设备…",
+      "デバイスを選択…",
+      "장치 선택…",
+      "Виберіть пристрій…"
+    ]
+  },
+  {
+    "source": "Расширенные настройки",
+    "text": [
+      "Advanced settings",
+      "Erweiterte Einstellungen",
+      "Réglages avancés",
+      "Ajustes avanzados",
+      "Configurações avançadas",
+      "Impostazioni avanzate",
+      "高级设置",
+      "詳細設定",
+      "고급 설정",
+      "Розширені налаштування"
+    ]
+  },
+  {
+    "source": "Зоны накидки",
+    "text": [
+      "Seat zones",
+      "Sitzzonen",
+      "Zones du siège",
+      "Zonas del asiento",
+      "Zonas do assento",
+      "Zone del sedile",
+      "坐垫区域",
+      "シートのゾーン",
+      "시트 구역",
+      "Зони накидки"
+    ]
+  },
+  {
+    "source": "Режим разработчика",
+    "text": [
+      "Developer mode",
+      "Entwicklermodus",
+      "Mode développeur",
+      "Modo de desarrollador",
+      "Modo de desenvolvedor",
+      "Modalità sviluppatore",
+      "开发者模式",
+      "開発者モード",
+      "개발자 모드",
+      "Режим розробника"
+    ]
+  },
+  {
+    "source": "Открыть диагностику",
+    "text": [
+      "Open diagnostics",
+      "Diagnose öffnen",
+      "Ouvrir le diagnostic",
+      "Abrir diagnóstico",
+      "Abrir diagnóstico",
+      "Apri diagnostica",
+      "打开诊断",
+      "診断を開く",
+      "진단 열기",
+      "Відкрити діагностику"
+    ]
+  },
+  {
+    "source": "Диагностика",
+    "text": [
+      "Diagnostics",
+      "Diagnose",
+      "Diagnostic",
+      "Diagnóstico",
+      "Diagnóstico",
+      "Diagnostica",
+      "诊断",
+      "診断",
+      "진단",
+      "Діагностика"
+    ]
+  },
+  {
+    "source": "Текущая команда моторам",
+    "text": [
+      "Current motor command",
+      "Aktueller Motorbefehl",
+      "Commande actuelle des moteurs",
+      "Comando actual a los motores",
+      "Comando atual dos motores",
+      "Comando attuale ai motori",
+      "当前电机指令",
+      "現在のモーター指令",
+      "현재 모터 명령",
+      "Поточна команда моторам"
+    ]
+  },
+  {
+    "source": "Индикаторы показывают команду, а не измеренную вибрацию.",
+    "text": [
+      "Indicators show commands, not measured vibration.",
+      "Anzeigen zeigen Befehle, keine gemessene Vibration.",
+      "Les indicateurs montrent les commandes, pas les vibrations mesurées.",
+      "Los indicadores muestran comandos, no vibración medida.",
+      "Os indicadores mostram comandos, não vibração medida.",
+      "Gli indicatori mostrano i comandi, non la vibrazione misurata.",
+      "指示器显示的是指令，并非实测振动。",
+      "表示は指令値で、振動の実測値ではありません。",
+      "표시값은 명령이며 측정된 진동이 아닙니다.",
+      "Індикатори показують команди, а не виміряну вібрацію."
+    ]
+  },
+  {
+    "source": "Журнал событий",
+    "text": [
+      "Event log",
+      "Ereignisprotokoll",
+      "Journal des événements",
+      "Registro de eventos",
+      "Registro de eventos",
+      "Registro eventi",
+      "事件日志",
+      "イベントログ",
+      "이벤트 로그",
+      "Журнал подій"
+    ]
+  },
+  {
+    "source": "Мягкий",
+    "text": [
+      "Gentle",
+      "Sanft",
+      "Doux",
+      "Suave",
+      "Suave",
+      "Delicato",
+      "柔和",
+      "やさしく",
+      "부드럽게",
+      "М’який"
+    ]
+  },
+  {
+    "source": "Плавный",
+    "text": [
+      "Smooth",
+      "Fließend",
+      "Fluide",
+      "Fluido",
+      "Fluido",
+      "Fluido",
+      "平滑",
+      "なめらか",
+      "매끄럽게",
+      "Плавний"
+    ]
+  },
+  {
+    "source": "Ритмичный",
+    "text": [
+      "Rhythmic",
+      "Rhythmisch",
+      "Rythmique",
+      "Rítmico",
+      "Rítmico",
+      "Ritmico",
+      "有节奏",
+      "リズミカル",
+      "리드미컬",
+      "Ритмічний"
+    ]
+  },
+  {
+    "source": "Постоянный",
+    "text": [
+      "Constant",
+      "Konstant",
+      "Constant",
+      "Constante",
+      "Constante",
+      "Costante",
+      "恒定",
+      "一定",
+      "일정하게",
+      "Сталий"
+    ]
+  },
+  {
+    "source": "Последовательный",
+    "text": [
+      "Sequential",
+      "Nacheinander",
+      "Séquentiel",
+      "Secuencial",
+      "Sequencial",
+      "Sequenziale",
+      "依次",
+      "順番に",
+      "순차적으로",
+      "Послідовний"
+    ]
+  },
+  {
+    "source": "Попеременный",
+    "text": [
+      "Alternating",
+      "Abwechselnd",
+      "Alterné",
+      "Alternado",
+      "Alternado",
+      "Alternato",
+      "交替",
+      "交互に",
+      "번갈아",
+      "Почерговий"
+    ]
   }
 ]

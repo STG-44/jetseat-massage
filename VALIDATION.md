@@ -1,11 +1,11 @@
 # Release validation
 
-Version 0.5.0, November 1, 2026. Local environment: Intel x86_64, macOS 15.8.2, Rust 1.96.0.
+Version 0.5.0, November 2, 2026. Local environment: Intel x86_64, macOS 15.8.2, Rust 1.96.0.
 
 ## Automated checks
 
 - Formatting and Clippy with all targets/features and warnings denied.
-- 19 tests passed locally; the real-audio test is intentionally opt-in.
+- The local suite passes 25 tests, with one opt-in real-audio test ignored in the default run. That real-audio test was also run separately and passed with zero signal.
 - Six packet vectors match independent execution of the original Gametrix encoder.
 - Software watchdog, session expiry, stop-on-error, zone masks, and bounded signal levels are covered.
 - Updater tests cover semver ordering, platform/CPU matching for every operating system, CPU and Linux package format, rejected URLs/drafts/missing hashes, and corrupt, truncated, or oversized files.
@@ -39,3 +39,9 @@ Updater tests cover distribution-family detection without shell evaluation, exac
 Source ZIP and tar.gz archives are generated from the same committed source and checked for the lockfile, build instructions, translations and font license. CI results distinguish tested base distributions from compatible derivatives. No container test exercises a connected seat.
 
 Native installation/runtime/removal checks passed on Ubuntu 22.04, 24.04 and 26.04; Debian 12 and 13; Fedora 44 and 45; AlmaLinux 9 and 10; openSUSE Leap 16.0 and Tumbleweed; and Arch Linux. Ubuntu/Debian packaged GUI checks also passed under Xvfb. These are isolated container checks, not full desktop or physical-device certification.
+
+## Background session and UI regression checks
+
+The new supervisor is exercised beyond the former 1.5-second GUI timeout without any GUI callbacks. A fake USB transport runs a live session with background pulses and confirms that the tail reports are zero. A simulated 30-minute timeline exercises the same expiry decision used by the supervisor. Suspension and stale writer supervision latch output off. Device ownership is tested both in one process and through a real child process, including release after Drop.
+
+The previous GUI heartbeat writes and 3-second redraw-pause stop have been removed. The macOS process-activity token is retained until final zero reports and HID close. The UI is split from the engine and uses ordinary egui controls; startup screenshots check compact layout and settings placement above Stop. On the connected Intel Mac, the 30-minute GUI session remained active after more than four minutes minimized, with zero strength forced by the opt-in QA build. Diagnostics showed more than 11,700 writes and six zero motor commands; Stop remained accessible with settings/diagnostics open. A second process was rejected while the device was owned, and eight more zero-force open/write/close cycles passed after Stop and GUI exit. macOS reported the session process-activity assertions while active; those assertions disappeared after Stop. This verifies background transport and ownership, not perceived massage quality or a full physical 30-minute massage.
